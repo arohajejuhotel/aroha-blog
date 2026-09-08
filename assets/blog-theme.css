@@ -133,7 +133,38 @@ h3.post-title a {
   font-style: normal;
 }
 
-.post-body table { font-size: 15px; }
+/* 표 — 기본 테마는 테두리가 없어 정보가 뭉쳐 보인다 */
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.post-body table td,
+.post-body table th {
+  border-bottom: 1px solid var(--aroha-line);
+  padding: 11px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.post-body table th,
+.post-body table tr:first-child td {
+  background: var(--aroha-cream);
+  font-weight: 700;
+  color: var(--aroha-ocean);
+  border-bottom: 2px solid var(--aroha-teal);
+}
+
+/* 좁은 화면에서 표가 넘칠 때 가로 스크롤 */
+.post-body table { display: block; overflow-x: auto; }
+
+/* 목록 여백 */
+.post-body ul,
+.post-body ol { padding-left: 22px; margin: 16px 0; }
+.post-body li { margin-bottom: 8px; }
 
 /* ---------- 사이드바 · 위젯 ---------- */
 .sidebar-container {
