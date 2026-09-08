@@ -50,6 +50,9 @@ class Blogger:
             resp = requests.request(method, url, headers=self._headers(),
                                     timeout=60, **kwargs)
             if resp.status_code < 300:
+                # DELETE 등은 204 No Content 로 본문이 비어 있다
+                if resp.status_code == 204 or not resp.content.strip():
+                    return {}
                 return resp.json()
             if resp.status_code in (429, 500, 502, 503) and attempt < 2:
                 wait = 5 * (attempt + 1)
