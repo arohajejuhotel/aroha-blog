@@ -32,7 +32,9 @@ def read_env() -> dict:
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             key, _, value = line.partition("=")
-            env[key.strip()] = value.strip().strip('"').strip("'")
+            # 따옴표를 벗긴 뒤 공백을 한 번 더 정리한다
+            # (붙여넣기할 때 " GOCSPX-..." 처럼 따옴표 안에 공백이 섞이는 일이 잦다)
+            env[key.strip()] = value.strip().strip('"').strip("'").strip()
     return env
 
 

@@ -26,7 +26,8 @@ def load_env() -> dict:
         if not line or line.startswith("#") or "=" not in line:
             continue
         key, _, value = line.partition("=")
-        env[key.strip()] = value.strip().strip('"').strip("'")
+        # 따옴표를 벗긴 뒤 공백을 한 번 더 정리 (붙여넣기 사고 방지)
+        env[key.strip()] = value.strip().strip('"').strip("'").strip()
     return env
 
 
