@@ -1,0 +1,39 @@
+{
+ "posts": [
+  {
+   "date": "2026-09-08",
+   "topic_id": "s27",
+   "category": "성산여행정보",
+   "images": [
+    "surroundings-img-5872-f5775ce2.jpg",
+    "surroundings-img-6044-c74b81ba.jpg",
+    "surroundings-img-6086-40d5cf04.jpg",
+    "surroundings-23-55725333.jpg",
+    "surroundings-83a96d68.jpg"
+   ],
+   "ko": {
+    "title": "성산 해수욕장, 9월에 수영해도 될까요?",
+    "url": "https://arohajeju.blogspot.com/",
+    "id": "3692253651439595060",
+    "labels": [
+     "성산여행정보",
+     "광치기해변",
+     "해수욕장안전정보",
+     "성산일출봉"
+    ]
+   },
+   "en": {
+    "title": "Seongsan Beach Swimming: Season and Safety Basics",
+    "url": "https://arohajeju.blogspot.com/",
+    "id": "4150385510103376838",
+    "labels": [
+     "Seongsan Travel",
+     "Gwangchigi Beach",
+     "Beach Safety",
+     "Jeju Swimming",
+     "English"
+    ]
+   }
+  }
+ ]
+}
