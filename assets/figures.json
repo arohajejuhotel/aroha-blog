@@ -1,0 +1,118 @@
+{
+ "figures": [
+  {
+   "id": "walk-distances",
+   "lang": "ko",
+   "file": "walk-distances-ko.png",
+   "tags": [
+    "walkable",
+    "location",
+    "sunrise-peak",
+    "udo",
+    "gwangchigi",
+    "transport"
+   ],
+   "caption": "호텔아로하에서 걸어갈 수 있는 곳 — 도보 거리 정리",
+   "width": 1000,
+   "height": 582
+  },
+  {
+   "id": "walk-distances",
+   "lang": "en",
+   "file": "walk-distances-en.png",
+   "tags": [
+    "walkable",
+    "location",
+    "sunrise-peak",
+    "udo",
+    "gwangchigi",
+    "transport"
+   ],
+   "caption": "What you can reach on foot from Hotel Aroha",
+   "width": 1000,
+   "height": 582
+  },
+  {
+   "id": "sunrise-times",
+   "lang": "ko",
+   "file": "sunrise-times-ko.png",
+   "tags": [
+    "sunrise-peak",
+    "sunrise",
+    "seongsan"
+   ],
+   "caption": "성산일출봉 여름 월별 일출 시각과 출발 권장 시각",
+   "width": 1000,
+   "height": 428
+  },
+  {
+   "id": "sunrise-times",
+   "lang": "en",
+   "file": "sunrise-times-en.png",
+   "tags": [
+    "sunrise-peak",
+    "sunrise",
+    "seongsan"
+   ],
+   "caption": "Monthly sunrise times at Seongsan Ilchulbong",
+   "width": 1000,
+   "height": 428
+  },
+  {
+   "id": "room-types",
+   "lang": "ko",
+   "file": "room-types-ko.png",
+   "tags": [
+    "room",
+    "family",
+    "deluxe",
+    "standard",
+    "booking"
+   ],
+   "caption": "호텔아로하 객실 3종 비교 — 인원·전망·요금",
+   "width": 1000,
+   "height": 428
+  },
+  {
+   "id": "room-types",
+   "lang": "en",
+   "file": "room-types-en.png",
+   "tags": [
+    "room",
+    "family",
+    "deluxe",
+    "standard",
+    "booking"
+   ],
+   "caption": "Hotel Aroha room types compared",
+   "width": 1000,
+   "height": 428
+  },
+  {
+   "id": "udo-ferry",
+   "lang": "ko",
+   "file": "udo-ferry-ko.png",
+   "tags": [
+    "udo",
+    "ferry",
+    "daytrip"
+   ],
+   "caption": "우도 페리 요금·운항 시간·발권 방법 정리",
+   "width": 1000,
+   "height": 540
+  },
+  {
+   "id": "udo-ferry",
+   "lang": "en",
+   "file": "udo-ferry-en.png",
+   "tags": [
+    "udo",
+    "ferry",
+    "daytrip"
+   ],
+   "caption": "Udo ferry fares, times and ticketing",
+   "width": 1000,
+   "height": 540
+  }
+ ]
+}

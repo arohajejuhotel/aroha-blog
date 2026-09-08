@@ -47,6 +47,9 @@ COMMON_RULES = """
 - 사진은 정확히 [[IMG1]] [[IMG2]] ... 형태의 자리표시자로만 넣는다. <img> 태그를 직접 쓰지 않는다.
 - 자리표시자는 각각 한 번씩만, 문단 사이 독립된 줄에 놓는다.
 - 첫 자리표시자는 도입부 직후에 둔다.
+- 도표가 제공되면 [[FIG1]] [[FIG2]] 형태로 넣는다. **그 도표가 설명하는 내용을
+  글로 먼저 설명한 직후**에 배치한다. 도표는 사진과 달리 정보를 전달하므로,
+  같은 숫자를 본문에서 되풀이해 나열하지 말고 도표에 맡기고 해석을 덧붙인다.
 
 [사실 규칙]
 - 아래 제공된 팩트시트와 검증된 사실 목록에 없는 가격·시간·거리·전화번호는 절대 만들어내지 않는다.
@@ -65,12 +68,32 @@ COMMON_RULES = """
 - 이 글은 광고가 아니라 여행 정보 글이다. 분량의 80% 이상은 호텔과 무관하게도 쓸모가 있어야 한다.
 - 호텔아로하는 정보의 흐름상 자연스러운 자리에서만 등장시킨다.
   (예: 일출 시간을 설명한 뒤 "그래서 도보권 숙소가 의미가 있다" 는 맥락)
-- 호텔 언급은 본문에서 2~3회를 넘기지 않는다. 시설 나열식 문단은 금지한다.
+- 호텔 언급은 본문에서 5회 안팎으로 한다. 시설 나열식 문단은 금지한다.
 - 마지막 문단에서 예약을 강권하지 않는다. 정보 글답게 담백하게 닫는다.
+
+[강점을 쓰는 방법]
+- 팩트시트의 strengths 중 오늘 주제와 관련 있는 것을 **두세 개** 쓴다. 전부 나열하지는 않는다.
+- 아래 항목은 독자가 실제로 궁금해하는 정보다. 주제와 조금이라도 닿으면 **적극적으로 넣는다.**
+  * 오션뷰 객실 (디럭스더블·스탠다드 트윈에서 바다가 보인다)
+  * 패밀리룸 (침실·거실 분리 + 풀키친, 최대 4인)
+  * 건물 1층 GS25 편의점 — 06:00~24:00, **ATM 있음** (제주 동부는 현금 필요한 곳이 있다)
+  * 투숙객 무료주차 + EV 충전
+  * 한국어·영어·중국어 응대
+  * 성산일출봉·광치기해변·우도 페리 터미널 도보권
+- 다만 나열식 문단은 여전히 금지다. 문맥 안에서 한 줄씩 자연스럽게 섞는다.
+  (예: 현금이 필요한 가게 이야기를 하다가 "1층 편의점에 ATM이 있어서 급할 때 쓸 수 있다")
+- 형용사로 자랑하지 말고, 독자의 문제를 푸는 방식으로 쓴다.
+  나쁨: "최고의 위치를 자랑하는 호텔입니다"
+  좋음: "일출을 보려면 보통 새벽 4시에 렌터카를 몰아야 하는데, 걸어서 갈 수 있으면 그 과정이 통째로 사라진다"
+- 근거 숫자(evidence)가 있으면 함께 쓴다. 다만 평점을 자랑처럼 늘어놓지 않는다.
+
+[과장 금지 — honest_limits]
+- 팩트시트의 honest_limits 에 적힌 것은 **절대 반대로 쓰지 않는다.**
+- 해당되는 맥락이면 오히려 먼저 밝힌다. 단점을 숨기지 않는 글이 더 신뢰를 얻는다.
 """
 
 
-def _prompt_ko(hotel, seo, topic, image_refs, extra):
+def _prompt_ko(hotel, seo, topic, image_refs, figure_refs, extra):
     return f"""너는 제주 성산의 작은 호텔 '호텔아로하' 블로그를 운영하는 사람이다.
 
 [페르소나]
@@ -89,6 +112,9 @@ def _prompt_ko(hotel, seo, topic, image_refs, extra):
 [사용 가능한 사진 — 자리표시자와 설명]
 {json.dumps(image_refs, ensure_ascii=False, indent=1)}
 
+[사용 가능한 도표 — 있으면 반드시 본문에 배치]
+{json.dumps(figure_refs, ensure_ascii=False, indent=1) if figure_refs else "(이번 글에는 도표가 없다)"}
+
 [분량]
 - 공백 포함 {seo['editorial_rules']['min_chars_ko']}자 이상.
 - 사진 자리표시자는 제공된 것을 모두 쓴다.
@@ -103,7 +129,7 @@ def _prompt_ko(hotel, seo, topic, image_refs, extra):
 {SCHEMA_HINT}"""
 
 
-def _prompt_en(hotel, seo, topic, image_refs, ko_url, extra):
+def _prompt_en(hotel, seo, topic, image_refs, figure_refs, ko_url, extra):
     cross = f"\n- 한국어 버전 URL: {ko_url} (본문 마지막에 자연스럽게 한 줄로 링크해도 좋다)" if ko_url else ""
     return f"""You write the blog of Hotel Aroha, a small hotel in Seongsan, Jeju, South Korea.
 The reader is an international traveller planning a trip to Jeju. Write in clear, plain English.
@@ -124,6 +150,9 @@ The reader is an international traveller planning a trip to Jeju. Write in clear
 
 [Available photos - placeholders and descriptions]
 {json.dumps(image_refs, ensure_ascii=False, indent=1)}
+
+[Available charts - place these in the body if provided]
+{json.dumps(figure_refs, ensure_ascii=False, indent=1) if figure_refs else "(no charts for this post)"}
 
 [Length]
 - At least {seo['editorial_rules']['min_words_en']} words.
@@ -151,13 +180,19 @@ def _extract_json(text: str) -> dict:
     end = text.rfind("}")
     if start == -1 or end == -1:
         raise ValueError(f"모델 응답에서 JSON 을 찾지 못했습니다: {text[:300]}")
-    return json.loads(text[start:end + 1])
+    blob = text[start:end + 1]
+    try:
+        return json.loads(blob)
+    except json.JSONDecodeError:
+        # 본문 HTML 안에 실제 줄바꿈이나 탭이 들어오면 엄격 모드에서 깨진다.
+        # strict=False 는 문자열 안의 제어문자를 허용한다.
+        return json.loads(blob, strict=False)
 
 
 REQUIRED = ("title", "meta_description", "labels", "body_html", "faq", "hashtags")
 
 # 본문에서 호텔명이 이 횟수를 넘으면 홍보 글로 기울었다고 보고 다시 쓰게 한다
-MAX_HOTEL_MENTIONS = 4
+MAX_HOTEL_MENTIONS = 7
 
 
 def stats(post: dict, lang: str) -> dict:
@@ -165,8 +200,9 @@ def stats(post: dict, lang: str) -> dict:
     body = post["body_html"]
     text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body))
     name = "호텔아로하" if lang == "ko" else "Hotel Aroha"
-    pattern = (r"호텔아로하는[^.]{0,100}(?:이다|입니다)" if lang == "ko"
-               else r"Hotel Aroha is[^.]{0,120}\.")
+    # 정의 문장 판정. 길이나 마침표까지 요구하면 정상 문장을 놓쳐
+    # 불필요한 재작성이 반복된다. 문장 시작 형태만 본다.
+    pattern = (r"호텔아로하는" if lang == "ko" else r"Hotel Aroha\s+is\b")
     return {
         "length": len(text) if lang == "ko" else len(text.split()),
         "unit": "자" if lang == "ko" else "단어",
@@ -210,11 +246,13 @@ def _validate(post: dict, image_refs: list, lang: str, strict: bool = True):
 
 
 def generate(env, hotel, seo, topic, image_refs, lang: str,
-             ko_url: str = "", extra: str = "") -> dict:
+             ko_url: str = "", extra: str = "", figure_refs: list = ()) -> dict:
     """Claude 를 호출해 포스팅 데이터를 만든다. 실패 시 한 번 재시도."""
     client = _client(env)
-    prompt = (_prompt_ko(hotel, seo, topic, image_refs, extra) if lang == "ko"
-              else _prompt_en(hotel, seo, topic, image_refs, ko_url, extra))
+    figure_refs = list(figure_refs)
+    prompt = (_prompt_ko(hotel, seo, topic, image_refs, figure_refs, extra)
+              if lang == "ko"
+              else _prompt_en(hotel, seo, topic, image_refs, figure_refs, ko_url, extra))
 
     last_error = None
     attempts = 3

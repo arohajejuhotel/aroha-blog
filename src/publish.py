@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import images, render, settings, writer  # noqa: E402
+from src import figures, images, render, settings, writer  # noqa: E402
 from src.blogger import Blogger  # noqa: E402
 
 KST = ZoneInfo("Asia/Seoul")
@@ -93,6 +93,7 @@ def main() -> int:
     seo = settings.seo()
     state = settings.state()
     manifest = settings.manifest()
+    all_figures = settings.figures()
 
     today = dt.datetime.now(KST)
     month = today.month
@@ -131,9 +132,15 @@ def main() -> int:
                              seo["editorial_rules"]["images_per_post"], usage)
         refs = images.to_refs(picked, env.image_base, lang)
 
+        chosen_figs = figures.pick(all_figures, topic, lang)
+        fig_refs = figures.to_refs(chosen_figs, env.image_base.rsplit("/", 1)[0])
+        if fig_refs:
+            print(f"[info] ({lang}) 도표 {len(fig_refs)}개: "
+                  f"{[f['id'] for f in chosen_figs]}")
+
         post = writer.generate(env, hotel, seo, topic, refs, lang,
-                               extra=season_note(month, lang))
-        html = render.build(post, hotel, topic, refs, lang)
+                               extra=season_note(month, lang), figure_refs=fig_refs)
+        html = render.build(post, hotel, topic, refs, lang, figs=fig_refs)
         s = writer.stats(post, lang)
         print(f"[info] ({lang}) 제목: {post['title']}")
         print(f"[info] ({lang}) 분량 {s['length']:,}{s['unit']} / 호텔 언급 {s['mentions']}회"

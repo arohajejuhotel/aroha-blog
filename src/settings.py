@@ -53,6 +53,16 @@ def manifest():
     return _load(MANIFEST_FILE)["images"]
 
 
+FIGURES_FILE = ASSETS_DIR / "figures.json"
+
+
+def figures():
+    """도표 이미지 메타데이터. 없으면 빈 목록(도표 없이 발행)."""
+    if not FIGURES_FILE.exists():
+        return []
+    return _load(FIGURES_FILE)["figures"]
+
+
 def state():
     if not STATE_FILE.exists():
         return {"posts": []}

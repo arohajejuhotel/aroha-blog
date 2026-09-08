@@ -56,6 +56,27 @@ def _figure(url: str, alt: str) -> str:
     )
 
 
+def _figure_block(url: str, caption: str) -> str:
+    cap = html.escape(caption, quote=True)
+    return (
+        f'<figure style="margin:30px 0;text-align:center;">'
+        f'<img src="{url}" alt="{cap}" loading="lazy" '
+        f'style="max-width:100%;height:auto;border:1px solid #e0d9cf;border-radius:10px;" />'
+        f'<figcaption style="font-size:13px;color:#8a8178;margin-top:8px;">{cap}</figcaption>'
+        f"</figure>"
+    )
+
+
+def _insert_figures(body: str, figs: list) -> str:
+    for f in figs:
+        body = body.replace(f"[[{f['id']}]]", _figure_block(f["url"], f["caption"]))
+    # 모델이 쓰지 않은 도표는 본문 끝(FAQ 앞)에 붙인다
+    for f in figs:
+        if f["url"] not in body:
+            body += "\n" + _figure_block(f["url"], f["caption"])
+    return re.sub(r"\[\[FIG\d+\]\]", "", body)
+
+
 def _insert_images(body: str, refs: list) -> str:
     for ref in refs:
         body = body.replace(f"[[{ref['id']}]]", _figure(ref["url"], ref["alt"]))
@@ -206,9 +227,10 @@ def _jsonld(post: dict, hotel: dict, topic: dict, lang: str,
 
 
 def build(post: dict, hotel: dict, topic: dict, refs: list, lang: str,
-          cross_url: str = "") -> str:
+          cross_url: str = "", figs: list = ()) -> str:
     """최종 Blogger 본문 HTML."""
-    body = _insert_images(post["body_html"], refs)
+    body = _insert_figures(post["body_html"], list(figs))
+    body = _insert_images(body, refs)
     image_urls = [r["url"] for r in refs]
     parts = [
         '<div style="font-size:16px;line-height:1.85;color:#3a3530;">',
