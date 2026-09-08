@@ -1,0 +1,206 @@
+/* ===========================================================
+   호텔아로하 블로그 스타일  (Blogger Contempo / indie_light 용)
+
+   붙여넣는 곳:
+     Blogger 관리 > 테마 > [맞춤설정] > 고급 > CSS 추가
+     (또는 테마 우측 드롭다운 > 맞춤설정)
+
+   기본 테마 위에 색과 여백만 덧입힙니다. 지우면 원래대로 돌아옵니다.
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap');
+
+:root {
+  --aroha-cream: #F4F1EC;
+  --aroha-ocean: #3A3530;
+  --aroha-teal:  #0A7A72;
+  --aroha-mint:  #3ECAC0;
+  --aroha-gold:  #E8C547;
+  --aroha-line:  #E2DCD2;
+  --aroha-muted: #8A8178;
+}
+
+/* ---------- 전체 바탕 ---------- */
+body {
+  background: var(--aroha-cream) !important;
+  color: var(--aroha-ocean) !important;
+  font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--aroha-teal); }
+a:hover { color: var(--aroha-mint); }
+
+/* ---------- 상단 헤더 ---------- */
+.centered-top-container,
+.centered-top {
+  background: var(--aroha-ocean) !important;
+}
+
+.blog-name h1,
+.blog-name .title,
+#header h1 {
+  font-family: 'Noto Serif KR', Georgia, serif !important;
+  letter-spacing: .04em;
+  color: #fff !important;
+}
+
+.blog-name p,
+#header .description {
+  color: rgba(255,255,255,.72) !important;
+  font-size: 14px;
+  letter-spacing: .02em;
+}
+
+/* 헤더 아래 얇은 골드 라인 — 브랜드 포인트 */
+.centered-top-container::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--aroha-teal), var(--aroha-gold));
+}
+
+/* ---------- 글 카드 ---------- */
+.post-outer-container {
+  background: #fff !important;
+  border: 1px solid var(--aroha-line) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 1px 3px rgba(58,53,48,.05) !important;
+  overflow: hidden;
+  margin-bottom: 26px !important;
+}
+
+.post-outer-container:hover {
+  box-shadow: 0 6px 20px rgba(58,53,48,.09) !important;
+  transition: box-shadow .2s ease;
+}
+
+/* ---------- 글 제목 ---------- */
+.post-title,
+.post-title a,
+h3.post-title a {
+  font-family: 'Noto Serif KR', Georgia, serif !important;
+  color: var(--aroha-ocean) !important;
+  font-weight: 700 !important;
+  line-height: 1.45 !important;
+  letter-spacing: -.01em;
+}
+
+.post-title a:hover { color: var(--aroha-teal) !important; }
+
+/* 날짜·작성자 줄 */
+.post-header .byline,
+.post-footer .byline,
+.byline {
+  color: var(--aroha-muted) !important;
+  font-size: 13px !important;
+}
+
+/* ---------- 본문 가독성 ---------- */
+.post-body,
+.post-body.entry-content {
+  font-size: 16.5px !important;
+  line-height: 1.9 !important;
+  color: #453F39 !important;
+  word-break: keep-all;      /* 한글 단어 중간에서 줄바꿈되지 않게 */
+  overflow-wrap: break-word;
+}
+
+.post-body h2 {
+  font-family: 'Noto Serif KR', Georgia, serif !important;
+  font-size: 22px !important;
+  color: var(--aroha-ocean) !important;
+  margin: 44px 0 14px !important;
+  padding-left: 13px;
+  border-left: 4px solid var(--aroha-teal);
+  line-height: 1.5;
+}
+
+.post-body h3 {
+  font-size: 18px !important;
+  color: var(--aroha-teal) !important;
+  margin: 30px 0 10px !important;
+}
+
+.post-body img { border-radius: 10px; }
+
+.post-body blockquote {
+  border-left: 3px solid var(--aroha-gold);
+  background: var(--aroha-cream);
+  margin: 24px 0;
+  padding: 14px 20px;
+  color: #5A534C;
+  font-style: normal;
+}
+
+.post-body table { font-size: 15px; }
+
+/* ---------- 사이드바 · 위젯 ---------- */
+.sidebar-container {
+  background: transparent !important;
+}
+
+.sidebar-container .widget,
+.sidebar_bottom .widget {
+  background: #fff;
+  border: 1px solid var(--aroha-line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.widget .title,
+.sidebar-container h3.title {
+  font-size: 12px !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase;
+  color: var(--aroha-teal) !important;
+  font-weight: 700 !important;
+  margin-bottom: 12px !important;
+}
+
+/* 라벨(카테고리) 목록을 태그 모양으로 */
+.Label .label-size a {
+  display: inline-block;
+  background: var(--aroha-cream);
+  border: 1px solid var(--aroha-line);
+  border-radius: 999px;
+  padding: 5px 13px;
+  margin: 0 5px 7px 0;
+  font-size: 13px;
+  color: var(--aroha-ocean);
+  text-decoration: none;
+}
+
+.Label .label-size a:hover {
+  background: var(--aroha-teal);
+  border-color: var(--aroha-teal);
+  color: #fff;
+}
+
+/* ---------- 페이지 넘김 버튼 ---------- */
+.blog-pager a,
+.blog-pager .blog-pager-older-link {
+  background: var(--aroha-teal) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 11px 24px !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---------- 푸터 ---------- */
+.footer,
+.footer.section {
+  background: var(--aroha-ocean) !important;
+  color: rgba(255,255,255,.65) !important;
+}
+
+.footer a { color: var(--aroha-mint) !important; }
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 640px) {
+  .post-body { font-size: 16px !important; line-height: 1.85 !important; }
+  .post-body h2 { font-size: 20px !important; margin-top: 36px !important; }
+  .post-outer-container { border-radius: 10px !important; }
+}
