@@ -1,0 +1,98 @@
+{
+  "name_ko": "호텔아로하",
+  "name_en": "Hotel Aroha",
+  "slogan_ko": "성산일출봉을 앞마당처럼, 광치기해변을 산책로처럼",
+  "slogan_en": "Sunrise Peak as your front yard, Gwangchigi Beach as your walking path",
+  "brand_meaning": "아로하(Aroha)는 마오리어로 사랑, 공감, 그리고 장소와의 깊은 연결을 뜻한다.",
+  "concept_ko": "제주 동부 여행의 베이스캠프",
+  "concept_en": "The basecamp for exploring eastern Jeju",
+  "address_ko": "제주특별자치도 서귀포시 성산읍 성산등용로 40",
+  "address_en": "40 Seongsandeungyong-ro, Seongsan-eup, Seogwipo-si, Jeju, South Korea",
+  "phone": "064-782-3100",
+  "email": "hotelaroha@naver.com",
+  "geo": { "lat": 33.46647, "lng": 126.9310441 },
+  "booking_url": "https://booking.naver.com/booking/3/bizes/139897?area=plt",
+  "map_url": "https://map.naver.com/p/entry/place/35911590?lng=126.9310441&lat=33.46647",
+  "checkin": "15:00",
+  "checkout": "11:00",
+  "rooms": [
+    {
+      "id": "deluxe", "ko": "디럭스더블", "en": "Deluxe Double",
+      "bed_ko": "퀸베드 1", "bed_en": "1 queen bed",
+      "occupancy": "기준 2인 / 최대 2인", "occupancy_en": "2 guests standard / 2 max",
+      "view_ko": "바다 전망 (광치기해변 + 성산일출봉 실루엣)", "view_en": "Ocean view (Gwangchigi Beach with the Sunrise Peak silhouette)",
+      "target_ko": "커플, 허니무너, 혼자 여행", "target_en": "couples, honeymooners, solo travelers",
+      "copy_ko": "새벽에 눈 떠서 커튼 열면, 바다가 거기 있습니다.",
+      "copy_en": "Open the curtain at dawn. The sea is right there.",
+      "rate": { "low": 120000, "mid": 140000, "high": 160000 }
+    },
+    {
+      "id": "standard", "ko": "스탠다드 트윈", "en": "Standard Twin",
+      "bed_ko": "슈퍼싱글 1 + 더블베드 1", "bed_en": "1 super single + 1 double bed",
+      "occupancy": "기준 2인 / 최대 3인", "occupancy_en": "2 guests standard / 3 max",
+      "view_ko": "바다 전망", "view_en": "Ocean view",
+      "target_ko": "친구 2~3인, 비즈니스 출장, 부모-자녀", "target_en": "groups of 2-3 friends, business trips, parent and child",
+      "copy_ko": "따로 쓰는 침대, 같이 보는 창밖. 친구랑 제주 여행의 정석.",
+      "copy_en": "Your own bed. Same view. The classic friends trip.",
+      "rate": { "low": 120000, "mid": 140000, "high": 160000 }
+    },
+    {
+      "id": "family", "ko": "패밀리 트윈", "en": "Family Twin",
+      "bed_ko": "퀸베드 1 + 슈퍼싱글 1", "bed_en": "1 queen + 1 super single",
+      "occupancy": "기준 3인 / 최대 4인", "occupancy_en": "3 guests standard / 4 max",
+      "view_ko": "마을 전망", "view_en": "Village view",
+      "structure_ko": "침실·거실 완전 분리 + 풀키친 (인덕션·전기밥솥·전자레인지·냉장고·식기)",
+      "structure_en": "Fully separated bedroom and living room, plus a full kitchen (induction cooktop, rice cooker, microwave, fridge, tableware)",
+      "target_ko": "가족 여행, 3~4인 그룹, 장기 투숙", "target_en": "families, groups of 3-4, long stays",
+      "copy_ko": "아이를 재우고, 거실에서 맥주 한 캔. 그게 여행이잖아요.",
+      "copy_en": "Kids asleep. Beer in hand. Separate living room. That's the vibe.",
+      "rate": { "low": 180000, "mid": 210000, "high": 250000 }
+    }
+  ],
+  "extra_person_fee": 10000,
+  "cancellation_ko": ["7일 이상 전: 100% 환불", "6~5일 전: 70% 환불", "4~3일 전: 50% 환불", "2일 전~당일: 환불 불가"],
+  "cancellation_en": ["7+ days before: 100% refund", "6-5 days: 70% refund", "4-3 days: 50% refund", "2 days to same day: no refund"],
+  "amenities_ko": [
+    "1층 GS25 편의점 (지역 최대 규모, 06:00~24:00, ATM 보유)",
+    "로비 도서관 — 제주 여행 에세이·소설 무료 대출",
+    "투숙객 전용 무료주차 + EV 충전",
+    "전 객실 무료 Wi-Fi",
+    "한국어·영어·중국어 응대",
+    "일회용 어메니티 미제공 (제주도 환경 정책) — 1층 GS25에서 구매 가능"
+  ],
+  "amenities_en": [
+    "GS25 convenience store on the ground floor (largest in the area, 06:00-24:00, ATM)",
+    "Lobby library with free-to-borrow Jeju travel essays and novels",
+    "Free guest parking with EV charging",
+    "Free Wi-Fi in all rooms",
+    "Korean, English and Chinese spoken at the front desk",
+    "No single-use toiletries (Jeju environmental policy) - available at the GS25 downstairs"
+  ],
+  "walking_distance_ko": [
+    "성산일출봉 (유네스코 세계자연유산): 도보 5~10분",
+    "광치기해변: 도보 5분",
+    "우도 페리 터미널: 도보 10분",
+    "짱구네 유채꽃밭: 도보 5분",
+    "섭지코지: 차 8분",
+    "제주국제공항: 차 약 60분"
+  ],
+  "walking_distance_en": [
+    "Seongsan Ilchulbong (Sunrise Peak, UNESCO World Heritage): 5-10 min walk",
+    "Gwangchigi Beach: 5 min walk",
+    "Udo ferry terminal: 10 min walk",
+    "Jjanggune canola flower field: 5 min walk",
+    "Seopjikoji: 8 min by car",
+    "Jeju International Airport: about 60 min by car"
+  ],
+  "ota_scores": { "Interpark NOL": "4.3/5", "Hotels.com": "8.4/10", "Agoda": "8.5/10", "Trip.com": "4.2/5" },
+  "verified_facts": [
+    "우도 페리 왕복 요금은 성인 11,500원이며 선박료·도립공원료·터미널이용료가 포함된다.",
+    "우도 페리 성수기(5~8월) 첫 배는 오전 7:00, 우도 출발 막 배는 오후 6:30이다.",
+    "우도 페리는 온라인 예약이 불가하며 현장 발권만 가능하고 신분증이 필수다.",
+    "성산일출봉 입장료는 성인 2,000원이다.",
+    "성산일출봉은 일출 1시간 전에 개장하고 일몰 1시간 후에 마감한다.",
+    "성산일출봉 여름 일출 시각은 6월 05:20~05:30, 7월 05:30~05:45, 8월 05:45~06:10이다.",
+    "우도봉(소머리오름)은 높이 약 130m이며 편도 등반에 20~30분이 걸린다."
+  ],
+  "brand_colors": { "cream": "#F4F1EC", "ocean": "#3A3530", "teal": "#0A7A72", "mint": "#3ECAC0", "gold": "#E8C547" }
+}

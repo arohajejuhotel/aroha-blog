@@ -1,0 +1,82 @@
+name: Daily blog publish
+
+on:
+  schedule:
+    # 22:00 UTC = 07:00 KST (한국시간 매일 아침 7시)
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "발행 방식"
+        type: choice
+        default: publish
+        options: [publish, draft, dry-run]
+      lang:
+        description: "언어"
+        type: choice
+        default: both
+        options: [both, ko, en]
+      topic:
+        description: "주제 id 강제 지정 (비우면 자동)"
+        type: string
+        default: ""
+
+concurrency:
+  group: daily-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build flags
+        id: flags
+        run: |
+          MODE="${{ inputs.mode || 'publish' }}"
+          LANG="${{ inputs.lang || 'both' }}"
+          TOPIC="${{ inputs.topic }}"
+          FLAGS="--lang $LANG"
+          [ "$MODE" = "draft" ] && FLAGS="$FLAGS --draft"
+          [ "$MODE" = "dry-run" ] && FLAGS="$FLAGS --dry-run"
+          [ -n "$TOPIC" ] && FLAGS="$FLAGS --topic $TOPIC"
+          echo "flags=$FLAGS" >> "$GITHUB_OUTPUT"
+
+      - name: Publish
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5' }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          IMAGE_BASE_URL: ${{ vars.IMAGE_BASE_URL }}
+        run: python -m src.publish ${{ steps.flags.outputs.flags }}
+
+      - name: Commit state
+        if: success()
+        run: |
+          git config user.name "aroha-bot"
+          git config user.email "actions@github.com"
+          git add state/published.json config/topics.json
+          git diff --staged --quiet || git commit -m "chore: publish log $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Upload preview (dry-run only)
+        if: inputs.mode == 'dry-run'
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview
+          path: out/

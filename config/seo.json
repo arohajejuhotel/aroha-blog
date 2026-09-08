@@ -1,0 +1,33 @@
+{
+  "categories": {
+    "아로하이야기": { "share": 0.20, "label_en": "Aroha Stories", "purpose": "호텔 소식·객실·운영 관점" },
+    "성산여행정보": { "share": 0.45, "label_en": "Seongsan Travel", "purpose": "주변 명소·맛집·코스·계절 정보 (SEO 핵심)" },
+    "제주동부여행": { "share": 0.35, "label_en": "East Jeju Guide", "purpose": "제주 동부 광역 정보·시즌 콘텐츠" }
+  },
+  "keywords": {
+    "ko": {
+      "t1": ["성산숙소", "성산일출봉근처숙소", "제주동부호텔"],
+      "t2": ["광치기해변숙소", "우도근처숙소", "성산가족호텔", "성산커플여행숙소", "성산일출봉호텔", "제주성산호텔"],
+      "t3": ["성산일출봉걸어서가는숙소", "제주동부여행베이스캠프", "광치기해변걸어서가는호텔", "우도페리터미널근처숙소", "성산일출봉일출보기좋은숙소", "제주동부2박3일코스", "성산조식되는호텔", "제주주방있는숙소"]
+    },
+    "en": {
+      "t1": ["Seongsan hotel", "hotel near Seongsan Ilchulbong", "east Jeju hotel"],
+      "t2": ["Gwangchigi Beach hotel", "hotel near Udo ferry", "Jeju family hotel", "Seongsan accommodation", "where to stay in Seongsan", "Jeju sunrise peak stay"],
+      "t3": ["hotel walking distance to Seongsan Ilchulbong", "east Jeju travel basecamp", "best place to watch sunrise in Jeju", "how to get to Udo island from Seongsan", "Jeju hotel with kitchen", "3 day east Jeju itinerary"]
+    }
+  },
+  "editorial_rules": {
+    "structure": "독자의 문제 공감 → 실제로 쓸모있는 정보(팩트·숫자·시간) → 그 맥락에서 호텔아로하가 자연스러운 답으로 한 번 등장 → 마무리",
+    "promo_ratio": "본문의 80% 이상은 호텔과 무관하게도 쓸모있는 정보여야 한다. 호텔 언급은 전체의 20% 이하.",
+    "forbidden": ["시설 나열식 홍보", "과장된 형용사 남발", "확인되지 않은 가격·시간 정보 창작", "경쟁 숙소 비방"],
+    "aeo": "포스팅당 '호텔아로하는 ~이다' 형식의 정의 문장 최소 2개, 그리고 실제 검색되는 질문 5개에 대한 40~60자 직답을 FAQ로 배치",
+    "min_chars_ko": 2000,
+    "min_words_en": 900,
+    "images_per_post": 5,
+    "hashtags": "T1 3개 + T2 3개 + T3 5개"
+  },
+  "persona": {
+    "ko": "투숙객으로 왔다가 이 동네에 반해서 여기서 일하게 된 직원. 유쾌하고, 현지인 시선이고, 솔직하다. 단점도 숨기지 않는다. 존댓말.",
+    "en": "A staff member who first came as a guest, fell for the neighbourhood, and stayed. Warm, candid, local-eyed. Writes clean plain English for international travellers, avoids brochure language."
+  }
+}

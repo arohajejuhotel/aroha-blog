@@ -1,0 +1,1462 @@
+{
+ "images": [
+  {
+   "file": "exterior-1-72b94dbe.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1086,
+   "height": 1448,
+   "orientation": "portrait",
+   "source": "01_외관/1.jpg"
+  },
+  {
+   "file": "exterior-dsc-0727-f885424a.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 934,
+   "orientation": "landscape",
+   "source": "01_외관/DSC_0727.JPG"
+  },
+  {
+   "file": "exterior-dsc-0728-c034a315.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 934,
+   "orientation": "landscape",
+   "source": "01_외관/DSC_0728.JPG"
+  },
+  {
+   "file": "exterior-hotelout-01-a605c863.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 788,
+   "orientation": "landscape",
+   "source": "01_외관/HOTELOUT_01.jpg"
+  },
+  {
+   "file": "exterior-hotelout-02-4754ef85.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 1196,
+   "orientation": "landscape",
+   "source": "01_외관/HOTELOUT_02.jpg"
+  },
+  {
+   "file": "exterior-hotelout-03-e8302990.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 788,
+   "orientation": "landscape",
+   "source": "01_외관/HOTELOUT_03.jpg"
+  },
+  {
+   "file": "exterior-hotelout-04-1c5b46f4.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/HOTELOUT_04.jpg"
+  },
+  {
+   "file": "exterior-hotelout-naver-a602367a.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 596,
+   "height": 509,
+   "orientation": "landscape",
+   "source": "01_외관/HOTELOUT_naver.jpg"
+  },
+  {
+   "file": "exterior-1-e37b5ccb.jpg",
+   "tags": [
+    "exterior",
+    "hotel",
+    "night"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/외관 (야간1).jpg"
+  },
+  {
+   "file": "exterior-2-3c63d4cb.jpg",
+   "tags": [
+    "exterior",
+    "hotel",
+    "night"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/외관 (야간2).jpg"
+  },
+  {
+   "file": "exterior-01-2d8ba3cc.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/외관 01.jpg"
+  },
+  {
+   "file": "exterior-02-752c4658.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/외관 02.jpg"
+  },
+  {
+   "file": "exterior-03-35715e3c.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/외관 03.jpg"
+  },
+  {
+   "file": "exterior-04-af53fd06.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "01_외관/외관 04.jpg"
+  },
+  {
+   "file": "exterior-05-fb5e7143.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 1049,
+   "orientation": "landscape",
+   "source": "01_외관/외관 05.jpg"
+  },
+  {
+   "file": "exterior-05-f9e485b9.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 1049,
+   "orientation": "landscape",
+   "source": "01_외관/외관 05.png"
+  },
+  {
+   "file": "exterior-06-c773457b.jpg",
+   "tags": [
+    "exterior",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 1050,
+   "orientation": "landscape",
+   "source": "01_외관/외관 06.jpg"
+  },
+  {
+   "file": "room-se-31d7ce7d-a2ce-40e1-b1c2-5-e862e66a.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 466,
+   "height": 350,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/SE-31D7CE7D-A2CE-40E1-B1C2-568E6CEED5F2.jpg"
+  },
+  {
+   "file": "room-se-476feba7-97f0-45d2-9f1b-8-f0caed71.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 900,
+   "height": 676,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/SE-476FEBA7-97F0-45D2-9F1B-877611014BD3.jpg"
+  },
+  {
+   "file": "room-se-5b2948a0-055f-44d5-a6f5-2-6289fe3f.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 900,
+   "height": 1200,
+   "orientation": "portrait",
+   "source": "02_객실_스탠다드/SE-5B2948A0-055F-44D5-A6F5-2756089190A6.jpg"
+  },
+  {
+   "file": "room-se-7feeb47e-724f-4bb0-964a-e-3d7045be.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 466,
+   "height": 621,
+   "orientation": "portrait",
+   "source": "02_객실_스탠다드/SE-7FEEB47E-724F-4BB0-964A-EFDDB82AA0CF.jpg"
+  },
+  {
+   "file": "room-se-9b0896c7-71a7-4680-9697-5-47827537.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 466,
+   "height": 350,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/SE-9B0896C7-71A7-4680-9697-5D2A608E1F86.jpg"
+  },
+  {
+   "file": "room-se-c89143f8-7ff2-4fde-a344-a-79914ab1.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 466,
+   "height": 621,
+   "orientation": "portrait",
+   "source": "02_객실_스탠다드/SE-C89143F8-7FF2-4FDE-A344-AEFC2D88D50A.jpg"
+  },
+  {
+   "file": "room-standard-01-f3701ac6.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/STANDARD_01.JPG"
+  },
+  {
+   "file": "room-standard-02-e7341347.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/STANDARD_02.JPG"
+  },
+  {
+   "file": "room-standard-03-1aa2089f.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/STANDARD_03.JPG"
+  },
+  {
+   "file": "room-standard-04-57e3fd35.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 934,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/STANDARD_04.JPG"
+  },
+  {
+   "file": "room-1-7aed66ff.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_1.JPG"
+  },
+  {
+   "file": "room-2-a3cfc409.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_2.JPG"
+  },
+  {
+   "file": "room-3-ffa5c14a.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_3.JPG"
+  },
+  {
+   "file": "room-4-fd9a10f0.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 2100,
+   "orientation": "portrait",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_4.JPG"
+  },
+  {
+   "file": "room-5-4f00e39d.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_5.jpg"
+  },
+  {
+   "file": "room-6-d3ca71d1.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_6.jpg"
+  },
+  {
+   "file": "room-7-e75e7ae8.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_7.JPG"
+  },
+  {
+   "file": "room-8-5b69d025.jpg",
+   "tags": [
+    "room",
+    "standard"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "02_객실_스탠다드/스탠다드트윈_작가촬영_8.JPG"
+  },
+  {
+   "file": "room-dsc09406-4c9e46c3.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 934,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/DSC09406.jpg"
+  },
+  {
+   "file": "room-dsc09407-3e8e084a.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/DSC09407.jpg"
+  },
+  {
+   "file": "room-stanocean-01-e3a052b0.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/STANOCEAN_01.JPG"
+  },
+  {
+   "file": "room-stanocean-02-5f3a4198.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/STANOCEAN_02.JPG"
+  },
+  {
+   "file": "room-stanocean-03-ae5150ca.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/STANOCEAN_03.JPG"
+  },
+  {
+   "file": "room-stanocean-04-8f331bff.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/STANOCEAN_04.JPG"
+  },
+  {
+   "file": "room-stanocean-05-4aa33b12.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/STANOCEAN_05.JPG"
+  },
+  {
+   "file": "room-stanocean-06-1f9b34ad.jpg",
+   "tags": [
+    "room",
+    "standard",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 스탠다드 트윈 객실",
+   "alt_en": "Hotel Aroha Standard Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "03_객실_스탠다드오션뷰/STANOCEAN_06.JPG"
+  },
+  {
+   "file": "room-deluxe-01-cc6a4cb7.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DELUXE_01.JPG"
+  },
+  {
+   "file": "room-deluxe-02-14334e8d.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DELUXE_02.JPG"
+  },
+  {
+   "file": "room-deluxe-03-788fd3fa.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DELUXE_03.JPG"
+  },
+  {
+   "file": "room-deluxe-04-14b86c26.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DELUXE_04.JPG"
+  },
+  {
+   "file": "room-deluxe-05-519c240e.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DELUXE_05.JPG"
+  },
+  {
+   "file": "room-deluxe-06-4b84c40e.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DELUXE_06.JPG"
+  },
+  {
+   "file": "room-deluxedouble-1-c17e8a72.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DeluxeDouble (1).JPG"
+  },
+  {
+   "file": "room-deluxedouble-2-4719bcb7.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DeluxeDouble (2).JPG"
+  },
+  {
+   "file": "room-deluxedouble-3-eae23865.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DeluxeDouble (3).JPG"
+  },
+  {
+   "file": "room-deluxedouble-4-631727fa.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DeluxeDouble (4).JPG"
+  },
+  {
+   "file": "room-deluxedouble-5-1833300f.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 2100,
+   "orientation": "portrait",
+   "source": "04_객실_디럭스/DeluxeDouble (5).JPG"
+  },
+  {
+   "file": "room-deluxedouble-6-467a5bb3.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 2100,
+   "orientation": "portrait",
+   "source": "04_객실_디럭스/DeluxeDouble (6).JPG"
+  },
+  {
+   "file": "room-deluxedouble-7-0eb66836.jpg",
+   "tags": [
+    "room",
+    "deluxe",
+    "oceanview"
+   ],
+   "alt_ko": "호텔아로하 디럭스더블 객실 — 바다 전망",
+   "alt_en": "Hotel Aroha Deluxe Double room with ocean view",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "04_객실_디럭스/DeluxeDouble (7).JPG"
+  },
+  {
+   "file": "room-1-bf653247.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (1).JPG"
+  },
+  {
+   "file": "room-10-0102b946.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (10).JPG"
+  },
+  {
+   "file": "room-11-4286a75a.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (11).JPG"
+  },
+  {
+   "file": "room-12-d12301ed.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (12).JPG"
+  },
+  {
+   "file": "room-13-fb5006e2.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (13).JPG"
+  },
+  {
+   "file": "room-14-3f57e335.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (14).JPG"
+  },
+  {
+   "file": "room-3-457eb479.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (3).JPG"
+  },
+  {
+   "file": "room-4-639637d3.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (4).JPG"
+  },
+  {
+   "file": "room-5-bfb12794.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (5).JPG"
+  },
+  {
+   "file": "room-6-fa857566.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (6).JPG"
+  },
+  {
+   "file": "room-7-fbf76ff5.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (7).JPG"
+  },
+  {
+   "file": "room-8-646a83cc.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (8).JPG"
+  },
+  {
+   "file": "room-9-81741fc1.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) (9).JPG"
+  },
+  {
+   "file": "room-2-f5cc4f5f.jpg",
+   "tags": [
+    "room",
+    "family",
+    "kitchen"
+   ],
+   "alt_ko": "호텔아로하 패밀리 트윈 — 침실과 거실이 분리된 가족 객실",
+   "alt_en": "Hotel Aroha Family Twin with a separate living room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "05_객실_패밀리/패밀리트윈(마을전망) 2.JPG"
+  },
+  {
+   "file": "room-economy-01-3c215d70.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/ECONOMY_01.JPG"
+  },
+  {
+   "file": "room-economy-02-0889439c.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/ECONOMY_02.JPG"
+  },
+  {
+   "file": "room-economy-03-cf762344.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/ECONOMY_03.JPG"
+  },
+  {
+   "file": "room-economy-04-6629adef.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/ECONOMY_04.JPG"
+  },
+  {
+   "file": "room-economy-05-fd482d75.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/ECONOMY_05.JPG"
+  },
+  {
+   "file": "room-img-5576-8d7ad2b3.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/IMG_5576.JPG"
+  },
+  {
+   "file": "room-img-5579-d0ea7c8b.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/IMG_5579.JPG"
+  },
+  {
+   "file": "room-img-5587-93a53a6f.jpg",
+   "tags": [
+    "room",
+    "economy"
+   ],
+   "alt_ko": "호텔아로하 이코노미 트윈 객실",
+   "alt_en": "Hotel Aroha Economy Twin room",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "06_객실_이코노미트윈/IMG_5587.JPG"
+  },
+  {
+   "file": "lobby-recep-01-328d265d.jpg",
+   "tags": [
+    "lobby",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 로비와 프런트, 로비 도서관",
+   "alt_en": "Hotel Aroha lobby, front desk and library",
+   "width": 1400,
+   "height": 826,
+   "orientation": "landscape",
+   "source": "07_로비_프런트/RECEP_01.jpg"
+  },
+  {
+   "file": "lobby-recep-011-f0e53387.jpg",
+   "tags": [
+    "lobby",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 로비와 프런트, 로비 도서관",
+   "alt_en": "Hotel Aroha lobby, front desk and library",
+   "width": 1400,
+   "height": 826,
+   "orientation": "landscape",
+   "source": "07_로비_프런트/RECEP_011.jpg"
+  },
+  {
+   "file": "lobby-se-a8a6cbc4-af4f-49a7-91ec-1-ede814e3.jpg",
+   "tags": [
+    "lobby",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 로비와 프런트, 로비 도서관",
+   "alt_en": "Hotel Aroha lobby, front desk and library",
+   "width": 900,
+   "height": 676,
+   "orientation": "landscape",
+   "source": "07_로비_프런트/SE-A8A6CBC4-AF4F-49A7-91EC-1EEB4B5743EC.jpg"
+  },
+  {
+   "file": "lobby-01-af294bab.jpg",
+   "tags": [
+    "lobby",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 로비와 프런트, 로비 도서관",
+   "alt_en": "Hotel Aroha lobby, front desk and library",
+   "width": 1079,
+   "height": 720,
+   "orientation": "landscape",
+   "source": "07_로비_프런트/로비 01.jpg"
+  },
+  {
+   "file": "lobby-02-d391ff3d.jpg",
+   "tags": [
+    "lobby",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 로비와 프런트, 로비 도서관",
+   "alt_en": "Hotel Aroha lobby, front desk and library",
+   "width": 1400,
+   "height": 788,
+   "orientation": "landscape",
+   "source": "07_로비_프런트/로비 02.jpg"
+  },
+  {
+   "file": "breakfast-breakfast-01-a2f5f75e.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/BREAKFAST_01.JPG"
+  },
+  {
+   "file": "breakfast-breakfast-02-f39a1e00.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/BREAKFAST_02.JPG"
+  },
+  {
+   "file": "breakfast-breakfast-03-72afadc4.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/BREAKFAST_03.JPG"
+  },
+  {
+   "file": "breakfast-breakfast-04-698db8ff.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/BREAKFAST_04.JPG"
+  },
+  {
+   "file": "breakfast-res-01-1b6bfb70.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/RES_01.jpg"
+  },
+  {
+   "file": "breakfast-res-02-f97487ac.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/RES_02.jpg"
+  },
+  {
+   "file": "breakfast-res-03-d25fec40.jpg",
+   "tags": [
+    "breakfast",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 조식",
+   "alt_en": "Breakfast at Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "08_레스토랑_조식/RES_03.jpg"
+  },
+  {
+   "file": "amenity-gs25-b60a76fd.jpg",
+   "tags": [
+    "amenity",
+    "hotel",
+    "convenience-store"
+   ],
+   "alt_ko": "호텔아로하 편의시설 — 1층 GS25 편의점",
+   "alt_en": "Hotel Aroha amenities including the GS25 store downstairs",
+   "width": 960,
+   "height": 458,
+   "orientation": "landscape",
+   "source": "09_편의시설/GS25.jpg"
+  },
+  {
+   "file": "amenity-img-5448-6ddc051f.jpg",
+   "tags": [
+    "amenity",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 편의시설 — 1층 GS25 편의점",
+   "alt_en": "Hotel Aroha amenities including the GS25 store downstairs",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "09_편의시설/IMG_5448.JPG"
+  },
+  {
+   "file": "amenity-img-5451-9cf1581a.jpg",
+   "tags": [
+    "amenity",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 편의시설 — 1층 GS25 편의점",
+   "alt_en": "Hotel Aroha amenities including the GS25 store downstairs",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "09_편의시설/IMG_5451.JPG"
+  },
+  {
+   "file": "amenity-img-5580-c9c4b76d.jpg",
+   "tags": [
+    "amenity",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 편의시설 — 1층 GS25 편의점",
+   "alt_en": "Hotel Aroha amenities including the GS25 store downstairs",
+   "width": 1400,
+   "height": 2100,
+   "orientation": "portrait",
+   "source": "09_편의시설/IMG_5580.JPG"
+  },
+  {
+   "file": "amenity-01-1b38201e.jpg",
+   "tags": [
+    "amenity",
+    "hotel"
+   ],
+   "alt_ko": "호텔아로하 편의시설 — 1층 GS25 편의점",
+   "alt_en": "Hotel Aroha amenities including the GS25 store downstairs",
+   "width": 1400,
+   "height": 788,
+   "orientation": "landscape",
+   "source": "09_편의시설/편의시설 01.jpg"
+  },
+  {
+   "file": "surroundings-23-55725333.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 768,
+   "height": 512,
+   "orientation": "landscape",
+   "source": "10_주변환경/23.jpg"
+  },
+  {
+   "file": "surroundings-img-5739-79b7a9b5.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 858,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_5739.JPG"
+  },
+  {
+   "file": "surroundings-img-5872-f5775ce2.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_5872.JPG"
+  },
+  {
+   "file": "surroundings-img-5878-f7292b4f.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_5878.JPG"
+  },
+  {
+   "file": "surroundings-img-6044-c74b81ba.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_6044.JPG"
+  },
+  {
+   "file": "surroundings-img-6063-cb50d320.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_6063.JPG"
+  },
+  {
+   "file": "surroundings-img-6086-40d5cf04.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_6086.JPG"
+  },
+  {
+   "file": "surroundings-img-6144-7362eff9.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/IMG_6144.JPG"
+  },
+  {
+   "file": "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 1080,
+   "height": 1080,
+   "orientation": "landscape",
+   "source": "10_주변환경/SE-5c3aeb7c-bab4-4505-9796-8b4c42dadd2b.jpg"
+  },
+  {
+   "file": "surroundings-seongsan-73f59874.jpg",
+   "tags": [
+    "surroundings",
+    "sunrise-peak"
+   ],
+   "alt_ko": "성산일출봉 — 호텔아로하에서 도보 5~10분",
+   "alt_en": "Seongsan Ilchulbong, a 5-10 minute walk from Hotel Aroha",
+   "width": 1080,
+   "height": 1350,
+   "orientation": "portrait",
+   "source": "10_주변환경/seongsan.jpg"
+  },
+  {
+   "file": "surroundings-sunrise-5038cbe7.jpg",
+   "tags": [
+    "surroundings",
+    "sunrise-peak"
+   ],
+   "alt_ko": "성산일출봉 — 호텔아로하에서 도보 5~10분",
+   "alt_en": "Seongsan Ilchulbong, a 5-10 minute walk from Hotel Aroha",
+   "width": 909,
+   "height": 512,
+   "orientation": "landscape",
+   "source": "10_주변환경/sunrise.jpg"
+  },
+  {
+   "file": "surroundings-83a96d68.jpg",
+   "tags": [
+    "surroundings",
+    "seopjikoji"
+   ],
+   "alt_ko": "섭지코지 — 성산에서 차로 8분",
+   "alt_en": "Seopjikoji, 8 minutes by car from Seongsan",
+   "width": 768,
+   "height": 512,
+   "orientation": "landscape",
+   "source": "10_주변환경/섭지코지.jpg"
+  },
+  {
+   "file": "surroundings-c4603ba2.jpg",
+   "tags": [
+    "surroundings",
+    "sunrise-peak"
+   ],
+   "alt_ko": "성산일출봉 — 호텔아로하에서 도보 5~10분",
+   "alt_en": "Seongsan Ilchulbong, a 5-10 minute walk from Hotel Aroha",
+   "width": 1400,
+   "height": 933,
+   "orientation": "landscape",
+   "source": "10_주변환경/성산일출봉.JPG"
+  },
+  {
+   "file": "surroundings-2ea8db05.jpg",
+   "tags": [
+    "surroundings",
+    "udo"
+   ],
+   "alt_ko": "우도 — 성산 페리 터미널에서 배로 이동",
+   "alt_en": "Udo Island, reached by ferry from Seongsan",
+   "width": 768,
+   "height": 512,
+   "orientation": "landscape",
+   "source": "10_주변환경/우도.jpg"
+  },
+  {
+   "file": "surroundings-a3badf5d.jpg",
+   "tags": [
+    "surroundings"
+   ],
+   "alt_ko": "제주 성산 주변 풍경",
+   "alt_en": "Around Seongsan, Jeju",
+   "width": 768,
+   "height": 512,
+   "orientation": "landscape",
+   "source": "10_주변환경/유체꽃밭.jpg"
+  }
+ ]
+}
