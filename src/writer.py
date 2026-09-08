@@ -8,6 +8,27 @@ import anthropic
 # 영문 글은 한글보다 토큰을 많이 먹는다. 넉넉히 잡아야 JSON 이 잘리지 않는다.
 MAX_TOKENS = 16000
 
+
+def _client(env) -> "anthropic.Anthropic":
+    """API 키를 정리해서 클라이언트를 만든다.
+
+    키에 줄바꿈이나 공백이 섞이면 HTTP 헤더가 깨지고, SDK 는 이를
+    APIConnectionError('Connection error.') 로 보고해 네트워크 문제처럼 보인다.
+    원인을 구분할 수 있도록 여기서 미리 걸러 낸다.
+    """
+    key = (env.anthropic_key or "").strip()
+    if not key:
+        raise SystemExit("ANTHROPIC_API_KEY 가 비어 있습니다.")
+    if any(c.isspace() for c in key):
+        raise SystemExit(
+            "ANTHROPIC_API_KEY 값 안에 공백이나 줄바꿈이 들어 있습니다. "
+            "GitHub Secrets 에 다시 등록하세요 (앞뒤 공백 없이 한 줄로)."
+        )
+    if not key.startswith("sk-ant-"):
+        print(f"[warn] API 키가 'sk-ant-' 로 시작하지 않습니다 (앞 7자: {key[:7]!r})")
+    # 일시적인 네트워크 오류는 SDK 가 알아서 재시도하게 둔다
+    return anthropic.Anthropic(api_key=key, max_retries=4, timeout=180.0)
+
 SCHEMA_HINT = """다음 JSON 객체 하나만 출력한다. 코드펜스나 설명 문장을 붙이지 않는다.
 
 {
@@ -191,7 +212,7 @@ def _validate(post: dict, image_refs: list, lang: str, strict: bool = True):
 def generate(env, hotel, seo, topic, image_refs, lang: str,
              ko_url: str = "", extra: str = "") -> dict:
     """Claude 를 호출해 포스팅 데이터를 만든다. 실패 시 한 번 재시도."""
-    client = anthropic.Anthropic(api_key=env.anthropic_key)
+    client = _client(env)
     prompt = (_prompt_ko(hotel, seo, topic, image_refs, extra) if lang == "ko"
               else _prompt_en(hotel, seo, topic, image_refs, ko_url, extra))
 
@@ -234,7 +255,7 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
 
 def expand_topics(env, hotel, seo, existing: list, count: int = 20) -> list:
     """주제 큐가 바닥나면 Claude 에게 새 주제를 받아 온다."""
-    client = anthropic.Anthropic(api_key=env.anthropic_key)
+    client = _client(env)
     used = [{"ko": t["ko"], "kw_ko": t["kw_ko"]} for t in existing]
     prompt = f"""제주 성산의 호텔아로하 블로그에 쓸 새 포스팅 주제 {count}개를 만들어라.
 

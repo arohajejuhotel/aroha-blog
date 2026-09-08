@@ -85,6 +85,10 @@ def load_dotenv() -> None:
 def env(name: str, default=None, required: bool = False) -> str:
     load_dotenv()
     value = os.environ.get(name, default)
+    # GitHub Secrets 에 붙여넣을 때 줄바꿈·공백이 딸려 들어가는 일이 잦다.
+    # 그대로 두면 HTTP 헤더가 깨져 연결 오류처럼 보인다.
+    if isinstance(value, str):
+        value = value.strip()
     if required and not value:
         raise SystemExit(
             f"환경 변수 {name} 가 설정되지 않았습니다. "
