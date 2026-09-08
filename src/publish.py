@@ -9,6 +9,7 @@
 
 import argparse
 import datetime as dt
+import re
 import sys
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -41,6 +42,19 @@ def choose_topic(all_topics: list, state: dict, forced: str, month: int) -> dict
     # 계절이 지정된 주제는 제철이 아니면 뒤로 미룬다
     evergreen = [t for t in remaining if not t.get("months")]
     return (evergreen or remaining)[0]
+
+
+def permalink_title(topic: dict, lang: str) -> str:
+    """주소로 쓸 영문 제목을 만든다.
+
+    Blogger 는 이 제목을 소문자 하이픈 형태로 바꿔 주소에 쓴다.
+    한글 제목만으로는 영문 슬러그가 만들어지지 않아 주소가 숫자만 남는다.
+    """
+    base = re.sub(r"[^a-zA-Z0-9\s-]", " ", topic["kw_en"]).strip()
+    base = re.sub(r"\s+", " ", base)
+    if lang == "en":
+        return f"{base} guide"
+    return f"{base} {topic['id']}"
 
 
 def season_note(month: int, lang: str) -> str:
@@ -116,9 +130,13 @@ def main() -> int:
             continue
 
         created = client.create_post(post["title"], html, post["labels"],
-                                     draft=args.draft)
+                                     draft=args.draft,
+                                     permalink_title=permalink_title(topic, lang))
         url = created.get("url", "")
         print(f"[ok] ({lang}) 발행: {url or '초안'}")
+        if args.draft:
+            # 초안은 발행되는 순간 주소가 정해지므로, 진짜 제목은 그때 되돌린다
+            settings.add_pending_title(created["id"], post["title"])
         results[lang] = {"title": post["title"], "url": url,
                          "id": created["id"], "labels": post["labels"]}
         if lang == "ko":

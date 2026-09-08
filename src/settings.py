@@ -51,6 +51,31 @@ def save_state(data):
     )
 
 
+PENDING_TITLES = STATE_DIR / "pending_titles.json"
+
+
+def pending_titles() -> dict:
+    """초안으로 올린 글의 '발행 후 되돌릴 진짜 제목' 매핑."""
+    if not PENDING_TITLES.exists():
+        return {}
+    return _load(PENDING_TITLES)
+
+
+def add_pending_title(post_id: str, title: str) -> None:
+    data = pending_titles()
+    data[str(post_id)] = title
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    PENDING_TITLES.write_text(
+        json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def drop_pending_title(post_id: str) -> None:
+    data = pending_titles()
+    if data.pop(str(post_id), None) is not None:
+        PENDING_TITLES.write_text(
+            json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
 def save_topics(data):
     TOPICS_FILE.write_text(
         json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8"

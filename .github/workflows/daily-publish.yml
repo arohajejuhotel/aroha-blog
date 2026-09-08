@@ -121,7 +121,7 @@ jobs:
         run: |
           git config user.name "aroha-bot"
           git config user.email "actions@github.com"
-          git add state/published.json config/topics.json
+          git add state config/topics.json
           git diff --staged --quiet || git commit -m "chore: publish log $(date -u +%Y-%m-%d)"
           git push
 
