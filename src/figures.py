@@ -5,10 +5,16 @@
 """
 
 
-def pick(all_figures: list, topic: dict, lang: str, limit: int = 2) -> list:
-    """주제 태그와 겹치는 도표를 고른다. 없으면 빈 목록."""
+# 도표는 정보를 전달할 때만 의미가 있다. 모든 글에 붙이면 오히려 상투적으로 보인다.
+# 주제와 확실히 맞물릴 때(점수 2 이상)만 고르고, 한 글에 하나를 기본으로 한다.
+MIN_SCORE = 2
+
+
+def pick(all_figures: list, topic: dict, lang: str, limit: int = 1) -> list:
+    """주제와 확실히 관련된 도표만 고른다. 애매하면 빈 목록을 돌려준다."""
     wanted = set(topic.get("img", []))
     kw = f"{topic.get('kw_ko', '')} {topic.get('kw_en', '')}".lower()
+    angle = f"{topic.get('ko', '')} {topic.get('en', '')}".lower()
 
     scored = []
     for fig in all_figures:
@@ -16,11 +22,14 @@ def pick(all_figures: list, topic: dict, lang: str, limit: int = 2) -> list:
             continue
         tags = set(fig["tags"])
         score = len(wanted & tags)
-        # 키워드에 도표 주제가 직접 등장하면 가산점
+        # 핵심 키워드나 주제 방향에 도표 주제가 직접 등장하면 확실히 관련 있다
         for t in tags:
-            if t.replace("-", " ") in kw:
-                score += 2
-        if score > 0:
+            word = t.replace("-", " ")
+            if word in kw:
+                score += 3
+            elif word in angle:
+                score += 1
+        if score >= MIN_SCORE:
             scored.append((score, fig))
 
     scored.sort(key=lambda s: -s[0])

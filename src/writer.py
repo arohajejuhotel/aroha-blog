@@ -47,9 +47,9 @@ COMMON_RULES = """
 - 사진은 정확히 [[IMG1]] [[IMG2]] ... 형태의 자리표시자로만 넣는다. <img> 태그를 직접 쓰지 않는다.
 - 자리표시자는 각각 한 번씩만, 문단 사이 독립된 줄에 놓는다.
 - 첫 자리표시자는 도입부 직후에 둔다.
-- 도표가 제공되면 [[FIG1]] [[FIG2]] 형태로 넣는다. **그 도표가 설명하는 내용을
-  글로 먼저 설명한 직후**에 배치한다. 도표는 사진과 달리 정보를 전달하므로,
-  같은 숫자를 본문에서 되풀이해 나열하지 말고 도표에 맡기고 해석을 덧붙인다.
+- 도표가 제공될 때가 있다. **그 글에 실제로 도움이 될 때만** [[FIG1]] 형태로 넣는다.
+  글의 흐름과 겉돌면 넣지 않는다. 도표는 모든 글에 들어가야 하는 요소가 아니다.
+  넣는다면 그 내용을 글로 설명한 직후에 두고, 같은 숫자를 본문에서 되풀이하지 않는다.
 
 [사실 규칙]
 - 아래 제공된 팩트시트와 검증된 사실 목록에 없는 가격·시간·거리·전화번호는 절대 만들어내지 않는다.
@@ -112,7 +112,7 @@ def _prompt_ko(hotel, seo, topic, image_refs, figure_refs, extra):
 [사용 가능한 사진 — 자리표시자와 설명]
 {json.dumps(image_refs, ensure_ascii=False, indent=1)}
 
-[사용 가능한 도표 — 있으면 반드시 본문에 배치]
+[사용 가능한 도표 — 도움이 될 때만 쓴다. 안 써도 된다]
 {json.dumps(figure_refs, ensure_ascii=False, indent=1) if figure_refs else "(이번 글에는 도표가 없다)"}
 
 [분량]
@@ -151,7 +151,7 @@ The reader is an international traveller planning a trip to Jeju. Write in clear
 [Available photos - placeholders and descriptions]
 {json.dumps(image_refs, ensure_ascii=False, indent=1)}
 
-[Available charts - place these in the body if provided]
+[Available charts - use only if they genuinely help. Skipping them is fine]
 {json.dumps(figure_refs, ensure_ascii=False, indent=1) if figure_refs else "(no charts for this post)"}
 
 [Length]

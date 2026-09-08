@@ -217,8 +217,8 @@ def fig_udo(lang):
 FIGURES = {
     "walk-distances": (fig_walk, ["walkable", "location", "sunrise-peak", "udo",
                                   "gwangchigi", "transport"]),
-    "sunrise-times": (fig_sunrise, ["sunrise-peak", "sunrise", "seongsan"]),
-    "room-types": (fig_rooms, ["room", "family", "deluxe", "standard", "booking"]),
+    "sunrise-times": (fig_sunrise, ["sunrise-peak", "sunrise"]),
+    "room-types": (fig_rooms, ["family", "deluxe", "standard", "oceanview"]),
     "udo-ferry": (fig_udo, ["udo", "ferry", "daytrip"]),
 }
 

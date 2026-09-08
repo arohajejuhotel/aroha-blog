@@ -38,8 +38,7 @@
    "file": "sunrise-times-ko.png",
    "tags": [
     "sunrise-peak",
-    "sunrise",
-    "seongsan"
+    "sunrise"
    ],
    "caption": "성산일출봉 여름 월별 일출 시각과 출발 권장 시각",
    "width": 1000,
@@ -51,8 +50,7 @@
    "file": "sunrise-times-en.png",
    "tags": [
     "sunrise-peak",
-    "sunrise",
-    "seongsan"
+    "sunrise"
    ],
    "caption": "Monthly sunrise times at Seongsan Ilchulbong",
    "width": 1000,
@@ -63,11 +61,10 @@
    "lang": "ko",
    "file": "room-types-ko.png",
    "tags": [
-    "room",
     "family",
     "deluxe",
     "standard",
-    "booking"
+    "oceanview"
    ],
    "caption": "호텔아로하 객실 3종 비교 — 인원·전망·요금",
    "width": 1000,
@@ -78,11 +75,10 @@
    "lang": "en",
    "file": "room-types-en.png",
    "tags": [
-    "room",
     "family",
     "deluxe",
     "standard",
-    "booking"
+    "oceanview"
    ],
    "caption": "Hotel Aroha room types compared",
    "width": 1000,
