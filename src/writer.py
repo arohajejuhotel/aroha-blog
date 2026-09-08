@@ -156,7 +156,7 @@ def stats(post: dict, lang: str) -> dict:
     }
 
 
-def _validate(post: dict, image_refs: list, lang: str):
+def _validate(post: dict, image_refs: list, lang: str, strict: bool = True):
     missing = [k for k in REQUIRED if k not in post]
     if missing:
         raise ValueError(f"응답에 누락된 키: {missing}")
@@ -171,14 +171,20 @@ def _validate(post: dict, image_refs: list, lang: str):
         raise ValueError("본문이 너무 짧습니다.")
     post["body_html"] = body
 
+    # 아래 둘은 품질 규칙이다. 마지막 시도에서는 경고만 남기고 통과시킨다.
+    # (문체 문제로 그날 발행을 통째로 거르는 것보다 낫다)
     s = stats(post, lang)
+    problems = []
     if s["mentions"] > MAX_HOTEL_MENTIONS:
-        raise ValueError(
-            f"호텔 언급이 {s['mentions']}회로 너무 많습니다 "
-            f"(최대 {MAX_HOTEL_MENTIONS}회). 정보 글로 다시 써야 합니다."
-        )
+        problems.append(
+            f"호텔 언급이 {s['mentions']}회로 많습니다 (권장 {MAX_HOTEL_MENTIONS}회 이하)")
     if s["definitions"] < 1:
-        raise ValueError("AEO 정의 문장이 없습니다.")
+        problems.append("AEO 정의 문장이 없습니다")
+    if problems:
+        message = " / ".join(problems)
+        if strict:
+            raise ValueError(message)
+        print(f"[warn] 품질 기준 미달이지만 마지막 시도라 그대로 진행합니다: {message}")
     return post
 
 
@@ -190,7 +196,8 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
               else _prompt_en(hotel, seo, topic, image_refs, ko_url, extra))
 
     last_error = None
-    for attempt in range(3):
+    attempts = 3
+    for attempt in range(attempts):
         message = client.messages.create(
             model=env.model,
             max_tokens=MAX_TOKENS,
@@ -205,7 +212,8 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
                        "같은 구성을 유지하되 전체 분량을 25% 줄여 다시 작성하라.")
             continue
         try:
-            return _validate(_extract_json(raw), image_refs, lang)
+            return _validate(_extract_json(raw), image_refs, lang,
+                             strict=attempt < attempts - 1)
         except (ValueError, json.JSONDecodeError) as exc:
             last_error = exc
             print(f"[warn] 생성 결과 검증 실패 (시도 {attempt + 1}): {exc}")
@@ -213,6 +221,14 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
                 prompt += ("\n\n[재시도 지시] 직전 응답은 호텔 언급이 너무 잦아 광고처럼 읽혔다. "
                            f"호텔명은 본문 전체에서 {MAX_HOTEL_MENTIONS}회 이하로만 쓰고, "
                            "나머지는 순수한 여행 정보로 채워라.")
+            if "정의 문장" in str(exc):
+                example = ('"호텔아로하는 성산일출봉에서 도보 5~10분 거리에 있는 호텔이다."'
+                           if lang == "ko" else
+                           '"Hotel Aroha is a small hotel a 5-10 minute walk from '
+                           'Seongsan Ilchulbong."')
+                prompt += (f"\n\n[재시도 지시] 정의 문장이 없었다. {example} 처럼 "
+                           "그 문장만 떼어내도 뜻이 통하는 완결된 정의 문장을 "
+                           "본문 안에 최소 2개 넣어라.")
     raise SystemExit(f"본문 생성에 실패했습니다: {last_error}")
 
 
