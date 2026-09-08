@@ -128,10 +128,11 @@
   "Jeju International Airport: about 60 min by car"
  ],
  "ota_scores": {
-  "Interpark NOL": "4.3/5",
-  "Hotels.com": "8.4/10",
-  "Agoda": "8.5/10",
-  "Trip.com": "4.2/5"
+  "Agoda": "8.2/10 (리뷰 1,135)",
+  "Expedia": "8.6/10 (리뷰 337)",
+  "HotelsCombined": "8.4/10 (리뷰 346)",
+  "Google": "4.0/5 (리뷰 156)",
+  "야놀자 NOL": "4.0/5 (리뷰 22)"
  },
  "verified_facts": [
   "우도 페리 왕복 요금은 성인 11,500원이며 선박료·도립공원료·터미널이용료가 포함된다.",
@@ -149,5 +150,27 @@
   "mint": "#3ECAC0",
   "gold": "#E8C547"
  },
- "blog_url": "https://arohajeju.blogspot.com/"
+ "blog_url": "https://arohajeju.blogspot.com/",
+ "cta": {
+  "ko": {
+   "primary": {
+    "label": "객실 확인하기",
+    "url": "https://booking.naver.com/booking/3/bizes/139897?area=plt"
+   },
+   "secondary": {
+    "label": "네이버 지도에서 보기",
+    "url": "https://map.naver.com/p/entry/place/35911590?lng=126.9310441&lat=33.46647"
+   }
+  },
+  "en": {
+   "primary": {
+    "label": "Check rates on Agoda",
+    "url": "https://www.agoda.com/hotel-aroha-jeju/hotel/jeju-island-kr.html"
+   },
+   "secondary": {
+    "label": "Or book on Trip.com",
+    "url": "https://www.trip.com/hotels/seogwipo-hotel-detail-3799607/hotel-aroha/"
+   }
+  }
+ }
 }

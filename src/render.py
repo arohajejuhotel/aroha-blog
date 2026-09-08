@@ -95,17 +95,30 @@ def _info_block(hotel: dict, lang: str) -> str:
         f'<td style="padding:7px 0;color:#4a443e;">{v}</td></tr>'
         for k, v in rows
     )
+    # 언어별 예약 채널: 한국어는 네이버 예약(직접예약), 영어는 OTA(리뷰 축적)
+    cta = hotel.get("cta", {}).get(lang, {})
+    primary = cta.get("primary") or {"label": t["booking_cta"], "url": hotel["booking_url"]}
+    secondary = cta.get("secondary") or {"label": t["map"], "url": hotel["map_url"]}
+
+    buttons = (
+        f'<a href="{primary["url"]}" rel="noopener nofollow" '
+        f'style="display:inline-block;background:{C["teal"]};color:#fff;text-decoration:none;'
+        f'padding:11px 22px;border-radius:8px;font-weight:700;">'
+        f'{html.escape(primary["label"])}</a>'
+    )
+    if secondary.get("url"):
+        buttons += (
+            f'&nbsp;&nbsp;<a href="{secondary["url"]}" rel="noopener nofollow" '
+            f'style="color:{C["teal"]};font-size:14px;">'
+            f'{html.escape(secondary["label"])}</a>'
+        )
+
     return (
         f'<div style="border:1px solid #e0d9cf;border-radius:12px;padding:22px;margin:40px 0 24px;">'
         f'<p style="margin:0 0 14px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;'
         f'color:{C["teal"]};font-weight:700;">{t["info_heading"]}</p>'
         f'<table style="width:100%;border-collapse:collapse;font-size:15px;"><tbody>{body}</tbody></table>'
-        f'<p style="margin:20px 0 0;">'
-        f'<a href="{hotel["booking_url"]}" rel="noopener" '
-        f'style="display:inline-block;background:{C["teal"]};color:#fff;text-decoration:none;'
-        f'padding:11px 22px;border-radius:8px;font-weight:700;">{t["booking_cta"]}</a>'
-        f'&nbsp;&nbsp;<a href="{hotel["map_url"]}" rel="noopener" '
-        f'style="color:{C["teal"]};font-size:14px;">{t["map"]}</a></p>'
+        f'<p style="margin:20px 0 0;">{buttons}</p>'
         f"</div>"
     )
 
