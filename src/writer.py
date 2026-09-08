@@ -5,6 +5,9 @@ import re
 
 import anthropic
 
+# 영문 글은 한글보다 토큰을 많이 먹는다. 넉넉히 잡아야 JSON 이 잘리지 않는다.
+MAX_TOKENS = 16000
+
 SCHEMA_HINT = """다음 JSON 객체 하나만 출력한다. 코드펜스나 설명 문장을 붙이지 않는다.
 
 {
@@ -132,6 +135,26 @@ def _extract_json(text: str) -> dict:
 
 REQUIRED = ("title", "meta_description", "labels", "body_html", "faq", "hashtags")
 
+# 본문에서 호텔명이 이 횟수를 넘으면 홍보 글로 기울었다고 보고 다시 쓰게 한다
+MAX_HOTEL_MENTIONS = 4
+
+
+def stats(post: dict, lang: str) -> dict:
+    """생성된 글의 편집 원칙 준수 여부를 수치로 뽑는다."""
+    body = post["body_html"]
+    text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body))
+    name = "호텔아로하" if lang == "ko" else "Hotel Aroha"
+    pattern = (r"호텔아로하는[^.]{0,100}(?:이다|입니다)" if lang == "ko"
+               else r"Hotel Aroha is[^.]{0,120}\.")
+    return {
+        "length": len(text) if lang == "ko" else len(text.split()),
+        "unit": "자" if lang == "ko" else "단어",
+        "mentions": text.count(name),
+        "definitions": len(re.findall(pattern, text)),
+        "h2": len(re.findall(r"<h2", body, re.I)),
+        "faq": len(post.get("faq", [])),
+    }
+
 
 def _validate(post: dict, image_refs: list, lang: str):
     missing = [k for k in REQUIRED if k not in post]
@@ -147,6 +170,15 @@ def _validate(post: dict, image_refs: list, lang: str):
     if lang == "ko" and len(re.sub(r"<[^>]+>", "", body)) < 1200:
         raise ValueError("본문이 너무 짧습니다.")
     post["body_html"] = body
+
+    s = stats(post, lang)
+    if s["mentions"] > MAX_HOTEL_MENTIONS:
+        raise ValueError(
+            f"호텔 언급이 {s['mentions']}회로 너무 많습니다 "
+            f"(최대 {MAX_HOTEL_MENTIONS}회). 정보 글로 다시 써야 합니다."
+        )
+    if s["definitions"] < 1:
+        raise ValueError("AEO 정의 문장이 없습니다.")
     return post
 
 
@@ -158,19 +190,29 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
               else _prompt_en(hotel, seo, topic, image_refs, ko_url, extra))
 
     last_error = None
-    for attempt in range(2):
+    for attempt in range(3):
         message = client.messages.create(
             model=env.model,
-            max_tokens=8000,
-            temperature=1 if attempt == 0 else 0.7,
+            max_tokens=MAX_TOKENS,
             messages=[{"role": "user", "content": prompt}],
         )
         raw = "".join(b.text for b in message.content if b.type == "text")
+        if message.stop_reason == "max_tokens":
+            # 응답이 잘리면 JSON 이 깨진다. 분량을 줄여 다시 요청한다.
+            last_error = ValueError("응답이 길이 제한에 걸려 잘렸습니다.")
+            print(f"[warn] 응답 잘림 (시도 {attempt + 1}) — 분량을 줄여 재시도")
+            prompt += ("\n\n[재시도 지시] 직전 응답이 너무 길어 잘렸다. "
+                       "같은 구성을 유지하되 전체 분량을 25% 줄여 다시 작성하라.")
+            continue
         try:
             return _validate(_extract_json(raw), image_refs, lang)
         except (ValueError, json.JSONDecodeError) as exc:
             last_error = exc
             print(f"[warn] 생성 결과 검증 실패 (시도 {attempt + 1}): {exc}")
+            if "호텔 언급" in str(exc):
+                prompt += ("\n\n[재시도 지시] 직전 응답은 호텔 언급이 너무 잦아 광고처럼 읽혔다. "
+                           f"호텔명은 본문 전체에서 {MAX_HOTEL_MENTIONS}회 이하로만 쓰고, "
+                           "나머지는 순수한 여행 정보로 채워라.")
     raise SystemExit(f"본문 생성에 실패했습니다: {last_error}")
 
 

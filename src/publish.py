@@ -97,7 +97,10 @@ def main() -> int:
         post = writer.generate(env, hotel, seo, topic, refs, lang,
                                ko_url=ko_url, extra=season_note(month, lang))
         html = render.build(post, hotel, topic, refs, lang, cross_url=ko_url)
-        print(f"[info] ({lang}) 제목: {post['title']}  본문 {len(html):,}자")
+        s = writer.stats(post, lang)
+        print(f"[info] ({lang}) 제목: {post['title']}")
+        print(f"[info] ({lang}) 분량 {s['length']:,}{s['unit']} / 호텔 언급 {s['mentions']}회"
+              f" / 정의문장 {s['definitions']}개 / 소제목 {s['h2']}개 / FAQ {s['faq']}개")
 
         if args.dry_run:
             OUT.mkdir(exist_ok=True)

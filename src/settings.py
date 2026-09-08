@@ -57,10 +57,39 @@ def save_topics(data):
     )
 
 
+ENV_FILE = ROOT / ".env"
+_dotenv_loaded = False
+
+
+def load_dotenv() -> None:
+    """로컬 실행 편의를 위해 .env 를 환경 변수로 읽어들인다.
+
+    이미 설정된 환경 변수를 덮어쓰지 않는다 (GitHub Actions 의 시크릿이 우선).
+    """
+    global _dotenv_loaded
+    if _dotenv_loaded or not ENV_FILE.exists():
+        _dotenv_loaded = True
+        return
+    for line in ENV_FILE.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'").strip()
+        if key and value and key not in os.environ:
+            os.environ[key] = value
+    _dotenv_loaded = True
+
+
 def env(name: str, default=None, required: bool = False) -> str:
+    load_dotenv()
     value = os.environ.get(name, default)
     if required and not value:
-        raise SystemExit(f"환경 변수 {name} 가 설정되지 않았습니다.")
+        raise SystemExit(
+            f"환경 변수 {name} 가 설정되지 않았습니다. "
+            f"(.env 파일 또는 GitHub Secrets 확인)"
+        )
     return value
 
 
