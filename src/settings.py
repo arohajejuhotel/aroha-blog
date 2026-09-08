@@ -26,8 +26,23 @@ def seo():
     return _load(CONFIG_DIR / "seo.json")
 
 
-def topics():
+TOPICS_EN_FILE = CONFIG_DIR / "topics_en.json"
+
+
+def topics(lang: str = "ko"):
+    """언어별 주제 풀.
+
+    한국인과 외국인은 검색 의도가 완전히 다르다. 같은 주제를 번역해 두 번 쓰면
+    영문 글이 실제 검색 수요와 어긋난다. 그래서 풀을 분리해 각각 돌린다.
+    """
+    if lang == "en" and TOPICS_EN_FILE.exists():
+        return _load(TOPICS_EN_FILE)
     return _load(TOPICS_FILE)
+
+
+def save_topics_en(data):
+    TOPICS_EN_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 def manifest():

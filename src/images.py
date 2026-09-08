@@ -58,10 +58,16 @@ def pick(manifest: list, wanted_tags: list, count: int, usage: Counter) -> list:
 
 
 def usage_counter(state: dict) -> Counter:
+    """지금까지 각 사진을 몇 번 썼는지 센다.
+
+    주제 풀을 언어별로 나누기 전에는 'images' 하나였고, 지금은
+    'ko_images' / 'en_images' 로 나뉜다. 둘 다 센다.
+    """
     counter = Counter()
     for post in state.get("posts", []):
-        for f in post.get("images", []):
-            counter[f] += 1
+        for key in ("images", "ko_images", "en_images"):
+            for f in post.get(key, []):
+                counter[f] += 1
     return counter
 
 

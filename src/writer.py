@@ -116,7 +116,7 @@ The reader is an international traveller planning a trip to Jeju. Write in clear
 - Angle: {topic['en']}
 - Primary keyword: {topic['kw_en']}
 - Search questions this post must answer: {" / ".join(topic['q'])}
-- (Korean-language angle for reference, do not translate literally: {topic['ko']}){cross}
+- (Reference note, do not translate literally: {topic.get("ko", topic["en"])}){cross}
 {extra}
 
 [Hotel fact sheet]
@@ -253,30 +253,62 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
     raise SystemExit(f"본문 생성에 실패했습니다: {last_error}")
 
 
-def expand_topics(env, hotel, seo, existing: list, count: int = 20) -> list:
+def expand_topics(env, hotel, seo, existing: list, count: int = 20,
+                  lang: str = "ko") -> list:
     """주제 큐가 바닥나면 Claude 에게 새 주제를 받아 온다."""
     client = _client(env)
-    used = [{"ko": t["ko"], "kw_ko": t["kw_ko"]} for t in existing]
-    prompt = f"""제주 성산의 호텔아로하 블로그에 쓸 새 포스팅 주제 {count}개를 만들어라.
+    prefix = "gen" if lang == "ko" else "xgen"
+    tags = ("exterior, room, deluxe, standard, family, economy, oceanview, kitchen, "
+            "lobby, breakfast, amenity, surroundings, sunrise-peak, udo, seopjikoji, "
+            "gwangchigi, convenience-store, night")
 
-목적: 사람들이 실제로 검색하는 제주/성산 여행 주제로 검색 유입을 만드는 것.
+    if lang == "en":
+        used = [{"en": t["en"], "kw_en": t["kw_en"]} for t in existing]
+        prompt = f"""Create {count} new blog post topics for Hotel Aroha's blog
+(a small hotel in Seongsan, Jeju, South Korea).
+
+The reader is an international traveller planning a trip to Korea, searching in
+English on Google. Their questions differ from Korean readers': they ask whether
+a trip is even feasible (flights, visas, rental cars, buses, payment, language)
+before they ask what to see. Write topics for that reader.
+
+These must be travel information topics, not hotel promotion.
+
+Audience note: {seo['editorial_rules'].get('en_audience', '')}
+Keyword map: {json.dumps(seo['keywords']['en'], ensure_ascii=False)}
+Hotel location: {hotel['address_en']} (5-10 min walk to Seongsan Ilchulbong)
+
+Topics already covered - do not repeat these:
+{json.dumps(used, ensure_ascii=False, indent=1)}
+
+Output only this JSON array. No code fences.
+[{{"id":"{prefix}01","cat":"성산여행정보","en":"English angle",
+  "kw_en":"primary keyword","q":["2-4 search questions"],
+  "img":["2-3 photo tags"]}}]
+
+cat must be one of {list(seo['categories'])} (keep the Korean keys as-is).
+img tags must come from: {tags}."""
+    else:
+        used = [{"ko": t["ko"], "kw_ko": t["kw_ko"]} for t in existing]
+        prompt = f"""제주 성산의 호텔아로하 블로그에 쓸 새 포스팅 주제 {count}개를 만들어라.
+
+목적: 한국인이 실제로 검색하는 제주/성산 여행 주제로 검색 유입을 만드는 것.
 호텔 홍보 주제가 아니라 여행 정보 주제여야 한다.
 
 카테고리 비중: {json.dumps(seo['categories'], ensure_ascii=False)}
-키워드 맵: {json.dumps(seo['keywords'], ensure_ascii=False)}
+키워드 맵: {json.dumps(seo['keywords']['ko'], ensure_ascii=False)}
 호텔 위치: {hotel['address_ko']} (성산일출봉 도보 5~10분)
 
 이미 다룬 주제 — 겹치지 않게 하라:
 {json.dumps(used, ensure_ascii=False, indent=1)}
 
 다음 JSON 배열 하나만 출력한다. 코드펜스 금지.
-[{{"id":"x01","cat":"성산여행정보","ko":"한국어 주제 방향","en":"English angle",
+[{{"id":"{prefix}01","cat":"성산여행정보","ko":"한국어 주제 방향","en":"English angle",
   "kw_ko":"핵심 키워드","kw_en":"primary keyword",
   "q":["검색 질문 2~4개"],"img":["사진 태그 2~3개"]}}]
 
 cat 은 {list(seo['categories'])} 중 하나. img 태그는 다음 중에서만 고른다:
-exterior, room, deluxe, standard, family, economy, oceanview, kitchen, lobby,
-breakfast, amenity, surroundings, sunrise-peak, udo, seopjikoji, night."""
+{tags}."""
 
     message = client.messages.create(
         model=env.model, max_tokens=6000,
@@ -288,7 +320,7 @@ breakfast, amenity, surroundings, sunrise-peak, udo, seopjikoji, night."""
     seen = {t["id"] for t in existing}
     out = []
     for n, t in enumerate(new):
-        tid = t.get("id") or f"gen{n:03d}"
+        tid = t.get("id") or f"{prefix}{n:03d}"
         while tid in seen:
             tid += "x"
         t["id"] = tid
