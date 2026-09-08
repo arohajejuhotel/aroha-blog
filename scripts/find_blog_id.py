@@ -3,7 +3,7 @@
 인증 없이 API 키만 필요:
  Google Cloud Console > 사용자 인증 정보 > API 키 생성 (Blogger API 사용 설정 후)
 
-    python scripts/find_blog_id.py --url https://hotelaroha.blogspot.com --api-key XXX
+    python scripts/find_blog_id.py --url https://arohajeju.blogspot.com --api-key XXX
 
 인증된 방식으로 확인하고 싶으면 (환경 변수 설정 후):
 

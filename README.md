@@ -59,7 +59,7 @@ blog-automation/
 
 1. <https://www.blogger.com> 접속 → 호텔 계정 지메일로 로그인
 2. **블로그 만들기** → 제목 `호텔아로하 | 성산 여행의 시작`
-3. 주소는 원하는 것으로 (예: `hotelaroha.blogspot.com`)
+3. 주소는 원하는 것으로 (예: `arohajeju.blogspot.com`)
 4. 설정 → **언어** 한국어, **검색엔진에 표시** 사용
 
 > 계정 생성과 로그인은 직접 해야 한다.
