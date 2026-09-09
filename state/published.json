@@ -34,6 +34,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-09-10",
+   "ko_topic": "e13",
+   "ko_images": [
+    "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg",
+    "surroundings-img-6144-7362eff9.jpg",
+    "surroundings-a3badf5d.jpg",
+    "surroundings-img-6063-cb50d320.jpg",
+    "surroundings-seongsan-73f59874.jpg"
+   ],
+   "ko": {
+    "title": "제주 가을 여행, 억새와 감귤 사이의 두 달 (feat. 성산)",
+    "url": "https://arohajeju.blogspot.com/2026/09/jeju-autumn-travel-e13_0730033570.html",
+    "id": "6079664315687006755",
+    "labels": [
+     "제주동부여행",
+     "제주가을여행",
+     "성산일출봉",
+     "감귤체험"
+    ]
+   },
+   "en_topic": "x27",
+   "en_images": [
+    "surroundings-c4603ba2.jpg",
+    "surroundings-a3badf5d.jpg",
+    "surroundings-seongsan-73f59874.jpg",
+    "surroundings-img-6144-7362eff9.jpg",
+    "surroundings-sunrise-5038cbe7.jpg"
+   ],
+   "en": {
+    "title": "Jeju in Autumn: Silver Grass Season and the First Tangerines",
+    "url": "https://arohajeju.blogspot.com/2026/09/jeju-in-autumn-guide.html",
+    "id": "698558822266631098",
+    "labels": [
+     "East Jeju Guide",
+     "Autumn in Jeju",
+     "Seongsan Ilchulbong",
+     "Silver Grass Season",
+     "English"
+    ]
+   }
   }
  ]
 }
