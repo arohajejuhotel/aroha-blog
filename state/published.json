@@ -76,6 +76,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-09-11",
+   "ko_topic": "s01",
+   "ko_images": [
+    "surroundings-c4603ba2.jpg",
+    "exterior-2-3c63d4cb.jpg",
+    "surroundings-img-5878-f7292b4f.jpg",
+    "exterior-02-752c4658.jpg",
+    "exterior-05-fb5e7143.jpg"
+   ],
+   "ko": {
+    "title": "성산일출봉 일출 시간, 9월엔 몇 시에 나가야 할까",
+    "url": "https://arohajeju.blogspot.com/2026/09/seongsan-ilchulbong-sunrise-time-s01.html",
+    "id": "8056540029515869032",
+    "labels": [
+     "성산여행정보",
+     "성산일출봉",
+     "일출시간",
+     "제주여행팁"
+    ]
+   },
+   "en_topic": "x01",
+   "en_images": [
+    "exterior-05-f9e485b9.jpg",
+    "surroundings-img-5739-79b7a9b5.jpg",
+    "exterior-1-e37b5ccb.jpg",
+    "exterior-hotelout-03-e8302990.jpg",
+    "exterior-2-3c63d4cb.jpg"
+   ],
+   "en": {
+    "title": "How to Get to Jeju from Seoul: Flights, Cost, and When to Book",
+    "url": "https://arohajeju.blogspot.com/2026/09/how-to-get-to-jeju-from-seoul-guide.html",
+    "id": "5651642504265884625",
+    "labels": [
+     "East Jeju Guide",
+     "Getting to Jeju",
+     "Seoul to Jeju Flights",
+     "Travel Planning",
+     "English"
+    ]
+   }
   }
  ]
 }
