@@ -118,6 +118,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-09-12",
+   "ko_topic": "s02",
+   "ko_images": [
+    "surroundings-2ea8db05.jpg",
+    "exterior-1-72b94dbe.jpg",
+    "exterior-03-35715e3c.jpg",
+    "exterior-dsc-0728-c034a315.jpg",
+    "exterior-hotelout-naver-a602367a.jpg"
+   ],
+   "ko": {
+    "title": "광치기해변 물때, 이끼바위 언제 드러날까",
+    "url": "https://arohajeju.blogspot.com/2026/09/gwangchigi-beach-tide-s02.html",
+    "id": "6045460009559443122",
+    "labels": [
+     "성산여행정보",
+     "광치기해변",
+     "물때정보",
+     "성산일출봉"
+    ]
+   },
+   "en_topic": "x02",
+   "en_images": [
+    "exterior-1-72b94dbe.jpg",
+    "surroundings-2ea8db05.jpg",
+    "room-img-5579-d0ea7c8b.jpg",
+    "room-5-4f00e39d.jpg",
+    "room-deluxe-04-14b86c26.jpg"
+   ],
+   "en": {
+    "title": "Do I Need a Car in Jeju? An Honest Answer for East Jeju",
+    "url": "https://arohajeju.blogspot.com/2026/09/do-i-need-car-in-jeju-guide.html",
+    "id": "8085383355296562536",
+    "labels": [
+     "East Jeju Guide",
+     "Getting Around Jeju",
+     "Seongsan",
+     "Transportation",
+     "English"
+    ]
+   }
   }
  ]
 }
