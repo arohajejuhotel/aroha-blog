@@ -202,6 +202,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-09-14",
+   "ko_topic": "s04",
+   "ko_images": [
+    "breakfast-res-03-d25fec40.jpg",
+    "amenity-01-1b38201e.jpg",
+    "amenity-img-5580-c9c4b76d.jpg",
+    "breakfast-breakfast-04-698db8ff.jpg",
+    "breakfast-breakfast-02-f39a1e00.jpg"
+   ],
+   "ko": {
+    "title": "성산 아침식사, 이른 시간에 여는 곳 총정리",
+    "url": "https://arohajeju.blogspot.com/2026/09/seongsan-breakfast-s04.html",
+    "id": "2893173037534272012",
+    "labels": [
+     "성산여행정보",
+     "성산맛집",
+     "성산아침식사",
+     "제주동부여행"
+    ]
+   },
+   "en_topic": "x04",
+   "en_images": [
+    "surroundings-sunrise-5038cbe7.jpg",
+    "exterior-01-2d8ba3cc.jpg",
+    "room-economy-02-0889439c.jpg",
+    "room-7-e75e7ae8.jpg",
+    "room-7-fbf76ff5.jpg"
+   ],
+   "en": {
+    "title": "Seongsan Ilchulbong Sunrise: What Time to Arrive, and Whether It's Worth the Early Alarm",
+    "url": "https://arohajeju.blogspot.com/2026/09/seongsan-ilchulbong-sunrise-guide.html",
+    "id": "738120662346486952",
+    "labels": [
+     "Seongsan Travel",
+     "Seongsan Ilchulbong",
+     "Jeju Sunrise",
+     "Travel Tips",
+     "English"
+    ]
+   }
   }
  ]
 }
