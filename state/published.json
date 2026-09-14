@@ -244,6 +244,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-09-15",
+   "ko_topic": "s05",
+   "ko_images": [
+    "exterior-hotelout-04-1c5b46f4.jpg",
+    "surroundings-img-5872-f5775ce2.jpg",
+    "exterior-dsc-0727-f885424a.jpg",
+    "exterior-04-af53fd06.jpg",
+    "surroundings-img-5878-f7292b4f.jpg"
+   ],
+   "ko": {
+    "title": "성산 차 없이 여행, 버스와 도보로 9월을 걷다",
+    "url": "https://arohajeju.blogspot.com/2026/09/seongsan-without-car-s05.html",
+    "id": "7846821414206421434",
+    "labels": [
+     "성산여행정보",
+     "성산차없이여행",
+     "성산버스",
+     "제주동부뚜벅이여행"
+    ]
+   },
+   "en_topic": "x05",
+   "en_images": [
+    "surroundings-2ea8db05.jpg",
+    "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg",
+    "surroundings-img-6063-cb50d320.jpg",
+    "surroundings-23-55725333.jpg",
+    "surroundings-img-5878-f7292b4f.jpg"
+   ],
+   "en": {
+    "title": "Udo Island Day Trip from Seongsan: Ferry, Tickets, and How Long You Need",
+    "url": "https://arohajeju.blogspot.com/2026/09/udo-island-day-trip-guide.html",
+    "id": "1553069719919775107",
+    "labels": [
+     "Seongsan Travel",
+     "Udo Island",
+     "Jeju Ferry",
+     "Day Trip",
+     "English"
+    ]
+   }
   }
  ]
 }
