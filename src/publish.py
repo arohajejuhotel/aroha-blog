@@ -171,10 +171,16 @@ def main() -> int:
         entry[f"{lang}_images"] = [p["file"] for p in picked]
         entry[lang] = results[lang]
 
-    if not args.dry_run and results:
-        state.setdefault("posts", []).append(entry)
+        # 발행할 때마다 즉시 기록한다.
+        # 두 언어를 다 끝낸 뒤 한 번에 저장하면, 뒤쪽에서 실패했을 때 앞서 발행한
+        # 글의 기록이 사라져 다음 날 같은 주제를 또 발행하게 된다. (실제로 발생)
+        posts = state.setdefault("posts", [])
+        if posts and posts[-1].get("date") == entry["date"]:
+            posts[-1] = entry
+        else:
+            posts.append(entry)
         settings.save_state(state)
-        print(f"[ok] state 업데이트 (누적 {len(state['posts'])}일)")
+        print(f"[ok] ({lang}) 기록 저장 (누적 {len(posts)}일)")
 
     return 0
 

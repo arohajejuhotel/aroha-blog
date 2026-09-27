@@ -69,7 +69,23 @@ jobs:
       - name: Probe APIs
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
+          echo "--- 구글 토큰 확인 ---"
+          code=$(curl -s -o /tmp/g.json -w "%{http_code}"             -d "client_id=$GOOGLE_CLIENT_ID"             -d "client_secret=$GOOGLE_CLIENT_SECRET"             -d "refresh_token=$GOOGLE_REFRESH_TOKEN"             -d "grant_type=refresh_token"             https://oauth2.googleapis.com/token)
+          if [ "$code" = "200" ]; then
+            echo "구글 토큰 정상"
+          else
+            echo "::error title=구글 토큰 만료::refresh token 이 더 이상 유효하지 않습니다 (HTTP $code)."
+            echo "복구 방법:"
+            echo " 1) 로컬에서  python scripts/get_refresh_token.py  실행"
+            echo " 2) .env 의 GOOGLE_REFRESH_TOKEN 값을 GitHub Secrets 에 Update"
+            echo " 3) 근본 해결: Google Cloud 콘솔에서 앱을 '프로덕션'으로 게시"
+            cat /tmp/g.json
+            exit 1
+          fi
           echo "--- 키 형태 (값은 노출되지 않음) ---"
           python - <<'EOF'
           import os
@@ -122,8 +138,32 @@ jobs:
           git config user.name "aroha-bot"
           git config user.email "actions@github.com"
           git add state config/topics.json
-          git diff --staged --quiet || git commit -m "chore: publish log $(date -u +%Y-%m-%d)"
-          git push
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: publish log $(date -u +%Y-%m-%d)"
+          # 원격이 앞서 있으면 rebase 후 재시도한다.
+          # 이 커밋이 유실되면 다음 날 같은 주제를 다시 발행하게 된다.
+          for i in 1 2 3; do
+            git push && exit 0
+            echo "push 실패, 원격을 받아 재시도 ($i/3)"
+            git pull --rebase origin main || exit 1
+          done
+          echo "::error title=발행 기록 저장 실패::state 를 푸시하지 못했습니다. 중복 발행 위험이 있습니다."
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### 호텔아로하 블로그 발행"
+            echo ""
+            echo "- 실행: ${{ github.event_name }}"
+            echo "- 결과: ${{ job.status }}"
+            if [ "${{ job.status }}" != "success" ]; then
+              echo ""
+              echo "실패했습니다. 위 단계 로그를 확인하세요."
+              echo "구글 토큰 만료가 가장 흔한 원인입니다."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload preview (dry-run only)
         if: inputs.mode == 'dry-run'
