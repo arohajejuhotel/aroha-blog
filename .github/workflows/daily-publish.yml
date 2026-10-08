@@ -73,10 +73,34 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
+          echo "--- 구글 값 형태 (값은 노출되지 않음) ---"
+          python - <<'EOF'
+          import os
+          for name in ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN"):
+              v = os.environ.get(name, "")
+              print(f"{name}: 길이 {len(v)}, 정리 후 {len(v.strip())}")
+          cid = os.environ.get("GOOGLE_CLIENT_ID", "").strip()
+          print(f"CLIENT_ID 접미사 정상: {cid.endswith('.apps.googleusercontent.com')}")
+          print(f"CLIENT_SECRET prefix 정상: {os.environ.get('GOOGLE_CLIENT_SECRET', '').strip().startswith('GOCSPX-')}")
+          EOF
+          # 발행 코드(src/settings.py)와 똑같이 앞뒤 공백·줄바꿈을 정리한 값으로 확인한다
+          CID=$(printf '%s' "$GOOGLE_CLIENT_ID" | tr -d '[:space:]')
+          CSECRET=$(printf '%s' "$GOOGLE_CLIENT_SECRET" | tr -d '[:space:]')
+          RTOKEN=$(printf '%s' "$GOOGLE_REFRESH_TOKEN" | tr -d '[:space:]')
           echo "--- 구글 토큰 확인 ---"
-          code=$(curl -s -o /tmp/g.json -w "%{http_code}"             -d "client_id=$GOOGLE_CLIENT_ID"             -d "client_secret=$GOOGLE_CLIENT_SECRET"             -d "refresh_token=$GOOGLE_REFRESH_TOKEN"             -d "grant_type=refresh_token"             https://oauth2.googleapis.com/token)
+          code=$(curl -s -o /tmp/g.json -w "%{http_code}" \
+            --data-urlencode "client_id=$CID" \
+            --data-urlencode "client_secret=$CSECRET" \
+            --data-urlencode "refresh_token=$RTOKEN" \
+            -d "grant_type=refresh_token" \
+            https://oauth2.googleapis.com/token)
           if [ "$code" = "200" ]; then
             echo "구글 토큰 정상"
+          elif grep -q invalid_client /tmp/g.json; then
+            echo "::error title=구글 클라이언트 불일치::GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET 이 Google Cloud 의 OAuth 클라이언트와 맞지 않습니다 (HTTP $code)."
+            echo "로컬 .env 의 두 값을 GitHub Secrets 에 다시 넣으세요."
+            cat /tmp/g.json
+            exit 1
           else
             echo "::error title=구글 토큰 만료::refresh token 이 더 이상 유효하지 않습니다 (HTTP $code)."
             echo "복구 방법:"
