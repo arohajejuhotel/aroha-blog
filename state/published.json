@@ -328,6 +328,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-09",
+   "ko_topic": "s07",
+   "ko_images": [
+    "surroundings-seongsan-73f59874.jpg",
+    "amenity-gs25-b60a76fd.jpg",
+    "amenity-img-5448-6ddc051f.jpg",
+    "amenity-img-5451-9cf1581a.jpg",
+    "amenity-img-5580-c9c4b76d.jpg"
+   ],
+   "ko": {
+    "title": "성산 맛집, 흑돼지·해산물 가격 실패 안 하는 기준",
+    "url": "https://arohajeju.blogspot.com/2026/10/seongsan-restaurants-s07.html",
+    "id": "3023228259780974134",
+    "labels": [
+     "성산여행정보",
+     "성산맛집",
+     "흑돼지",
+     "해산물"
+    ]
+   },
+   "en_topic": "x07",
+   "en_images": [
+    "exterior-hotelout-01-a605c863.jpg",
+    "room-deluxedouble-6-467a5bb3.jpg",
+    "room-deluxedouble-7-0eb66836.jpg",
+    "room-deluxedouble-5-1833300f.jpg",
+    "room-deluxedouble-2-4719bcb7.jpg"
+   ],
+   "en": {
+    "title": "Where to Stay in Jeju: East, West, or Jeju City?",
+    "url": "https://arohajeju.blogspot.com/2026/10/where-to-stay-in-jeju-guide.html",
+    "id": "3576727127288372108",
+    "labels": [
+     "East Jeju Guide",
+     "Where to Stay in Jeju",
+     "Seongsan",
+     "Jeju Travel Tips",
+     "English"
+    ]
+   }
   }
  ]
 }
