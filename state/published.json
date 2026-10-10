@@ -370,6 +370,47 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-10",
+   "ko_topic": "s08",
+   "ko_images": [
+    "surroundings-c4603ba2.jpg",
+    "room-2-f5cc4f5f.jpg",
+    "room-13-fb5006e2.jpg",
+    "room-10-0102b946.jpg",
+    "room-5-bfb12794.jpg"
+   ],
+   "ko": {
+    "title": "성산일출봉 등반, 아이랑 부모님과 올라도 괜찮을까",
+    "url": "https://arohajeju.blogspot.com/2026/10/seongsan-ilchulbong-hike-difficulty-s08.html",
+    "id": "71012334214131980",
+    "labels": [
+     "성산여행정보",
+     "성산일출봉",
+     "가족여행",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "x08",
+   "en_images": [
+    "lobby-se-a8a6cbc4-af4f-49a7-91ec-1-ede814e3.jpg",
+    "amenity-img-5451-9cf1581a.jpg",
+    "exterior-02-752c4658.jpg",
+    "lobby-recep-011-f0e53387.jpg",
+    "lobby-02-d391ff3d.jpg"
+   ],
+   "en": {
+    "title": "Jeju for Foreign Travellers: Cards, Cash, English and SIM in October",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-for-foreign-travellers-guide.html",
+    "id": "2020805869928234052",
+    "labels": [
+     "East Jeju Guide",
+     "Practical Tips",
+     "Payments and Connectivity",
+     "English"
+    ]
+   }
   }
  ]
 }
