@@ -411,6 +411,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-11",
+   "ko_topic": "s09",
+   "ko_images": [
+    "lobby-01-af294bab.jpg",
+    "amenity-01-1b38201e.jpg",
+    "surroundings-img-5739-79b7a9b5.jpg",
+    "lobby-recep-01-328d265d.jpg",
+    "amenity-gs25-b60a76fd.jpg"
+   ],
+   "ko": {
+    "title": "성산 비오는날, 실내로 돌릴 수 있는 반나절 코스",
+    "url": "https://arohajeju.blogspot.com/2026/10/seongsan-rainy-day-s09.html",
+    "id": "4688003424692627923",
+    "labels": [
+     "성산여행정보",
+     "성산비오는날",
+     "성산일출봉",
+     "실내관광지"
+    ]
+   },
+   "en_topic": "x09",
+   "en_images": [
+    "surroundings-83a96d68.jpg",
+    "surroundings-img-6063-cb50d320.jpg",
+    "surroundings-img-6144-7362eff9.jpg",
+    "surroundings-img-6086-40d5cf04.jpg",
+    "surroundings-sunrise-5038cbe7.jpg"
+   ],
+   "en": {
+    "title": "Seopjikoji Jeju: What's There, and How to Pair It with Seongsan",
+    "url": "https://arohajeju.blogspot.com/2026/10/seopjikoji-jeju-guide.html",
+    "id": "5690823263601082193",
+    "labels": [
+     "Seongsan Travel",
+     "Seopjikoji",
+     "Jeju Itinerary",
+     "East Jeju",
+     "English"
+    ]
+   }
   }
  ]
 }
