@@ -537,6 +537,48 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-14",
+   "ko_topic": "s13",
+   "ko_images": [
+    "amenity-img-5448-6ddc051f.jpg",
+    "exterior-03-35715e3c.jpg",
+    "exterior-06-c773457b.jpg",
+    "exterior-hotelout-naver-a602367a.jpg",
+    "exterior-hotelout-04-1c5b46f4.jpg"
+   ],
+   "ko": {
+    "title": "성산 편의점·약국 정보, 밤에 뭔가 필요할 때",
+    "url": "https://arohajeju.blogspot.com/2026/10/seongsan-convenience-store-s13.html",
+    "id": "8898261727459677430",
+    "labels": [
+     "성산여행정보",
+     "성산편의점",
+     "성산약국",
+     "제주여행준비"
+    ]
+   },
+   "en_topic": "x12",
+   "en_images": [
+    "breakfast-breakfast-03-72afadc4.jpg",
+    "surroundings-c4603ba2.jpg",
+    "breakfast-res-02-f97487ac.jpg",
+    "breakfast-res-01-1b6bfb70.jpg",
+    "breakfast-breakfast-01-a2f5f75e.jpg"
+   ],
+   "en": {
+    "title": "What to Eat in Jeju: A First-Timer's Guide to Ordering",
+    "url": "https://arohajeju.blogspot.com/2026/10/what-to-eat-in-jeju-guide.html",
+    "id": "5432747388833622558",
+    "labels": [
+     "East Jeju Guide",
+     "Jeju Food",
+     "Seongsan",
+     "Travel Tips",
+     "English"
+    ]
+   }
   }
  ]
 }
