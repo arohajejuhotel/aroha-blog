@@ -90,6 +90,8 @@ COMMON_RULES = """
 [과장 금지 — honest_limits]
 - 팩트시트의 honest_limits 에 적힌 것은 **절대 반대로 쓰지 않는다.**
 - 해당되는 맥락이면 오히려 먼저 밝힌다. 단점을 숨기지 않는 글이 더 신뢰를 얻는다.
+- 단, 객실 크기는 예외다. 방이 작다·넓은 편은 아니다·작지만 쾌적하다 같은 문장은 쓰지 않는다.
+  (영문도 같다: "rooms are small", "not spacious", "compact but comfortable" 등 금지)
 """
 
 
@@ -194,6 +196,26 @@ REQUIRED = ("title", "meta_description", "labels", "body_html", "faq", "hashtags
 # 본문에서 호텔명이 이 횟수를 넘으면 홍보 글로 기울었다고 보고 다시 쓰게 한다
 MAX_HOTEL_MENTIONS = 7
 
+# 객실 크기 언급. 모든 글에 같은 문장이 반복돼 쓰지 않기로 했다 (2026-10-15).
+# 걸리면 다시 쓰게 하고, 마지막 시도에서는 해당 문장만 지운다.
+BANNED_ROOM_SIZE = re.compile(
+    r"넓은\s*편은?\s*아니|작지만\s*쾌적|방\s*(?:자체가|은|이)\s*(?:좀\s*|다소\s*)?(?:작|좁)"
+    r"|솔직히\s*말씀드리면[^.。!?]{0,40}(?:작|좁|넓)"
+    r"|\b(?:rooms?|it)\s+(?:is|are)\s+(?:on\s+the\s+)?(?:small|compact|not\s+(?:large|spacious|big))"
+    r"|compact\s+but\s+(?:comfortable|clean)|small\s+but\s+(?:comfortable|clean|cosy|cozy)",
+    re.I,
+)
+
+
+def _strip_banned_sentences(body: str) -> str:
+    """금지 문구가 들어간 문장만 지운다. 태그 경계는 넘지 않는다."""
+    sentence = r"[^<>.。!?]*(?:%s)[^<>.。!?]*[.。!?]?" % BANNED_ROOM_SIZE.pattern
+    body = re.sub(sentence, " ", body, flags=re.I)
+    body = re.sub(r"(>)\s+|\s+(<)", r"\1\2", body)
+    body = re.sub(r"([.。!?])(?=[^\s<])", r"\1 ", body)
+    body = re.sub(r" {2,}", " ", body)
+    return re.sub(r"<p>\s*</p>\s*", "", body)
+
 
 def stats(post: dict, lang: str) -> dict:
     """생성된 글의 편집 원칙 준수 여부를 수치로 뽑는다."""
@@ -237,6 +259,16 @@ def _validate(post: dict, image_refs: list, lang: str, strict: bool = True):
             f"호텔 언급이 {s['mentions']}회로 많습니다 (권장 {MAX_HOTEL_MENTIONS}회 이하)")
     if s["definitions"] < 1:
         problems.append("AEO 정의 문장이 없습니다")
+    faq_text = " ".join(f"{f.get('q', '')} {f.get('a', '')}" for f in post.get("faq", []))
+    banned = BANNED_ROOM_SIZE.search(re.sub(r"<[^>]+>", " ", body) + " " + faq_text)
+    if banned:
+        if strict:
+            problems.append(f"객실 크기 언급 금지 문구가 있습니다: '{banned.group(0)}'")
+        else:
+            post["body_html"] = _strip_banned_sentences(body)
+            for f in post.get("faq", []):
+                f["a"] = _strip_banned_sentences(f.get("a", "")).strip()
+            print(f"[warn] 객실 크기 언급 문장을 삭제했습니다: '{banned.group(0)}'")
     if problems:
         message = " / ".join(problems)
         if strict:
