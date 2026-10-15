@@ -199,22 +199,32 @@ MAX_HOTEL_MENTIONS = 7
 # 객실 크기 언급. 모든 글에 같은 문장이 반복돼 쓰지 않기로 했다 (2026-10-15).
 # 걸리면 다시 쓰게 하고, 마지막 시도에서는 해당 문장만 지운다.
 BANNED_ROOM_SIZE = re.compile(
-    r"넓은\s*편은?\s*아니|작지만\s*쾌적|방\s*(?:자체가|은|이)\s*(?:좀\s*|다소\s*)?(?:작|좁)"
+    r"넓은\s*편은?\s*아니|넓은\s*방(?:은|도|이)?\s*아니|(?:작지만|작아도)\s*쾌적"
+    r"|방\s*(?:자체가|은|이)\s*(?:좀\s*|다소\s*)?(?:작|좁)"
     r"|솔직히\s*말씀드리면[^.。!?]{0,40}(?:작|좁|넓)"
     r"|\b(?:rooms?|it)\s+(?:is|are)\s+(?:on\s+the\s+)?(?:small|compact|not\s+(?:large|spacious|big))"
-    r"|compact\s+but\s+(?:comfortable|clean)|small\s+but\s+(?:comfortable|clean|cosy|cozy)",
+    r"|compact\s+(?:but|rather\s+than)\s+(?:comfortable|clean|spacious)"
+    r"|small\s+but\s+(?:comfortable|clean|cosy|cozy)"
+    r"|(?:comfortable|clean)\s+but\s+not\s+(?:large|big|roomy|spacious)"
+    r"|not\s+(?:large|big|spacious)\s+rooms",
     re.I,
 )
 
 
 def _strip_banned_sentences(body: str) -> str:
-    """금지 문구가 들어간 문장만 지운다. 태그 경계는 넘지 않는다."""
-    sentence = r"[^<>.。!?]*(?:%s)[^<>.。!?]*[.。!?]?" % BANNED_ROOM_SIZE.pattern
-    body = re.sub(sentence, " ", body, flags=re.I)
-    body = re.sub(r"(>)\s+|\s+(<)", r"\1\2", body)
-    body = re.sub(r"([.。!?])(?=[^\s<])", r"\1 ", body)
-    body = re.sub(r" {2,}", " ", body)
-    return re.sub(r"<p>\s*</p>\s*", "", body)
+    """금지 문구가 들어간 문장만 지운다. 태그 경계는 넘지 않고, 나머지 글은 건드리지 않는다."""
+    if not BANNED_ROOM_SIZE.search(body):
+        return body
+    # 문장 앞 공백까지 함께 지워 앞뒤 문장이 자연스럽게 이어지게 한다
+    sentence = re.compile(
+        r"[ \t]*(?=[^<>.。!?\s])[^<>.。!?]*?(?:%s)[^<>.。!?]*[.。!?]?" % BANNED_ROOM_SIZE.pattern, re.I)
+    # 한 번에 겹치는 문장을 모두 못 잡을 수 있어 더 안 걸릴 때까지 반복한다
+    for _ in range(10):
+        new = sentence.sub("", body)
+        if new == body:
+            break
+        body = new
+    return re.sub(r"<p>\s*</p>", "", body)
 
 
 def stats(post: dict, lang: str) -> dict:
