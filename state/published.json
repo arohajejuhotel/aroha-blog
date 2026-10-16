@@ -689,6 +689,31 @@
      "제주가을여행"
     ]
    }
+  },
+  {
+   "date": "2026-10-16",
+   "ko_topic": "ev02",
+   "ko_images": [
+    "exterior-1-e37b5ccb.jpg",
+    "surroundings-img-6144-7362eff9.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/36/4121436_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/27/4121427_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/35/3403535_image2_1.jpg"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@e8c193b322145b6d0bf119109d330fc1359f2a4f/assets/thumbs/2026-10-16-ev02-ko.jpg",
+   "ko": {
+    "title": "제주 10월 축제 총정리 — 전국체전 주간 탐라문화제·섬야·서귀포 장터",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-october-festivals-ev02.html",
+    "id": "7328003698435105692",
+    "labels": [
+     "제주전역여행",
+     "탐라문화제",
+     "전국체전",
+     "제주축제"
+    ]
+   }
   }
  ]
 }
