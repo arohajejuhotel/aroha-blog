@@ -130,8 +130,9 @@ def find(key: str, places: list, lang: str, count: int, used: set) -> list:
 
     picked, per_place = [], {}
     for p in pool:
-        # 한 장소에 몰리지 않게 장소당 최대 2장
-        if per_place.get(p["place"], 0) >= 2 and len(places) > 1:
+        # 한 장소에 몰리지 않게 장소당 상한 (후보를 많이 뽑을 때는 상한도 늘린다)
+        cap = max(2, -(-count // max(1, len(places))) + 1)
+        if per_place.get(p["place"], 0) >= cap and len(places) > 1:
             continue
         picked.append(p)
         per_place[p["place"]] = per_place.get(p["place"], 0) + 1
@@ -140,6 +141,19 @@ def find(key: str, places: list, lang: str, count: int, used: set) -> list:
     for p in picked:
         p["credit"] = _credit(lang, p["license"], p["photographer"])
     return picked
+
+
+def thumbnail_candidates(key: str, places: list, used: set, limit: int = 6) -> list:
+    """썸네일 배경 후보 (변형 가능한 Type1 만). 안 쓴 사진 먼저."""
+    if not key:
+        return []
+    out = []
+    for place in places:
+        for p in _place_photos(key, place, "ko"):
+            if p["editable"] and p["url"] not in {o["url"] for o in out}:
+                out.append(p)
+    out.sort(key=lambda p: p["url"] in used)
+    return out[:limit]
 
 
 def thumbnail_source(key: str, places: list, used: set):

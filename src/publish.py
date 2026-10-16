@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import demand, figures, gdrive, images, naver, render, settings, thumbnail, tour_photos, writer  # noqa: E402
+from src import demand, figures, gdrive, images, naver, render, settings, thumbnail, tour_photos, vision, writer  # noqa: E402
 from src.blogger import Blogger  # noqa: E402
 
 KST = ZoneInfo("Asia/Seoul")
@@ -174,14 +174,25 @@ def make_thumbnail(env, topic, post, lang, picked_hotel, used, day, dry_run):
     """모바일 세로 썸네일을 만들어 주소를 돌려준다. 실패해도 발행은 계속한다."""
     try:
         places = topic_places(topic)
-        src = tour_photos.thumbnail_source(env.tour_key, places, used)
-        if src:
-            photo, credit = thumbnail.load_photo(src["url"]), tour_photos._credit(lang, src["license"])
-        else:
-            # 변형 가능한 관광공사 사진이 없으면 호텔이 직접 찍은 사진을 쓴다
-            own = next((p for p in picked_hotel if p.get("orientation") != "portrait"),
-                       picked_hotel[0])
-            photo, credit = thumbnail.load_photo(str(settings.ROOT / "assets" / "img" / own["file"])), ""
+        # 후보: 변형 가능한 관광공사 사진(Type1) + 호텔이 직접 찍은 사진. Claude 가 보고 고른다.
+        cands = [{"url": c["url"], "credit": tour_photos._credit(lang, c["license"])}
+                 for c in tour_photos.thumbnail_candidates(env.tour_key, places, used)]
+        cands += [{"url": f"{env.image_base}/{p['file']}", "credit": "",
+                   "local": str(settings.ROOT / "assets" / "img" / p["file"])}
+                  for p in picked_hotel if p.get("orientation") != "portrait"]
+        if not cands:
+            cands = [{"url": f"{env.image_base}/{picked_hotel[0]['file']}", "credit": "",
+                      "local": str(settings.ROOT / "assets" / "img" / picked_hotel[0]["file"])}]
+        choice = cands[0]
+        if len(cands) >= 2:
+            import anthropic
+            pick = vision.choose(anthropic.Anthropic(api_key=env.anthropic_key), env.model,
+                                 post["title"], topic.get("ko") or topic.get("en", ""),
+                                 [c["url"] for c in cands], 0)
+            if pick:
+                choice = cands[pick["thumb"]]
+        photo = thumbnail.load_photo(choice.get("local") or choice["url"])
+        credit = choice["credit"]
         lines = post.get("thumb_lines") or thumbnail.fallback_lines(post["title"])
         out = thumbnail.THUMB_DIR / f"{day}-{topic['id']}-{lang}.jpg"
         thumbnail.make(lines, topic["cat"], lang, photo, credit, out,
@@ -216,7 +227,9 @@ def save_naver_version(env, topic, post, url, picked, kto, points, day) -> None:
         lines = [
             "- 글쓴이는 호텔아로하 직원. 이 동네와 호텔을 자랑스러워하며 자신 있게 추천한다. 존댓말.",
             "- 호텔의 단점(객실 크기, 시설 연식, 없는 시설, 일회용품, 조식)은 절대 쓰지 않는다.",
-            "- 예약 안내는 네이버 예약 또는 전화(064-782-3100, 전화 예약 시 얼리체크인 12:00·레이트체크아웃 13:00).",
+            "- 목적은 **호텔아로하 홍보와 예약**이다. 존댓말(~습니다, ~요)로 쓴다.",
+            "- 끝에 예약 안내: 네이버 예약 https://booking.naver.com/booking/3/bizes/139897 , "
+            "전화 064-782-3100 (전화 예약 시 얼리체크인 12:00·레이트체크아웃 13:00).",
             "- 아래 호텔 장점 문장을 거의 그대로 넣는다:",
         ] + [f"  · {p['ko']}" for p in points]
         if kto:
@@ -298,7 +311,15 @@ def main() -> int:
         # 사진은 언어별로 따로 고른다 (주제가 다르므로)
         # 글 주제 장소의 실제 사진(한국관광공사)을 먼저 찾고, 나머지를 호텔 사진으로 채운다
         used_photos = used_photo_urls(state)
-        kto = tour_photos.find(env.tour_key, topic_places(topic), lang, KTO_PER_POST, used_photos)
+        kto = tour_photos.find(env.tour_key, topic_places(topic), lang, 10, used_photos)
+        if len(kto) > KTO_PER_POST:
+            # 후보 10장 중 글 주제와 맞는 사진을 Claude 가 보고 고른다 (실패하면 앞에서부터)
+            import anthropic
+            pick = vision.choose(anthropic.Anthropic(api_key=env.anthropic_key), env.model,
+                                 topic.get("ko") or topic.get("en", ""), " / ".join(topic.get("q", [])),
+                                 [p["url"] for p in kto], KTO_PER_POST)
+            chosen = ([pick["thumb"]] + pick["body"]) if pick else []
+            kto = [kto[i] for i in chosen[:KTO_PER_POST]] or kto[:KTO_PER_POST]
         total = seo["editorial_rules"]["images_per_post"]
         usage = images.usage_counter(state)
         picked = images.pick(manifest, topic["img"], max(2, total - len(kto)), usage)
