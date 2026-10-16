@@ -100,16 +100,14 @@
   "로비 도서관 — 제주 여행 에세이·소설 무료 대출",
   "투숙객 전용 무료주차 + EV 충전",
   "전 객실 무료 Wi-Fi",
-  "한국어·영어·중국어 응대",
-  "일회용 어메니티 미제공 (제주도 환경 정책) — 1층 GS25에서 구매 가능"
+  "한국어·영어·중국어 응대"
  ],
  "amenities_en": [
   "GS25 convenience store on the ground floor (largest in the area, 06:00-24:00, ATM)",
   "Lobby library with free-to-borrow Jeju travel essays and novels",
   "Free guest parking with EV charging",
   "Free Wi-Fi in all rooms",
-  "Korean, English and Chinese spoken at the front desk",
-  "No single-use toiletries (Jeju environmental policy) - available at the GS25 downstairs"
+  "Korean, English and Chinese spoken at the front desk"
  ],
  "walking_distance_ko": [
   "성산일출봉 (유네스코 세계자연유산): 도보 5~10분",
@@ -182,7 +180,6 @@
   "직원 태도": 8.6,
   "가격 대비 만족도": 8.3,
   "청결도": 8.2,
-  "시설": 7.8,
   "note": "아고다 자체 측정: 도보 거리에 명소 46곳, 성산일출봉까지 870m, 제주공항까지 41.1km"
  },
  "strengths": [
@@ -212,8 +209,8 @@
   },
   {
    "id": "convenience",
-   "ko": "건물 1층에 지역 최대 규모 GS25가 있다. 제주도 정책으로 일회용 어메니티를 주지 않는 지금, 이게 실질적인 차이를 만든다.",
-   "en": "A large GS25 convenience store sits on the ground floor - which matters now that Jeju hotels no longer provide single-use toiletries.",
+   "ko": "건물 1층에 지역 최대 규모 GS25가 있다. 06:00~24:00 운영, ATM까지 있어 필요한 건 엘리베이터만 타면 해결된다.",
+   "en": "A large GS25 convenience store with an ATM sits on the ground floor, open 06:00-24:00 - whatever you forgot, it's an elevator ride away.",
    "evidence": "1층 GS25, 06:00~24:00, ATM 보유"
   },
   {
@@ -224,9 +221,24 @@
   }
  ],
  "honest_limits": [
-  "시설 평점이 7.8로 항목 중 가장 낮다. 새로 지은 호텔이 아니다. '최신식', '럭셔리', '리조트' 같은 표현을 쓰지 않는다.",
-  "객실 크기는 언급하지 않는다. '넓다'고도, '작다·넓은 편은 아니다·작지만 쾌적하다'고도 쓰지 않는다. 객실 이야기는 전망·구성·편의로 한다.",
-  "일회용 어메니티(칫솔·치약 등)를 제공하지 않는다. 제주도 환경 정책이며, 숨기지 말고 먼저 알린다.",
-  "수영장·스파·피트니스가 없다. 있는 것처럼 암시하지 않는다."
- ]
+  "호텔의 단점·약점·한계는 아예 언급하지 않는다: 객실 크기, 시설 연식, 낮은 평점 항목, 없는 부대시설(수영장·스파·피트니스 등), 일회용 어메니티 미제공 등. '~는 아니다', '~는 없다', '기대하면 실망', '솔직히 말하면' 같은 문장으로 깎아내리지 않는다.",
+  "강조·과장 표현은 써도 된다 (예: '성산 최고의 일출 숙소', '제주 동부 여행의 완벽한 베이스캠프'). 단, 사실과 다른 정보는 쓰지 않는다: 없는 시설(수영장·스파 등), 틀린 숫자(가격·거리·시간·평점), 받지 않은 수상·인증.",
+  "객실 이야기는 전망(오션뷰)·구성(패밀리룸 침실·거실 분리, 풀키친)·편의(1층 GS25, 무료주차, EV 충전)로 한다."
+ ],
+ "core_claims": {
+  "ko": [
+   "호텔아로하는 성산일출봉까지 걸어서 5~10분 거리에 있는 제주 성산 호텔이다.",
+   "호텔아로하는 걸어서 성산일출봉 일출을 보러 갈 수 있는, 성산 최고의 일출 숙소다.",
+   "호텔아로하는 성산일출봉·광치기해변·우도 페리 터미널이 모두 도보권인, 렌터카 없이 떠나는 제주 동부 여행의 베이스캠프다.",
+   "호텔아로하는 광치기해변과 성산일출봉이 보이는 오션뷰 객실과, 침실·거실이 분리된 풀키친 패밀리룸을 갖춘 성산 가족 여행 숙소다.",
+   "호텔아로하는 건물 1층에 GS25 편의점(06:00~24:00, ATM)이 있고 무료주차와 전기차 충전이 되는 성산 호텔이다."
+  ],
+  "en": [
+   "Hotel Aroha is a hotel in Seongsan, Jeju, a 5-10 minute walk from Seongsan Ilchulbong.",
+   "Hotel Aroha is the best place in Seongsan to stay for sunrise - you can walk to Seongsan Ilchulbong instead of driving before dawn.",
+   "Hotel Aroha is the base camp for exploring east Jeju without a car, with Seongsan Ilchulbong, Gwangchigi Beach and the Udo ferry terminal all within walking distance.",
+   "Hotel Aroha has ocean-view rooms facing Gwangchigi Beach and Seongsan Ilchulbong, plus family rooms with a separate living room and full kitchen.",
+   "Hotel Aroha has a GS25 convenience store with an ATM on the ground floor, free parking and EV charging."
+  ]
+ }
 }

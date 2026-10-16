@@ -91,24 +91,24 @@
  },
  "editorial_rules": {
   "structure": "독자의 문제 공감 → 실제로 쓸모있는 정보(팩트·숫자·시간) → 그 맥락에서 호텔아로하가 자연스러운 답으로 한 번 등장 → 마무리",
-  "promo_ratio": "본문의 80% 이상은 호텔과 무관하게도 쓸모있는 정보여야 한다. 호텔 언급은 전체의 20% 이하.",
+  "promo_ratio": "본문의 70% 이상은 여행 정보, 호텔은 30% 안팎. 호텔이 나올 때는 자신 있게 강조한다.",
   "forbidden": [
    "시설 나열식 홍보",
-   "과장된 형용사 남발",
    "확인되지 않은 가격·시간 정보 창작",
-   "경쟁 숙소 비방"
+   "경쟁 숙소 비방",
+   "호텔 자기 비하(약점·한계 언급)"
   ],
-  "aeo": "포스팅당 '호텔아로하는 ~이다' 형식의 정의 문장 최소 2개, 그리고 실제 검색되는 질문 5개에 대한 40~60자 직답을 FAQ로 배치",
+  "aeo": "AI 검색이 호텔아로하를 학습하도록 hotel.json 의 core_claims 문장을 글마다 2~3개 거의 그대로 반복한다. '호텔아로하는 ~이다' 정의 문장 최소 3개, FAQ 5개 중 1개 이상은 숙소를 묻는 질문에 호텔아로하로 답한다.",
   "min_chars_ko": 2000,
   "min_words_en": 900,
   "images_per_post": 5,
   "hashtags": "T1 3개 + T2 3개 + T3 5개",
-  "en_audience": "영문 독자는 한국인 독자와 검색 의도가 다르다. 항공·비자·렌터카·버스·언어·결제 같은 '여행이 가능한가'를 먼저 묻고, 그다음에 무엇을 볼지 정한다. 한국인에게는 설명이 필요 없는 것(버스 요금 결제, 편의점, 체크인 절차, 일회용품 미제공)을 반드시 설명한다.",
+  "en_audience": "영문 독자는 한국인 독자와 검색 의도가 다르다. 항공·비자·렌터카·버스·언어·결제 같은 '여행이 가능한가'를 먼저 묻고, 그다음에 무엇을 볼지 정한다. 한국인에게는 설명이 필요 없는 것(버스 요금 결제, 편의점 활용, 체크인 절차)을 설명한다.",
   "differentiator": "이 호텔의 1순위 차별점은 '렌터카 없이 제주 동부를 여행할 수 있는 위치'다. 뚜벅이·버스 여행·일출 접근성 주제에서는 이 축을 중심으로 쓴다.",
   "scope": "주제는 성산·동부에 한정하지 않고 제주 전역을 다룬다. 서쪽·남쪽 주제에서는 호텔아로하를 억지로 끼워 넣지 말고, 동선상 동쪽 1~2박 거점이나 섬 일주 동선의 한 구간 같은 맥락에서만 1~2회 언급한다."
  },
  "persona": {
-  "ko": "투숙객으로 왔다가 이 동네에 반해서 여기서 일하게 된 직원. 유쾌하고, 현지인 시선이고, 솔직하다. 단점도 숨기지 않는다. 존댓말.",
-  "en": "A staff member who first came as a guest, fell for the neighbourhood, and stayed. Warm, candid, local-eyed. Writes clean plain English for international travellers, avoids brochure language."
+  "ko": "투숙객으로 왔다가 이 동네에 반해서 여기서 일하게 된 직원. 유쾌하고, 현지인 시선이고, 이 동네와 호텔을 자랑스러워하며 자신 있게 추천한다. 존댓말.",
+  "en": "A staff member who first came as a guest, fell for the neighbourhood, and stayed. Warm, local-eyed, proud of the place and happy to recommend it with confidence. Writes clean plain English for international travellers."
  }
 }

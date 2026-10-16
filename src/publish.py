@@ -90,7 +90,7 @@ def season_note(month: int, lang: str) -> str:
     return (f"\n- It is currently month {month} in Jeju. Write for this season."
             "\n- The reader is planning a trip from outside Korea. Explain what a "
             "Korean traveller would take for granted: how to pay, whether English "
-            "works, what a hotel does and does not provide.")
+            "works, how check-in works and what the hotel offers.")
 
 
 def facts_note(topic: dict, lang: str) -> str:
