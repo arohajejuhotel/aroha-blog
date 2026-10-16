@@ -114,6 +114,16 @@ def scope_note(seo: dict, lang: str) -> str:
             "south, mention Hotel Aroha only once or twice as an east-side base, never forced.")
 
 
+# 같은 블로그에 하루 이 편수를 넘겨 발행하지 않는다 (정기 2편 + 특집 1편)
+MAX_POSTS_PER_DAY = 3
+
+
+def posts_on(state: dict, day: str) -> int:
+    """그날 이미 공개 발행한 글 수 (언어 합산)."""
+    return sum(1 for p in state.get("posts", []) if p.get("date") == day
+               for lang in ("ko", "en") if p.get(lang, {}).get("url"))
+
+
 # 장소 키워드가 없는 예전 주제는 사진 태그로 장소를 짐작한다
 TAG_PLACES = {"sunrise-peak": "성산일출봉", "udo": "우도", "seopjikoji": "섭지코지",
               "gwangchigi": "광치기해변"}
@@ -165,6 +175,8 @@ def main() -> int:
     ap.add_argument("--draft", action="store_true")
     ap.add_argument("--lang", choices=["ko", "en", "both"], default="both")
     ap.add_argument("--topic", default="")
+    ap.add_argument("--force", action="store_true",
+                    help="하루 발행 한도(MAX_POSTS_PER_DAY)를 넘겨서라도 발행")
     args = ap.parse_args()
 
     env = settings.Env()
@@ -186,7 +198,14 @@ def main() -> int:
     entry = {"date": f"{today:%Y-%m-%d}"}
     results = {}
 
+    published_today = posts_on(state, entry["date"])
     for lang in langs:
+        # 하루에 너무 많이 올리면 Blogger 가 스팸 블로그로 의심할 수 있다
+        limited = not (args.dry_run or args.draft or args.force)
+        if limited and published_today >= MAX_POSTS_PER_DAY:
+            print(f"[warn] ({lang}) 오늘 이미 {published_today}편 발행 — 하루 한도 "
+                  f"{MAX_POSTS_PER_DAY}편이라 건너뜁니다 (--force 로 무시 가능)")
+            continue
         pool = settings.topics(lang)
         topic = choose_topic(pool, done_ids(state, lang), args.topic, month)
 
@@ -249,6 +268,8 @@ def main() -> int:
                                      permalink_title=permalink_title(topic, lang))
         url = created.get("url", "")
         print(f"[ok] ({lang}) 발행: {url or '초안'}")
+        if not args.draft:
+            published_today += 1
         if args.draft:
             settings.add_pending_title(created["id"], post["title"])
 
