@@ -352,5 +352,18 @@
  "info_card": {
   "ko": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-ko.png",
   "en": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-en.png"
+ },
+ "not_offered": {
+  "note": "현재 운영하지 않는다. 있다고 쓰지도, 없다고 쓰지도 않는다 (아예 언급하지 않는다).",
+  "items_ko": [
+   "조식 서비스",
+   "온돌룸",
+   "공동조리시설"
+  ],
+  "items_en": [
+   "breakfast service",
+   "ondol room",
+   "shared kitchen"
+  ]
  }
 }
