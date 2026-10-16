@@ -158,6 +158,9 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           IMAGE_BASE_URL: ${{ vars.IMAGE_BASE_URL }}
           TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
+          NAVER_AD_CUSTOMER_ID: ${{ secrets.NAVER_AD_CUSTOMER_ID }}
+          NAVER_AD_API_KEY: ${{ secrets.NAVER_AD_API_KEY }}
+          NAVER_AD_SECRET: ${{ secrets.NAVER_AD_SECRET }}
         run: python -m src.publish ${{ steps.flags.outputs.flags }}
 
       - name: Commit state

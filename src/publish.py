@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import figures, images, render, settings, thumbnail, tour_photos, writer  # noqa: E402
+from src import demand, figures, images, render, settings, thumbnail, tour_photos, writer  # noqa: E402
 from src.blogger import Blogger  # noqa: E402
 
 KST = ZoneInfo("Asia/Seoul")
@@ -233,6 +233,14 @@ def main() -> int:
             continue
         pool = settings.topics(lang)
         topic = choose_topic(pool, done_ids(state, lang), args.topic, month)
+
+        # 한국어는 그날 네이버 검색량이 많은 주제를 먼저 쓴다 (기간 한정 특집·직접 지정 주제는 예외)
+        if lang == "ko" and not args.topic and not (topic or {}).get("window"):
+            fresh = demand.pick_topic(env, seo, pool, done_ids(state, lang), f"{today:%Y-%m-%d}")
+            if fresh:
+                pool = pool + [fresh]
+                settings.save_topics(pool)
+                topic = fresh
 
         if not topic and args.topic:
             print(f"[warn] ({lang}) 주제 id '{args.topic}' 가 이 언어 풀에 없어 건너뜁니다.")
