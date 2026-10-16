@@ -1127,7 +1127,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/BREAKFAST_01.JPG"
+   "source": "08_레스토랑_조식/BREAKFAST_01.JPG",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "breakfast-breakfast-02-f39a1e00.jpg",
@@ -1140,7 +1142,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/BREAKFAST_02.JPG"
+   "source": "08_레스토랑_조식/BREAKFAST_02.JPG",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "breakfast-breakfast-03-72afadc4.jpg",
@@ -1153,7 +1157,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/BREAKFAST_03.JPG"
+   "source": "08_레스토랑_조식/BREAKFAST_03.JPG",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "breakfast-breakfast-04-698db8ff.jpg",
@@ -1166,7 +1172,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/BREAKFAST_04.JPG"
+   "source": "08_레스토랑_조식/BREAKFAST_04.JPG",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "breakfast-res-01-1b6bfb70.jpg",
@@ -1179,7 +1187,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/RES_01.jpg"
+   "source": "08_레스토랑_조식/RES_01.jpg",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "breakfast-res-02-f97487ac.jpg",
@@ -1192,7 +1202,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/RES_02.jpg"
+   "source": "08_레스토랑_조식/RES_02.jpg",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "breakfast-res-03-d25fec40.jpg",
@@ -1205,7 +1217,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "08_레스토랑_조식/RES_03.jpg"
+   "source": "08_레스토랑_조식/RES_03.jpg",
+   "exclude": true,
+   "exclude_reason": "조식 미운영 (2026-10-16) — 사용하지 않음"
   },
   {
    "file": "amenity-gs25-b60a76fd.jpg",

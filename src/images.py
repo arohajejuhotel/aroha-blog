@@ -15,6 +15,8 @@ def _score(image, usage: Counter, wanted: list) -> tuple:
 
 def pick(manifest: list, wanted_tags: list, count: int, usage: Counter) -> list:
     """wanted_tags 에 맞는 사진을 count 장 고른다. 모자라면 태그 범위를 넓힌다."""
+    # 운영하지 않는 시설(조식 등) 사진은 쓰지 않는다
+    manifest = [i for i in manifest if not i.get("exclude")]
     chosen = []
     seen = set()
 
