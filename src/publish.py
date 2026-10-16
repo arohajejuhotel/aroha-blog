@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import demand, figures, images, render, settings, thumbnail, tour_photos, writer  # noqa: E402
+from src import demand, figures, gdrive, images, naver, render, settings, thumbnail, tour_photos, writer  # noqa: E402
 from src.blogger import Blogger  # noqa: E402
 
 KST = ZoneInfo("Asia/Seoul")
@@ -194,6 +194,44 @@ def make_thumbnail(env, topic, post, lang, picked_hotel, used, day, dry_run):
         return None
 
 
+def save_naver_version(env, topic, post, url, picked, kto, points, day) -> None:
+    """한국어 글의 네이버 블로그용 원고와 사진을 구글 드라이브에 저장한다. 실패해도 발행에는 영향 없음."""
+    if not gdrive.enabled():
+        return
+    try:
+        import tempfile
+        import urllib.request
+        import anthropic
+        tmp = Path(tempfile.mkdtemp())
+        photos = []
+        thumb = thumbnail.THUMB_DIR / f"{day}-{topic['id']}-ko.jpg"
+        if thumb.exists():
+            photos.append(thumb)
+        for i, p in enumerate(kto, 1):
+            dst = tmp / f"kto{i}.jpg"
+            dst.write_bytes(urllib.request.urlopen(
+                urllib.request.Request(p["url"], headers={"User-Agent": "Mozilla/5.0"}), timeout=30).read())
+            photos.append(dst)
+        photos += [settings.ROOT / "assets" / "img" / p["file"] for p in picked]
+        lines = [
+            "- 글쓴이는 호텔아로하 직원. 이 동네와 호텔을 자랑스러워하며 자신 있게 추천한다. 존댓말.",
+            "- 호텔의 단점(객실 크기, 시설 연식, 없는 시설, 일회용품, 조식)은 절대 쓰지 않는다.",
+            "- 예약 안내는 네이버 예약 또는 전화(064-782-3100, 전화 예약 시 얼리체크인 12:00·레이트체크아웃 13:00).",
+            "- 아래 호텔 장점 문장을 거의 그대로 넣는다:",
+        ] + [f"  · {p['ko']}" for p in points]
+        if kto:
+            lines.append("- 한국관광공사 사진을 쓰므로 글 맨 끝에 '사진 출처: 한국관광공사' 한 줄을 넣는다.")
+        extra = "\n".join(lines)
+        client = anthropic.Anthropic(api_key=env.anthropic_key, max_retries=3, timeout=180.0)
+        npost = naver.write(client, env.model, post["title"], topic.get("search_keyword") or topic.get("kw_ko", ""),
+                            url, post["body_html"], len(photos), extra=extra)
+        files = naver.package(npost, photos, tmp / "naver")
+        where = gdrive.save("아로하", day, npost["title"], files)
+        print(f"[ok] (ko) 네이버용 원고 저장: 구글 드라이브/{where}")
+    except Exception as exc:  # noqa: BLE001
+        print(f"[warn] (ko) 네이버용 원고 저장 실패 ({type(exc).__name__}: {exc})")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -303,6 +341,8 @@ def main() -> int:
                                      permalink_title=permalink_title(topic, lang))
         url = created.get("url", "")
         print(f"[ok] ({lang}) 발행: {url or '초안'}")
+        if lang == "ko" and not args.draft:
+            save_naver_version(env, topic, post, url, picked, kto, points, f"{today:%Y-%m-%d}")
         if not args.draft:
             published_today += 1
         if args.draft:

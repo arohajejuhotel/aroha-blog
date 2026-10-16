@@ -8,3 +8,6 @@ venv/
 # 키가 들어 있는 백업 .env 파일 (예: AROHA261008.env)
 *.env
 !.env.example
+
+# 구글 드라이브 토큰
+token*.json
