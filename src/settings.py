@@ -159,3 +159,5 @@ class Env:
         self.refresh_token = env("GOOGLE_REFRESH_TOKEN", required=True)
         # 이미지 CDN 베이스 URL (끝에 / 없이). 예: https://user.github.io/aroha-blog/assets/img
         self.image_base = env("IMAGE_BASE_URL", required=True).rstrip("/")
+        # 한국관광공사 TourAPI (공공데이터포털 일반 인증키, Decoding). 없으면 호텔 사진만 쓴다.
+        self.tour_key = env("TOUR_API_KEY", "")

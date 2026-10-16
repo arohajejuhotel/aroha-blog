@@ -4,3 +4,7 @@ __pycache__/
 .env
 venv/
 .venv/
+
+# 키가 들어 있는 백업 .env 파일 (예: AROHA261008.env)
+*.env
+!.env.example

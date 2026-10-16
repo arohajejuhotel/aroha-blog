@@ -42,6 +42,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Install Korean fonts (thumbnails)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-nanum > /dev/null
+
       - name: Check secrets
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -154,6 +157,7 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           IMAGE_BASE_URL: ${{ vars.IMAGE_BASE_URL }}
+          TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
         run: python -m src.publish ${{ steps.flags.outputs.flags }}
 
       - name: Commit state
@@ -161,7 +165,7 @@ jobs:
         run: |
           git config user.name "aroha-bot"
           git config user.email "actions@github.com"
-          git add state config/topics.json
+          git add state config/topics.json config/topics_en.json assets/thumbs
           git diff --staged --quiet && exit 0
           git commit -m "chore: publish log $(date -u +%Y-%m-%d)"
           # 원격이 앞서 있으면 rebase 후 재시도한다.

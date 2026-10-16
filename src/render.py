@@ -45,14 +45,27 @@ TEXT = {
 }
 
 
-def _figure(url: str, alt: str) -> str:
+def _figure(url: str, alt: str, credit: str = "") -> str:
     alt = html.escape(alt, quote=True)
+    # 공공누리 사진은 출처 표기가 이용 조건이다. 캡션 아래 작게 붙인다.
+    credit_html = (f'<br><span style="font-size:11px;color:#a59c92;">{html.escape(credit)}</span>'
+                   if credit else "")
     return (
         f'<figure style="margin:28px 0;text-align:center;">'
         f'<img src="{url}" alt="{alt}" loading="lazy" '
         f'style="max-width:100%;height:auto;border-radius:10px;" />'
-        f'<figcaption style="font-size:13px;color:#8a8178;margin-top:8px;">{alt}</figcaption>'
+        f'<figcaption style="font-size:13px;color:#8a8178;margin-top:8px;">{alt}{credit_html}</figcaption>'
         f"</figure>"
+    )
+
+
+def _thumbnail(thumb: dict) -> str:
+    """본문 맨 위 썸네일. Blogger 는 본문의 첫 이미지를 글 목록 썸네일로 쓴다."""
+    alt = html.escape(thumb["alt"], quote=True)
+    return (
+        f'<div style="text-align:center;margin:0 0 28px;">'
+        f'<img src="{thumb["url"]}" alt="{alt}" width="1080" height="1350" '
+        f'style="width:100%;max-width:540px;height:auto;border-radius:12px;" /></div>'
     )
 
 
@@ -79,7 +92,8 @@ def _insert_figures(body: str, figs: list) -> str:
 
 def _insert_images(body: str, refs: list) -> str:
     for ref in refs:
-        body = body.replace(f"[[{ref['id']}]]", _figure(ref["url"], ref["alt"]))
+        body = body.replace(f"[[{ref['id']}]]",
+                            _figure(ref["url"], ref["alt"], ref.get("credit", "")))
     # 혹시 남은 자리표시자는 제거
     return re.sub(r"\[\[IMG\d+\]\]", "", body)
 
@@ -227,13 +241,14 @@ def _jsonld(post: dict, hotel: dict, topic: dict, lang: str,
 
 
 def build(post: dict, hotel: dict, topic: dict, refs: list, lang: str,
-          cross_url: str = "", figs: list = ()) -> str:
+          cross_url: str = "", figs: list = (), thumb: dict = None) -> str:
     """최종 Blogger 본문 HTML."""
     body = _insert_figures(post["body_html"], list(figs))
     body = _insert_images(body, refs)
-    image_urls = [r["url"] for r in refs]
+    image_urls = ([thumb["url"]] if thumb else []) + [r["url"] for r in refs]
     parts = [
         '<div style="font-size:16px;line-height:1.85;color:#3a3530;">',
+        _thumbnail(thumb) if thumb else "",
         _cross_link(cross_url, lang),
         body,
         _faq_block(post["faq"], lang),

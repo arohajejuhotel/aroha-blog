@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import figures, images, render, settings, writer  # noqa: E402
+from src import figures, images, render, settings, thumbnail, tour_photos, writer  # noqa: E402
 from src.blogger import Blogger  # noqa: E402
 
 KST = ZoneInfo("Asia/Seoul")
@@ -40,16 +40,29 @@ def done_ids(state: dict, lang: str) -> set:
     return done
 
 
-def choose_topic(pool: list, done: set, forced: str, month: int) -> dict:
+def in_window(topic: dict, day: str) -> bool:
+    """기간 한정 주제(전국체전 등)의 발행 가능 기간인지. window 가 없으면 항상 참."""
+    window = topic.get("window")
+    return not window or window[0] <= day <= window[1]
+
+
+def choose_topic(pool: list, done: set, forced: str, month: int, day: str = "") -> dict:
     if forced:
         for t in pool:
             if t["id"] == forced:
                 return t
         return {}
 
-    remaining = [t for t in pool if t["id"] not in done]
+    day = day or dt.datetime.now(KST).strftime("%Y-%m-%d")
+    # 기간이 지난 이벤트 주제는 다시 쓰지 않는다
+    remaining = [t for t in pool if t["id"] not in done and in_window(t, day)]
     if not remaining:
         return {}
+
+    # 기간 한정 주제가 기간 안이면 가장 먼저 쓴다
+    timely = [t for t in remaining if t.get("window")]
+    if timely:
+        return timely[0]
 
     # 이번 달에 맞는 계절 주제를 우선한다
     seasonal = [t for t in remaining if month in t.get("months", [])]
@@ -78,6 +91,72 @@ def season_note(month: int, lang: str) -> str:
             "\n- The reader is planning a trip from outside Korea. Explain what a "
             "Korean traveller would take for granted: how to pay, whether English "
             "works, what a hotel does and does not provide.")
+
+
+def facts_note(topic: dict, lang: str) -> str:
+    """시기성 주제는 확인된 사실만 쓰도록 근거 목록을 함께 넘긴다."""
+    facts = topic.get("facts")
+    if not facts:
+        return ""
+    head = ("\n[확인된 사실 — 이 목록에 없는 일정·장소·숫자는 지어내지 않는다]"
+            if lang == "ko" else
+            "\n[Verified facts - do not invent dates, venues or numbers beyond this list]")
+    return head + "".join(f"\n- {f}" for f in facts)
+
+
+def scope_note(seo: dict, lang: str) -> str:
+    scope = seo.get("editorial_rules", {}).get("scope")
+    if not scope:
+        return ""
+    if lang == "ko":
+        return f"\n- {scope}"
+    return ("\n- Topics cover all of Jeju, not only Seongsan. When the topic is in the west or "
+            "south, mention Hotel Aroha only once or twice as an east-side base, never forced.")
+
+
+# 장소 키워드가 없는 예전 주제는 사진 태그로 장소를 짐작한다
+TAG_PLACES = {"sunrise-peak": "성산일출봉", "udo": "우도", "seopjikoji": "섭지코지",
+              "gwangchigi": "광치기해변"}
+KTO_PER_POST = 3
+
+
+def topic_places(topic: dict) -> list:
+    if topic.get("place"):
+        return topic["place"]
+    places = [TAG_PLACES[t] for t in topic.get("img", []) if t in TAG_PLACES]
+    return places or ["성산일출봉"]
+
+
+def used_photo_urls(state: dict) -> set:
+    used = set()
+    for post in state.get("posts", []):
+        for key in ("ko_photos", "en_photos"):
+            used.update(post.get(key, []))
+    return used
+
+
+def make_thumbnail(env, topic, post, lang, picked_hotel, used, day, dry_run):
+    """모바일 세로 썸네일을 만들어 주소를 돌려준다. 실패해도 발행은 계속한다."""
+    try:
+        places = topic_places(topic)
+        src = tour_photos.thumbnail_source(env.tour_key, places, used)
+        if src:
+            photo, credit = thumbnail.load_photo(src["url"]), tour_photos._credit(lang, src["license"])
+        else:
+            # 변형 가능한 관광공사 사진이 없으면 호텔이 직접 찍은 사진을 쓴다
+            own = next((p for p in picked_hotel if p.get("orientation") != "portrait"),
+                       picked_hotel[0])
+            photo, credit = thumbnail.load_photo(str(settings.ROOT / "assets" / "img" / own["file"])), ""
+        lines = post.get("thumb_lines") or thumbnail.fallback_lines(post["title"])
+        out = thumbnail.THUMB_DIR / f"{day}-{topic['id']}-{lang}.jpg"
+        thumbnail.make(lines, topic["cat"], lang, photo, credit, out,
+                       badge=tuple(topic.get("badge", ())) if lang == "ko" else ())
+        if dry_run:
+            return {"url": out.resolve().as_uri(), "alt": post["title"], "credit": credit}
+        return {"url": thumbnail.publish(out), "alt": post["title"], "credit": credit}
+    except Exception as exc:  # noqa: BLE001 — 썸네일 때문에 그날 발행을 놓치지 않는다
+        print(f"[warn] ({lang}) 썸네일 생성 실패, 썸네일 없이 진행: {type(exc).__name__}: {exc}")
+        return None
 
 
 def main() -> int:
@@ -127,10 +206,15 @@ def main() -> int:
         print(f"[info] ({lang}) {today:%Y-%m-%d} 주제: [{topic['cat']}] {label}")
 
         # 사진은 언어별로 따로 고른다 (주제가 다르므로)
+        # 글 주제 장소의 실제 사진(한국관광공사)을 먼저 찾고, 나머지를 호텔 사진으로 채운다
+        used_photos = used_photo_urls(state)
+        kto = tour_photos.find(env.tour_key, topic_places(topic), lang, KTO_PER_POST, used_photos)
+        total = seo["editorial_rules"]["images_per_post"]
         usage = images.usage_counter(state)
-        picked = images.pick(manifest, topic["img"],
-                             seo["editorial_rules"]["images_per_post"], usage)
+        picked = images.pick(manifest, topic["img"], max(2, total - len(kto)), usage)
         refs = images.to_refs(picked, env.image_base, lang)
+        refs += tour_photos.to_refs(kto, len(refs) + 1, lang)
+        print(f"[info] ({lang}) 사진: 관광공사 {len(kto)}장 + 호텔 {len(picked)}장")
 
         chosen_figs = figures.pick(all_figures, topic, lang)
         fig_refs = figures.to_refs(chosen_figs, env.image_base.rsplit("/", 1)[0])
@@ -138,9 +222,12 @@ def main() -> int:
             print(f"[info] ({lang}) 도표 {len(fig_refs)}개: "
                   f"{[f['id'] for f in chosen_figs]}")
 
+        extra = season_note(month, lang) + facts_note(topic, lang) + scope_note(seo, lang)
         post = writer.generate(env, hotel, seo, topic, refs, lang,
-                               extra=season_note(month, lang), figure_refs=fig_refs)
-        html = render.build(post, hotel, topic, refs, lang, figs=fig_refs)
+                               extra=extra, figure_refs=fig_refs)
+        thumb = make_thumbnail(env, topic, post, lang, picked, used_photos,
+                               f"{today:%Y-%m-%d}", args.dry_run)
+        html = render.build(post, hotel, topic, refs, lang, figs=fig_refs, thumb=thumb)
         s = writer.stats(post, lang)
         print(f"[info] ({lang}) 제목: {post['title']}")
         print(f"[info] ({lang}) 분량 {s['length']:,}{s['unit']} / 호텔 언급 {s['mentions']}회"
@@ -169,14 +256,19 @@ def main() -> int:
                          "labels": post["labels"]}
         entry[f"{lang}_topic"] = topic["id"]
         entry[f"{lang}_images"] = [p["file"] for p in picked]
+        entry[f"{lang}_photos"] = [p["url"] for p in kto]
+        if thumb:
+            entry[f"{lang}_thumb"] = thumb["url"]
         entry[lang] = results[lang]
 
         # 발행할 때마다 즉시 기록한다.
         # 두 언어를 다 끝낸 뒤 한 번에 저장하면, 뒤쪽에서 실패했을 때 앞서 발행한
         # 글의 기록이 사라져 다음 날 같은 주제를 또 발행하게 된다. (실제로 발생)
+        # 같은 날 두 번째 실행(특집 글 추가 발행 등)이 아침 기록을 덮어쓰지 않도록
+        # 이번 실행에서 만든 기록만 갱신한다.
         posts = state.setdefault("posts", [])
-        if posts and posts[-1].get("date") == entry["date"]:
-            posts[-1] = entry
+        if posts and posts[-1] is entry:
+            pass
         else:
             posts.append(entry)
         settings.save_state(state)
