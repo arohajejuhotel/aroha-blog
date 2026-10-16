@@ -38,9 +38,9 @@ TEXT = {
             ("객실", "디럭스더블 · 스탠다드 트윈 (오션뷰)\n패밀리룸 27평형 (침실·거실 분리, 풀키친)\n이코노미 트윈"),
             ("편의시설", "1층 GS25 (06:00~24:00, ATM)\n무료주차 · EV 충전 · 짐 보관 · 로비 도서관\n한국어·영어·중국어 응대"),
         ],
-        "perk_title": "직접 예약 혜택",
-        "perk": "호텔 홈페이지 또는 전화로 예약하면\n얼리체크인 12:00 · 레이트체크아웃 13:00",
-        "contact": "hotelaroha.com  ·  064-782-3100",
+        "perk_title": "전화 예약 혜택  064-782-3100",
+        "perk": "전화로 직접 예약하면\n얼리체크인 12:00 · 레이트체크아웃 13:00",
+        "contact": "네이버에서 '호텔아로하' 검색 · 네이버 예약",
     },
     "en": {
         "heading": "Hotel Aroha at a glance",
@@ -53,9 +53,9 @@ TEXT = {
             ("Rooms", "Deluxe Double · Standard Twin (ocean view)\nFamily room (living room, full kitchen)\nEconomy Twin"),
             ("Facilities", "GS25 on the ground floor (06:00-24:00, ATM)\nFree parking · EV charging · Luggage storage\nLobby library · Korean, English, Chinese spoken"),
         ],
-        "perk_title": "Book direct",
-        "perk": "Book on the hotel website or by phone for\nearly check-in 12:00 · late check-out 13:00",
-        "contact": "hotelaroha.com  ·  +82-64-782-3100",
+        "perk_title": "Book by phone  +82-64-782-3100",
+        "perk": "Call to book direct for\nearly check-in 12:00 · late check-out 13:00",
+        "contact": "Also on Agoda and Trip.com",
     },
 }
 

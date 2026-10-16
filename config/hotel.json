@@ -168,11 +168,11 @@
  "cta": {
   "ko": {
    "primary": {
-    "label": "홈페이지에서 직접 예약 (얼리체크인·레이트체크아웃)",
-    "url": "http://www.hotelaroha.com/works/pension4.php"
+    "label": "네이버 예약으로 객실 확인하기",
+    "url": "https://booking.naver.com/booking/3/bizes/139897?area=plt"
    },
    "secondary": {
-    "label": "전화 문의 064-782-3100",
+    "label": "전화 예약 시 얼리체크인·레이트체크아웃 혜택 064-782-3100",
     "url": "tel:+82647823100"
    },
    "tertiary": {
@@ -190,8 +190,8 @@
     "url": "https://www.trip.com/hotels/seogwipo-hotel-detail-3799607/hotel-aroha/"
    },
    "tertiary": {
-    "label": "Book direct on the hotel website (early check-in, late check-out)",
-    "url": "http://www.hotelaroha.com/works/pension4.php"
+    "label": "Call +82-64-782-3100 to book direct (early check-in, late check-out)",
+    "url": "tel:+82647823100"
    }
   }
  },
@@ -250,10 +250,9 @@
  ],
  "homepage": "http://www.hotelaroha.com",
  "direct_booking": {
-  "url": "http://www.hotelaroha.com/works/pension4.php",
-  "inquiry_url": "http://www.hotelaroha.com/bbs/board.php?bo_table=reserve_qna",
-  "perks_ko": "호텔 홈페이지 실시간예약 또는 전화(064-782-3100) 직접 문의로 예약하면 얼리체크인(12:00)과 레이트체크아웃(13:00) 혜택",
-  "perks_en": "Book on the hotel website or contact the hotel directly (+82-64-782-3100) for early check-in (12:00) and late check-out (13:00)"
+  "phone": "064-782-3100",
+  "perks_ko": "전화(064-782-3100)로 직접 예약하면 얼리체크인(12:00)과 레이트체크아웃(13:00) 혜택",
+  "perks_en": "Call the hotel (+82-64-782-3100) to book direct for early check-in (12:00) and late check-out (13:00)"
  },
  "local_tips_ko": [
   "빨래는 호텔 근처 코인세탁소를 이용하면 된다."
@@ -305,8 +304,8 @@
   },
   {
    "id": "direct",
-   "ko": "호텔아로하는 홈페이지에서 직접 예약하거나 전화로 문의하면 얼리체크인(12:00)과 레이트체크아웃(13:00)을 제공한다.",
-   "en": "Book Hotel Aroha directly on its website or by phone for early check-in (12:00) and late check-out (13:00)."
+   "ko": "호텔아로하는 전화(064-782-3100)로 직접 예약하면 얼리체크인(12:00)과 레이트체크아웃(13:00)을 제공한다.",
+   "en": "Call Hotel Aroha (+82-64-782-3100) to book direct and get early check-in (12:00) and late check-out (13:00)."
   },
   {
    "id": "luggage",
@@ -350,8 +349,8 @@
   }
  ],
  "info_card": {
-  "ko": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-ko.png",
-  "en": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-en.png"
+  "ko": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-ko.png?v=2",
+  "en": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-en.png?v=2"
  },
  "not_offered": {
   "note": "현재 운영하지 않는다. 있다고 쓰지도, 없다고 쓰지도 않는다 (아예 언급하지 않는다).",
