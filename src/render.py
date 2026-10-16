@@ -114,46 +114,49 @@ def _faq_block(faq: list, lang: str) -> str:
 
 
 def _info_block(hotel: dict, lang: str) -> str:
+    """글 맨 아래 호텔 정보. 표 대신 카드 이미지(scripts/make_info_card.py)를 쓰고,
+    예약·전화·지도 링크는 누를 수 있게 이미지 아래 버튼으로 둔다.
+
+    이미지 속 글자는 검색엔진·AI 가 읽지 못하므로 alt 에 같은 정보를 글로 넣는다.
+    (숙소 정보는 JSON-LD Hotel 스키마에도 들어간다)
+    """
     t = TEXT[lang]
     addr = hotel["address_ko"] if lang == "ko" else hotel["address_en"]
     walk = (hotel["walking_distance_ko"] if lang == "ko"
             else hotel["walking_distance_en"])[:3]
-    rows = [
-        (t["address"], html.escape(addr)),
-        (t["phone"], hotel["phone"]),
-        (t["checkin"], f'{hotel["checkin"]} / {hotel["checkout"]}'),
-        (t["walk"], " · ".join(html.escape(w) for w in walk)),
-    ]
-    body = "".join(
-        f'<tr><td style="padding:7px 14px 7px 0;color:{C["teal"]};font-weight:700;'
-        f'white-space:nowrap;vertical-align:top;">{k}</td>'
-        f'<td style="padding:7px 0;color:#4a443e;">{v}</td></tr>'
-        for k, v in rows
-    )
-    # 언어별 예약 채널: 한국어는 네이버 예약(직접예약), 영어는 OTA(리뷰 축적)
+    alt = " / ".join([
+        t["info_heading"], addr, hotel["phone"],
+        f'{t["checkin"]} {hotel["checkin"]} / {hotel["checkout"]}',
+        " · ".join(walk),
+        (hotel.get("direct_booking", {}).get("perks_ko" if lang == "ko" else "perks_en", "")),
+    ])
+    card = hotel.get("info_card", {}).get(lang)
+
     cta = hotel.get("cta", {}).get(lang, {})
     primary = cta.get("primary") or {"label": t["booking_cta"], "url": hotel["booking_url"]}
-    secondary = cta.get("secondary") or {"label": t["map"], "url": hotel["map_url"]}
+    links = [cta.get("secondary"), cta.get("tertiary")]
 
     buttons = (
         f'<a href="{primary["url"]}" rel="noopener nofollow" '
         f'style="display:inline-block;background:{C["teal"]};color:#fff;text-decoration:none;'
-        f'padding:11px 22px;border-radius:8px;font-weight:700;">'
+        f'padding:12px 22px;border-radius:8px;font-weight:700;margin:4px 0;">'
         f'{html.escape(primary["label"])}</a>'
     )
-    if secondary.get("url"):
-        buttons += (
-            f'&nbsp;&nbsp;<a href="{secondary["url"]}" rel="noopener nofollow" '
-            f'style="color:{C["teal"]};font-size:14px;">'
-            f'{html.escape(secondary["label"])}</a>'
-        )
+    for link in links:
+        if link and link.get("url"):
+            buttons += (
+                f'<br><a href="{link["url"]}" rel="noopener nofollow" '
+                f'style="display:inline-block;color:{C["teal"]};font-size:15px;margin-top:10px;">'
+                f'{html.escape(link["label"])}</a>'
+            )
 
+    if not card:
+        return f'<div style="margin:40px 0 24px;text-align:center;">{buttons}</div>'
     return (
-        f'<div style="border:1px solid #e0d9cf;border-radius:12px;padding:22px;margin:40px 0 24px;">'
-        f'<p style="margin:0 0 14px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;'
-        f'color:{C["teal"]};font-weight:700;">{t["info_heading"]}</p>'
-        f'<table style="width:100%;border-collapse:collapse;font-size:15px;"><tbody>{body}</tbody></table>'
-        f'<p style="margin:20px 0 0;">{buttons}</p>'
+        f'<div style="margin:40px 0 24px;text-align:center;">'
+        f'<img src="{card}" alt="{html.escape(alt, quote=True)}" width="1080" loading="lazy" '
+        f'style="width:100%;max-width:540px;height:auto;border-radius:12px;" />'
+        f'<p style="margin:18px 0 0;">{buttons}</p>'
         f"</div>"
     )
 

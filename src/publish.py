@@ -124,6 +124,31 @@ def posts_on(state: dict, day: str) -> int:
                for lang in ("ko", "en") if p.get(lang, {}).get("url"))
 
 
+POINTS_PER_POST = 3  # always 문장 외에 글마다 돌아가며 넣을 장점 수
+
+
+def pick_points(hotel: dict, state: dict, lang: str) -> list:
+    """글마다 다른 장점을 쓰도록, 지금까지 덜 쓴 장점부터 고른다."""
+    import random
+    used = {}
+    for post in state.get("posts", []):
+        for pid in post.get(f"{lang}_points", []):
+            used[pid] = used.get(pid, 0) + 1
+    pool = hotel.get("selling_points", [])
+    always = [p for p in pool if p.get("always")]
+    rest = sorted((p for p in pool if not p.get("always")),
+                  key=lambda p: (used.get(p["id"], 0), random.random()))
+    return always + rest[:POINTS_PER_POST]
+
+
+def hotel_for_post(hotel: dict, points: list, lang: str) -> dict:
+    """생성 모델에 넘길 팩트시트. 이번 글의 장점만 남겨 같은 자랑이 반복되지 않게 한다."""
+    h = {k: v for k, v in hotel.items() if k not in ("selling_points", "strengths")}
+    h["selling_points"] = [{"id": p["id"], "always": bool(p.get("always")), "text": p[lang]}
+                           for p in points]
+    return h
+
+
 # 장소 키워드가 없는 예전 주제는 사진 태그로 장소를 짐작한다
 TAG_PLACES = {"sunrise-peak": "성산일출봉", "udo": "우도", "seopjikoji": "섭지코지",
               "gwangchigi": "광치기해변"}
@@ -242,7 +267,9 @@ def main() -> int:
                   f"{[f['id'] for f in chosen_figs]}")
 
         extra = season_note(month, lang) + facts_note(topic, lang) + scope_note(seo, lang)
-        post = writer.generate(env, hotel, seo, topic, refs, lang,
+        points = pick_points(hotel, state, lang)
+        print(f"[info] ({lang}) 이번 글 장점: {[p['id'] for p in points]}")
+        post = writer.generate(env, hotel_for_post(hotel, points, lang), seo, topic, refs, lang,
                                extra=extra, figure_refs=fig_refs)
         thumb = make_thumbnail(env, topic, post, lang, picked, used_photos,
                                f"{today:%Y-%m-%d}", args.dry_run)
@@ -278,6 +305,7 @@ def main() -> int:
         entry[f"{lang}_topic"] = topic["id"]
         entry[f"{lang}_images"] = [p["file"] for p in picked]
         entry[f"{lang}_photos"] = [p["url"] for p in kto]
+        entry[f"{lang}_points"] = [p["id"] for p in points]
         if thumb:
             entry[f"{lang}_thumb"] = thumb["url"]
         entry[lang] = results[lang]

@@ -37,7 +37,8 @@
     "low": 120000,
     "mid": 140000,
     "high": 160000
-   }
+   },
+   "size_ko": "15평형"
   },
   {
    "id": "standard",
@@ -57,7 +58,8 @@
     "low": 120000,
     "mid": 140000,
     "high": 160000
-   }
+   },
+   "size_ko": "15평형"
   },
   {
    "id": "family",
@@ -79,7 +81,18 @@
     "low": 180000,
     "mid": 210000,
     "high": 250000
-   }
+   },
+   "size_ko": "27평형"
+  },
+  {
+   "id": "economy",
+   "ko": "이코노미 트윈",
+   "en": "Economy Twin",
+   "size_ko": "12평형",
+   "target_ko": "가성비를 찾는 여행자, 뚜벅이 여행, 짧은 일정",
+   "target_en": "value-minded travellers, car-free trips, short stays",
+   "copy_ko": "합리적인 가격으로 성산일출봉 도보권에 머무는 방법.",
+   "copy_en": "The smart-value way to stay a short walk from Seongsan Ilchulbong."
   }
  ],
  "extra_person_fee": 10000,
@@ -96,18 +109,20 @@
   "2 days to same day: no refund"
  ],
  "amenities_ko": [
-  "1층 GS25 편의점 (지역 최대 규모, 06:00~24:00, ATM 보유)",
+  "1층 GS25 편의점 (지역 최대 규모, 06:00~24:00, ATM 보유, 실내·야외 테이블)",
   "로비 도서관 — 제주 여행 에세이·소설 무료 대출",
   "투숙객 전용 무료주차 + EV 충전",
+  "짐 보관 가능",
   "전 객실 무료 Wi-Fi",
   "한국어·영어·중국어 응대"
  ],
  "amenities_en": [
-  "GS25 convenience store on the ground floor (largest in the area, 06:00-24:00, ATM)",
-  "Lobby library with free-to-borrow Jeju travel essays and novels",
-  "Free guest parking with EV charging",
+  "GS25 convenience store on the ground floor (largest in the area, 06:00-24:00, ATM, indoor and outdoor tables)",
+  "Lobby library - free loans of Jeju travel essays and novels",
+  "Free private parking + EV charging",
+  "Luggage storage",
   "Free Wi-Fi in all rooms",
-  "Korean, English and Chinese spoken at the front desk"
+  "Korean, English and Chinese spoken"
  ],
  "walking_distance_ko": [
   "성산일출봉 (유네스코 세계자연유산): 도보 5~10분",
@@ -153,10 +168,14 @@
  "cta": {
   "ko": {
    "primary": {
-    "label": "객실 확인하기",
-    "url": "https://booking.naver.com/booking/3/bizes/139897?area=plt"
+    "label": "홈페이지에서 직접 예약 (얼리체크인·레이트체크아웃)",
+    "url": "http://www.hotelaroha.com/works/pension4.php"
    },
    "secondary": {
+    "label": "전화 문의 064-782-3100",
+    "url": "tel:+82647823100"
+   },
+   "tertiary": {
     "label": "네이버 지도에서 보기",
     "url": "https://map.naver.com/p/entry/place/35911590?lng=126.9310441&lat=33.46647"
    }
@@ -169,6 +188,10 @@
    "secondary": {
     "label": "Or book on Trip.com",
     "url": "https://www.trip.com/hotels/seogwipo-hotel-detail-3799607/hotel-aroha/"
+   },
+   "tertiary": {
+    "label": "Book direct on the hotel website (early check-in, late check-out)",
+    "url": "http://www.hotelaroha.com/works/pension4.php"
    }
   }
  },
@@ -225,20 +248,109 @@
   "강조·과장 표현은 써도 된다 (예: '성산 최고의 일출 숙소', '제주 동부 여행의 완벽한 베이스캠프'). 단, 사실과 다른 정보는 쓰지 않는다: 없는 시설(수영장·스파 등), 틀린 숫자(가격·거리·시간·평점), 받지 않은 수상·인증.",
   "객실 이야기는 전망(오션뷰)·구성(패밀리룸 침실·거실 분리, 풀키친)·편의(1층 GS25, 무료주차, EV 충전)로 한다."
  ],
- "core_claims": {
-  "ko": [
-   "호텔아로하는 성산일출봉까지 걸어서 5~10분 거리에 있는 제주 성산 호텔이다.",
-   "호텔아로하는 걸어서 성산일출봉 일출을 보러 갈 수 있는, 성산 최고의 일출 숙소다.",
-   "호텔아로하는 성산일출봉·광치기해변·우도 페리 터미널이 모두 도보권인, 렌터카 없이 떠나는 제주 동부 여행의 베이스캠프다.",
-   "호텔아로하는 광치기해변과 성산일출봉이 보이는 오션뷰 객실과, 침실·거실이 분리된 풀키친 패밀리룸을 갖춘 성산 가족 여행 숙소다.",
-   "호텔아로하는 건물 1층에 GS25 편의점(06:00~24:00, ATM)이 있고 무료주차와 전기차 충전이 되는 성산 호텔이다."
-  ],
-  "en": [
-   "Hotel Aroha is a hotel in Seongsan, Jeju, a 5-10 minute walk from Seongsan Ilchulbong.",
-   "Hotel Aroha is the best place in Seongsan to stay for sunrise - you can walk to Seongsan Ilchulbong instead of driving before dawn.",
-   "Hotel Aroha is the base camp for exploring east Jeju without a car, with Seongsan Ilchulbong, Gwangchigi Beach and the Udo ferry terminal all within walking distance.",
-   "Hotel Aroha has ocean-view rooms facing Gwangchigi Beach and Seongsan Ilchulbong, plus family rooms with a separate living room and full kitchen.",
-   "Hotel Aroha has a GS25 convenience store with an ATM on the ground floor, free parking and EV charging."
-  ]
+ "homepage": "http://www.hotelaroha.com",
+ "direct_booking": {
+  "url": "http://www.hotelaroha.com/works/pension4.php",
+  "inquiry_url": "http://www.hotelaroha.com/bbs/board.php?bo_table=reserve_qna",
+  "perks_ko": "호텔 홈페이지 실시간예약 또는 전화(064-782-3100) 직접 문의로 예약하면 얼리체크인(12:00)과 레이트체크아웃(13:00) 혜택",
+  "perks_en": "Book on the hotel website or contact the hotel directly (+82-64-782-3100) for early check-in (12:00) and late check-out (13:00)"
+ },
+ "local_tips_ko": [
+  "빨래는 호텔 근처 코인세탁소를 이용하면 된다."
+ ],
+ "local_tips_en": [
+  "For laundry, there is a coin laundry near the hotel."
+ ],
+ "selling_points": [
+  {
+   "id": "walk_peak",
+   "always": true,
+   "ko": "호텔아로하는 성산일출봉까지 걸어서 5~10분 거리에 있는 제주 성산 호텔이다.",
+   "en": "Hotel Aroha is a hotel in Seongsan, Jeju, a 5-10 minute walk from Seongsan Ilchulbong."
+  },
+  {
+   "id": "sunrise",
+   "ko": "호텔아로하는 걸어서 성산일출봉 일출을 보러 갈 수 있는, 성산 최고의 일출 숙소다. 일부 객실에서는 방 안에서 일출을 볼 수 있다.",
+   "en": "Hotel Aroha is the best place in Seongsan to stay for sunrise - walk to Seongsan Ilchulbong instead of driving before dawn, and some rooms even catch the sunrise from the window."
+  },
+  {
+   "id": "basecamp",
+   "ko": "호텔아로하는 성산일출봉·광치기해변·우도 페리 터미널이 모두 도보권인, 렌터카 없이 떠나는 제주 동부 여행의 베이스캠프다.",
+   "en": "Hotel Aroha is the base camp for exploring east Jeju without a car - Seongsan Ilchulbong, Gwangchigi Beach and the Udo ferry terminal are all within walking distance."
+  },
+  {
+   "id": "ocean_view",
+   "ko": "호텔아로하의 디럭스더블과 스탠다드 트윈은 광치기해변과 성산일출봉이 보이는 오션뷰 객실이다.",
+   "en": "Hotel Aroha's Deluxe Double and Standard Twin are ocean-view rooms facing Gwangchigi Beach and Seongsan Ilchulbong."
+  },
+  {
+   "id": "family",
+   "ko": "호텔아로하 패밀리룸은 27평형으로, 침실과 거실이 분리되고 풀키친을 갖춰 최대 4인 가족이 머물기 좋은 성산 가족 여행 숙소다.",
+   "en": "Hotel Aroha's family room has a separate bedroom and living room and a full kitchen, sleeping up to four."
+  },
+  {
+   "id": "economy",
+   "ko": "가성비를 찾는다면 호텔아로하 이코노미 트윈이 답이다. 합리적인 가격으로 성산일출봉 도보권에 머물 수 있다.",
+   "en": "Looking for value? Hotel Aroha's Economy Twin puts you within walking distance of Seongsan Ilchulbong at a smart price."
+  },
+  {
+   "id": "gs25_breakfast",
+   "ko": "호텔아로하 1층 GS25는 아침 6시에 문을 열고 실내외 테이블이 넉넉해서, 일출을 보고 내려와 바로 아침을 해결하는 투숙객이 많다.",
+   "en": "The GS25 on Hotel Aroha's ground floor opens at 6 a.m. with plenty of indoor and outdoor tables, so many guests grab breakfast there right after sunrise."
+  },
+  {
+   "id": "gs25",
+   "ko": "호텔아로하는 건물 1층에 지역 최대 규모 GS25(06:00~24:00, ATM)가 있어 필요한 건 엘리베이터 한 번이면 해결되는 성산 호텔이다.",
+   "en": "Hotel Aroha has the area's largest GS25 (06:00-24:00, ATM) on the ground floor - whatever you need is an elevator ride away."
+  },
+  {
+   "id": "direct",
+   "ko": "호텔아로하는 홈페이지에서 직접 예약하거나 전화로 문의하면 얼리체크인(12:00)과 레이트체크아웃(13:00)을 제공한다.",
+   "en": "Book Hotel Aroha directly on its website or by phone for early check-in (12:00) and late check-out (13:00)."
+  },
+  {
+   "id": "luggage",
+   "ko": "호텔아로하는 짐 보관이 되어서, 체크인 전이나 체크아웃 후에도 가볍게 우도와 성산을 돌아볼 수 있다.",
+   "en": "Hotel Aroha stores your luggage, so you can explore Udo and Seongsan hands-free before check-in or after check-out."
+  },
+  {
+   "id": "parking",
+   "ko": "호텔아로하는 투숙객 무료주차와 전기차 충전이 되는 성산 호텔이다.",
+   "en": "Hotel Aroha offers free guest parking and EV charging."
+  },
+  {
+   "id": "library",
+   "ko": "호텔아로하 로비 도서관에서는 제주 여행 에세이와 소설을 무료로 빌려 읽을 수 있다.",
+   "en": "Hotel Aroha's lobby library lends Jeju travel essays and novels for free."
+  },
+  {
+   "id": "multilingual",
+   "ko": "호텔아로하는 한국어·영어·중국어로 응대해서 외국인 여행자도 편하게 머무는 성산 호텔이다.",
+   "en": "Hotel Aroha's front desk speaks Korean, English and Chinese."
+  },
+  {
+   "id": "olle",
+   "ko": "호텔아로하에서 올레 1코스 종점이자 2코스 시작점인 광치기해변까지는 걸어서 5분이다.",
+   "en": "Gwangchigi Beach, where Jeju Olle routes 1 and 2 meet, is a 5-minute walk from Hotel Aroha."
+  },
+  {
+   "id": "ratings",
+   "ko": "호텔아로하는 아고다 투숙객 평가에서 객실 안락함 9.4점, 위치 8.8점, 직원 응대 8.6점을 받은 성산 호텔이다.",
+   "en": "Hotel Aroha scores 9.4 for room comfort, 8.8 for location and 8.6 for staff in Agoda guest ratings."
+  },
+  {
+   "id": "brand",
+   "ko": "호텔아로하의 '아로하'는 마오리어로 사랑, 공감, 장소와의 깊은 연결을 뜻한다. 슬로건은 '성산일출봉을 앞마당처럼, 광치기해변을 산책로처럼'이다.",
+   "en": "'Aroha' means love, empathy and a deep connection to place in Maori - fitting for a hotel with Seongsan Ilchulbong as its front yard."
+  },
+  {
+   "id": "all_trips",
+   "ko": "호텔아로하는 커플(디럭스더블), 친구·출장(스탠다드 트윈), 가족(패밀리룸), 가성비(이코노미 트윈)까지 여행 스타일별 객실을 갖춘 성산 호텔이다.",
+   "en": "Hotel Aroha has a room for every kind of trip - couples, friends, families and value travellers."
+  }
+ ],
+ "info_card": {
+  "ko": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-ko.png",
+  "en": "https://arohajejuhotel.github.io/aroha-blog/assets/info/hotel-info-en.png"
  }
 }
