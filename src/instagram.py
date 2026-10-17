@@ -36,11 +36,14 @@ PROMPT = """아래 블로그 글을 인스타그램 캐러셀(카드 여러 장)
 
 말투 (가장 중요)
 - 호텔아로하 프런트 직원이 손님에게 말해 주듯 쓴다. 존댓말 구어체(~요, ~거든요, ~세요).
+  "~습니다/~입니다" 체는 쓰지 않는다.
 - 설명문·보고서 말투 금지. "~할 수 있습니다", "~를 소개합니다", "완벽 정리", "꿀팁", "알아보세요" 같은
   AI·광고 티 나는 표현을 쓰지 않는다.
 - 손님이 실제로 묻는 질문을 그대로 소제목으로 써도 좋다. 예: "배표 미리 끊어야 해요?"
 - 겪지 않은 일화("어제 오신 손님이…")를 지어내지 않는다. 의견("제 추천은 첫 배")은 괜찮다.
 - 호텔 단점(객실 크기, 없는 시설, 일회용품, 조식)은 쓰지 않는다.
+- 호텔에 관한 사실(거리, 시설, 운영 시간)은 **팩트의 표현을 그대로** 쓴다. 본문과 다르면 팩트가 맞다.
+  예) 성산일출봉 도보 5분(5~10분 아님), GS25 06:00~24:00(24시간 아님). 팩트에 없는 시설·숫자는 쓰지 않는다.
 
 구성
 - cover_lines: 표지 제목 2줄. 줄당 12자 안팎. 궁금해서 넘기게 만드는 말.
@@ -52,6 +55,8 @@ PROMPT = """아래 블로그 글을 인스타그램 캐러셀(카드 여러 장)
     - "big": 사진 없이 핵심 숫자·한마디를 크게. "big" 에 8자 이내 (예: "11,500원", "18:30", "도보 5분").
       숫자가 핵심인 장이 있을 때만, 많아야 1장.
     - "summary": 맨 마지막 정보 카드에만. 저장해 둘 핵심을 "rows" 에 [항목, 값] 4~6개 (값은 22자 이내).
+      heading 은 주제가 드러나게 (예: "우도 페리 한 장 요약"). 카드 위에 이미 "저장해 두고 보세요" 태그가
+      붙으므로 heading 에 '저장' 이라는 말을 쓰지 않는다.
   추천 순서 예: full → big → split → full → summary (숫자가 없으면 full → split → full → split → summary)
   photo_hint: 이 카드에 어울리는 사진 장면 (예: "우도봉 등대", "성산항 여객선", "객실 창밖 바다").
 - cta_heading: 마지막 카드 제목. 글 주제와 호텔을 잇는 한 줄 (16자 이내). 예: "우도 터미널까지 걸어서 10분"
@@ -77,9 +82,65 @@ PHOTO_PROMPT = """인스타그램 카드에 넣을 사진을 고른다. 위 사�
 - 0번 장(표지)은 위쪽 절반에 큰 흰 글자를 얹는다. 하늘·바다처럼 위쪽이 단순한 사진, 사진 안 글자가 적은 사진.
 - 각 장 내용과 실제로 맞는 사진을 고른다. 맞는 게 없으면 그 주제 장소의 분위기가 사는 사진.
 - 같은 사진을 두 번 쓰지 않는다 (후보가 모자라면 예외).
+- 주제와 맞는 장소 사진을 최우선으로 쓴다. 객실·욕실 같은 실내 사진은 주제가 호텔·객실일 때만.
+  주제 장소 사진이 모자라면 실내 사진보다 성산·제주 바다·풍경 사진으로 채운다.
+- 사진 안에 큰 글자·제목·그래픽이 들어간 사진(다른 게시물 썸네일, 포스터 등)은 어느 장에도 쓰지 않는다.
 - alts: 고른 사진마다 대체 텍스트 한 문장. 사진에 실제로 보이는 것만 쓴다 (장소를 확신할 수 없으면
   "제주 바닷가 풍경"처럼 일반적으로).
 다음 JSON 하나만 출력한다: {{"pick": [장0 사진번호, 장1 사진번호, ...], "alts": ["장0 설명", ...], "reason": "한 줄"}}"""
+
+
+# 사진 안에 큰 글자가 들어간 호텔 사진 (예전 블로그 썸네일). 카드에 쓰지 않는다.
+TEXT_PHOTOS = {"surroundings-seongsan-73f59874.jpg"}
+
+
+# 주제 장소 사진이 모자랄 때 채우는 호텔 근처 대표 장소
+NEARBY = ["성산일출봉", "광치기해변", "섭지코지", "우도"]
+
+
+def gather_candidates(env, topic: dict, places: list, manifest: list, usage, recent: set,
+                      used_blog: set = frozenset()) -> list:
+    """카드 사진 후보: 주제 장소(관광공사 제1유형) → 근처 대표 장소 → 호텔 풍경·외관 → 주제 태그 호텔 사진."""
+    from src import images, settings, tour_photos
+    cands = []
+
+    def add_place(ps, limit):
+        got = 0
+        for c in tour_photos.find(env.tour_key, ps, "ko", 10, used_blog):
+            if c.get("editable") and got < limit:
+                cands.append({"url": c["url"], "credit": c["credit"]})
+                got += 1
+        for c in tour_photos.thumbnail_candidates(env.tour_key, ps, used_blog):
+            if got < limit:
+                cands.append({"url": c["url"], "credit": tour_photos._credit("ko", c["license"])})
+                got += 1
+
+    add_place(places, 8)
+    add_place([p for p in NEARBY if p not in places][:2], 3)
+    hotel = images.pick(manifest, ["surroundings", "exterior"], 6, usage)
+    hotel += images.pick(manifest, topic.get("img", ["surroundings"]), 4, usage)
+    for img in hotel:
+        cands.append({"url": f"{env.image_base}/{img['file']}", "credit": "",
+                      "local": str(settings.ROOT / "assets" / "img" / img["file"])})
+    return tidy_candidates(cands, recent, limit=14)
+
+
+def tidy_candidates(cands: list, recent: set = frozenset(), limit: int = 12) -> list:
+    """중복·글자 사진을 빼고 후보를 정리한다.
+
+    주제 장소 사진(관광공사, credit 있음)이 호텔 사진보다 먼저다. 주제와 맞는 사진이 가장 중요하므로
+    최근 게시물(recent)에 쓴 사진도 빼지 않고 같은 묶음 안에서 뒤로만 미룬다."""
+    seen, groups = set(), {(0, False): [], (0, True): [], (1, False): [], (1, True): []}
+    for c in cands:
+        if c["url"] in seen or c["url"].rsplit("/", 1)[-1] in TEXT_PHOTOS:
+            continue
+        seen.add(c["url"])
+        groups[(0 if c.get("credit") else 1, c["url"] in recent)].append(c)
+    place = groups[(0, False)] + groups[(0, True)]
+    hotel = groups[(1, False)] + groups[(1, True)]
+    # 장소 사진은 최대 9장, 나머지는 호텔 사진
+    out = place[:9] + hotel
+    return out[:limit]
 
 
 def _plain(body_html: str) -> str:
@@ -93,7 +154,8 @@ def _json(text: str) -> dict:
     return json.loads(text[text.index("{"): text.rindex("}") + 1], strict=False)
 
 
-def write(client, model: str, title: str, url: str, body_html: str, hotel: dict) -> dict:
+def write(client, model: str, title: str, url: str, body_html: str, hotel: dict,
+          today: str = "") -> dict:
     facts = {k: hotel[k] for k in ("name_ko", "concept_ko", "checkin", "checkout", "rooms",
                                    "amenities_ko", "walking_distance_ko", "verified_facts",
                                    "honest_limits", "not_offered") if k in hotel}
@@ -101,6 +163,10 @@ def write(client, model: str, title: str, url: str, body_html: str, hotel: dict)
     prompt = PROMPT.format(title=title, url=url or "(주소 미정)",
                            facts=json.dumps(facts, ensure_ascii=False)[:4000],
                            body=_plain(body_html)[:8000])
+    if today:
+        prompt += (f"\n\n[게시일] {today}. 글이 다른 달에 쓰였으면 지금 계절에 맞게 쓴다. "
+                   "지난 달에만 해당하는 내용(예: '9월엔', 지난 행사 일정)은 빼거나 바꾸고, "
+                   "이번 달 시간·일정이 글과 팩트에 없으면 숫자로 단정하지 않는다.")
     resp = client.messages.create(model=model, max_tokens=8000,
                                   messages=[{"role": "user", "content": prompt}])
     post = _json("".join(b.text for b in resp.content if getattr(b, "type", "") == "text"))
@@ -126,7 +192,8 @@ def photo_cards(post: dict) -> list:
     return [c for c in post["cards"] if c.get("layout", "split") in PHOTO_LAYOUTS]
 
 
-def pick_photos(client, model: str, post: dict, title: str, cands: list) -> list:
+def pick_photos(client, model: str, post: dict, title: str, cands: list,
+                recent: set = frozenset()) -> list:
     """사진이 들어가는 장(표지 + full·split 카드)마다 후보 번호를 고른다. 실패하면 앞에서부터 차례로.
     고른 사진을 보고 쓴 대체 텍스트로 post["alts"] 를 채운다 (사진 없는 카드는 카드 내용으로)."""
     pcards = photo_cards(post)
@@ -135,12 +202,20 @@ def pick_photos(client, model: str, post: dict, title: str, cands: list) -> list
     _fill_alts(post, None)
     if len(cands) < 2:
         return fallback
-    cands = cands[:12]
+    cands = cands[:14]
     wants = "\n".join([f"0번 장(표지): {' '.join(post['cover_lines'])}"] +
                       [f"{i}번 장: {c['heading']} — {c.get('photo_hint', '')}"
                        for i, c in enumerate(pcards, 1)])
-    content = [{"type": "image", "source": {"type": "url", "url": c["url"]}} for c in cands]
-    content.append({"type": "text", "text": PHOTO_PROMPT.format(n=len(cands), title=title, wants=wants)})
+    # 관광공사 사진 일부가 http 주소로 온다. Claude 는 https 만 받는다.
+    content = [{"type": "image", "source": {"type": "url",
+                                            "url": re.sub(r"^http://", "https://", c["url"])}}
+               for c in cands]
+    text_prompt = PHOTO_PROMPT.format(n=len(cands), title=title, wants=wants)
+    seen_before = [i for i, c in enumerate(cands) if c["url"] in recent]
+    if seen_before:
+        text_prompt += (f"\n- {seen_before}번 사진은 바로 앞 게시물들에 이미 썼다. 피드에 나란히 보이므로 "
+                        "표지(0번 장)에는 절대 쓰지 않고, 다른 장도 대신할 사진이 있으면 쓰지 않는다.")
+    content.append({"type": "text", "text": text_prompt})
     text = ""
     try:
         # 사진 12장을 보고 생각하는 데 토큰이 꽤 든다. 모자라면 답(JSON) 없이 끝난다.

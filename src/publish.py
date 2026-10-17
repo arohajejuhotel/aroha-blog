@@ -255,28 +255,22 @@ def save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, 
         import tempfile
         import anthropic
         from src import instagram
-        # 후보: 글 주제 장소 사진(관광공사 제1유형만 — 글자를 얹고 자르므로) + 호텔 사진
-        used = used_photo_urls(state)
-        cands = [{"url": p["url"], "credit": p.get("credit", "")} for p in kto if p.get("editable")]
-        cands += [{"url": c["url"], "credit": tour_photos._credit("ko", c["license"])}
-                  for c in tour_photos.thumbnail_candidates(env.tour_key, topic_places(topic), used)]
-        more = images.pick(manifest, topic["img"], 6, images.usage_counter(state))
-        for p in picked + more:
-            cands.append({"url": f"{env.image_base}/{p['file']}", "credit": "",
-                          "local": str(settings.ROOT / "assets" / "img" / p["file"])})
-        seen, uniq = set(), []
-        for c in cands:
-            if c["url"] not in seen:
-                seen.add(c["url"])
-                uniq.append(c)
-        cands = uniq[:12]
+        # 후보: 주제 장소 사진(관광공사 제1유형만 — 글자를 얹고 자르므로) + 근처 대표 장소 + 호텔 사진
+        cands = instagram.gather_candidates(env, topic, topic_places(topic), manifest,
+                                            images.usage_counter(state),
+                                            set(state.get("insta_photos", [])), used_photo_urls(state))
 
         client = anthropic.Anthropic(api_key=env.anthropic_key, max_retries=3, timeout=180.0)
-        ipost = instagram.write(client, env.model, post["title"], url, post["body_html"], hotel)
-        idx = instagram.pick_photos(client, env.model, ipost, post["title"], cands)
+        ipost = instagram.write(client, env.model, post["title"], url, post["body_html"], hotel,
+                                today=day)
+        idx = instagram.pick_photos(client, env.model, ipost, post["title"], cands,
+                                    set(state.get("insta_photos", [])))
         publishing = mode == "publish" and instagram.can_publish()
         out = (settings.ROOT / "assets" / "insta" / day) if publishing else Path(tempfile.mkdtemp())
         files = instagram.package(ipost, cands, idx, topic["cat"], out, f"{day}-{topic['id']}")
+        # 다음 게시물이 같은 사진을 피하도록 최근 3개 게시물의 사진을 기록한다 (state 는 발행 후 커밋된다)
+        state["insta_photos"] = (state.get("insta_photos", []) + [cands[i]["url"] for i in idx])[-15:]
+        settings.save_state(state)
         cards = [f for f in files if f.suffix == ".jpg"]
 
         if publishing:
