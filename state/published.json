@@ -773,6 +773,66 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-18",
+   "ko_topic": "d261018",
+   "ko_images": [
+    "surroundings-seongsan-73f59874.jpg",
+    "surroundings-83a96d68.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/00/2613500_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/83/2513483_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "gs25",
+    "luggage",
+    "multilingual"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@97c6ff9c36528837d4e04c150405f76b654b04ec/assets/thumbs/2026-10-18-d261018-ko.jpg",
+   "ko": {
+    "title": "제주 동쪽 가볼만한곳, 성산 거점 동선 총정리",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-east-attractions-guide-d261018.html",
+    "id": "2837777506969669892",
+    "labels": [
+     "제주동부여행",
+     "성산일출봉",
+     "우도여행",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "x15",
+   "en_images": [
+    "room-deluxe-02-14334e8d.jpg",
+    "lobby-02-d391ff3d.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/86/2653586_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "direct",
+    "basecamp",
+    "ocean_view"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@e06440b4ee0638d97551f03cddc5e8500d1c937b/assets/thumbs/2026-10-18-x15-en.jpg",
+   "en": {
+    "title": "Solo Travel Jeju: Safety, Eating Alone, and Getting Around by Yourself",
+    "url": "https://arohajeju.blogspot.com/2026/10/solo-travel-jeju-guide.html",
+    "id": "4956215502662084413",
+    "labels": [
+     "East Jeju Guide",
+     "Solo Travel Jeju",
+     "Seongsan Ilchulbong",
+     "Getting Around Jeju",
+     "English"
+    ]
+   }
   }
  ]
 }
