@@ -228,8 +228,7 @@ def save_naver_version(env, topic, post, url, picked, kto, points, day) -> None:
             "- 글쓴이는 호텔아로하 직원. 이 동네와 호텔을 자랑스러워하며 자신 있게 추천한다. 존댓말.",
             "- 호텔의 단점(객실 크기, 시설 연식, 없는 시설, 일회용품, 조식)은 절대 쓰지 않는다.",
             "- 목적은 **호텔아로하 홍보와 예약**이다. 존댓말(~습니다, ~요)로 쓴다.",
-            "- 끝에 예약 안내: 네이버 예약 https://booking.naver.com/booking/3/bizes/139897 , "
-            "전화 064-782-3100 (전화 예약 시 얼리체크인 12:00·레이트체크아웃 13:00).",
+            "- 예약·인스타·전화 안내 블록은 원고 끝에 자동으로 붙으니 본문에 따로 쓰지 않는다.",
             "- 아래 호텔 장점 문장을 거의 그대로 넣는다:",
         ] + [f"  · {p['ko']}" for p in points]
         if kto:
@@ -238,7 +237,7 @@ def save_naver_version(env, topic, post, url, picked, kto, points, day) -> None:
         client = anthropic.Anthropic(api_key=env.anthropic_key, max_retries=3, timeout=180.0)
         npost = naver.write(client, env.model, post["title"], topic.get("search_keyword") or topic.get("kw_ko", ""),
                             url, post["body_html"], len(photos), extra=extra)
-        files = naver.package(npost, photos, tmp / "naver")
+        files = naver.package(npost, photos, tmp / "naver", footer_html=naver.footer(settings.hotel()))
         where = gdrive.save("아로하", day, npost["title"], files)
         print(f"[ok] (ko) 네이버용 원고 저장: 구글 드라이브/{where}")
     except Exception as exc:  # noqa: BLE001
