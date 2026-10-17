@@ -44,8 +44,15 @@ PROMPT = """아래 블로그 글을 인스타그램 캐러셀(카드 여러 장)
 
 구성
 - cover_lines: 표지 제목 2줄. 줄당 12자 안팎. 궁금해서 넘기게 만드는 말.
-- cards: 정보 카드 4~5장. heading 은 16자 이내, body 는 2~3줄(줄바꿈 \\n, 줄당 22자 안팎).
-  카드 하나에 정보 하나. 글에서 가장 쓸모 있는 것만 고른다.
+- cards: 정보 카드 4장 + 마지막에 요약 카드 1장 (총 5장). 카드 하나에 정보 하나. 글에서 가장 쓸모 있는 것만.
+  heading 은 16자 이내, body 는 2~3줄(줄바꿈 \\n, 줄당 22자 안팎).
+  layout 으로 장마다 모양을 바꿔 넘길 때 리듬이 생기게 한다. 같은 layout 을 두 장 연달아 쓰지 않는다.
+    - "full": 사진이 화면 전체, 아래에 글. 풍경·분위기가 사는 장. photo_hint 필수.
+    - "split": 위 사진 + 아래 글. 설명이 조금 더 필요한 장. photo_hint 필수.
+    - "big": 사진 없이 핵심 숫자·한마디를 크게. "big" 에 8자 이내 (예: "11,500원", "18:30", "도보 5분").
+      숫자가 핵심인 장이 있을 때만, 많아야 1장.
+    - "summary": 맨 마지막 정보 카드에만. 저장해 둘 핵심을 "rows" 에 [항목, 값] 4~6개 (값은 22자 이내).
+  추천 순서 예: full → big → split → full → summary (숫자가 없으면 full → split → full → split → summary)
   photo_hint: 이 카드에 어울리는 사진 장면 (예: "우도봉 등대", "성산항 여객선", "객실 창밖 바다").
 - cta_heading: 마지막 카드 제목. 글 주제와 호텔을 잇는 한 줄 (16자 이내). 예: "우도 터미널까지 걸어서 10분"
 - cta_points: 호텔 강점 3개 (각 16자 이내, 팩트에 있는 것만).
@@ -54,7 +61,10 @@ PROMPT = """아래 블로그 글을 인스타그램 캐러셀(카드 여러 장)
 - hashtags: 8~12개. 지역+주제 위주 (#성산숙소 #우도여행 처럼 붙여쓴 실제 검색어). #호텔아로하 포함.
 
 다음 JSON 하나만 출력한다:
-{{"cover_lines": ["", ""], "cards": [{{"heading": "", "body": "", "photo_hint": ""}}],
+{{"cover_lines": ["", ""],
+ "cards": [{{"layout": "full", "heading": "", "body": "", "photo_hint": ""}},
+           {{"layout": "big", "big": "", "heading": "", "body": ""}},
+           {{"layout": "summary", "heading": "", "rows": [["", ""]]}}],
  "cta_heading": "", "cta_points": ["", "", ""], "caption": "", "hashtags": ["#"]}}"""
 
 PHOTO_PROMPT = """인스타그램 카드에 넣을 사진을 고른다. 위 사진 {n}장(0번부터)이 후보다.
@@ -94,23 +104,41 @@ def write(client, model: str, title: str, url: str, body_html: str, hotel: dict)
     resp = client.messages.create(model=model, max_tokens=8000,
                                   messages=[{"role": "user", "content": prompt}])
     post = _json("".join(b.text for b in resp.content if getattr(b, "type", "") == "text"))
-    # 본문이 빈 카드, 마지막 예약 카드와 겹치는 카드는 뺀다
+    # 내용이 빈 카드, 마지막 예약 카드와 겹치는 카드는 뺀다
     cta = post.get("cta_heading", "").replace(" ", "")
-    post["cards"] = [c for c in post["cards"]
-                     if c.get("body", "").strip() and c.get("heading", "").replace(" ", "") != cta][:5]
+    cards = []
+    for c in post["cards"]:
+        layout = c.get("layout", "split")
+        if layout not in ("full", "split", "big", "summary"):
+            c["layout"] = layout = "split"
+        filled = c.get("rows") if layout == "summary" else c.get("body", "").strip()
+        if layout == "big" and not c.get("big", "").strip():
+            c["layout"] = "split"
+        if filled and c.get("heading", "").replace(" ", "") != cta:
+            cards.append(c)
+    post["cards"] = cards[:6]
     return post
 
 
+def photo_cards(post: dict) -> list:
+    """사진이 들어가는 카드 (표지 다음 순서)."""
+    from src.insta_cards import PHOTO_LAYOUTS
+    return [c for c in post["cards"] if c.get("layout", "split") in PHOTO_LAYOUTS]
+
+
 def pick_photos(client, model: str, post: dict, title: str, cands: list) -> list:
-    """장마다(표지 + 정보 카드) 후보 번호를 고른다. 실패하면 앞에서부터 차례로."""
-    slots = 1 + len(post["cards"])
+    """사진이 들어가는 장(표지 + full·split 카드)마다 후보 번호를 고른다. 실패하면 앞에서부터 차례로.
+    고른 사진을 보고 쓴 대체 텍스트로 post["alts"] 를 채운다 (사진 없는 카드는 카드 내용으로)."""
+    pcards = photo_cards(post)
+    slots = 1 + len(pcards)
     fallback = [i % len(cands) for i in range(slots)]
+    _fill_alts(post, None)
     if len(cands) < 2:
         return fallback
     cands = cands[:12]
     wants = "\n".join([f"0번 장(표지): {' '.join(post['cover_lines'])}"] +
                       [f"{i}번 장: {c['heading']} — {c.get('photo_hint', '')}"
-                       for i, c in enumerate(post["cards"], 1)])
+                       for i, c in enumerate(pcards, 1)])
     content = [{"type": "image", "source": {"type": "url", "url": c["url"]}} for c in cands]
     content.append({"type": "text", "text": PHOTO_PROMPT.format(n=len(cands), title=title, wants=wants)})
     text = ""
@@ -127,14 +155,28 @@ def pick_photos(client, model: str, post: dict, title: str, cands: list) -> list
             return fallback
         alts = [str(a) for a in pick.get("alts", [])][:slots]
         if len(alts) == slots:
-            # 실제로 고른 사진을 보고 쓴 설명으로 바꾼다. 마지막 예약 카드 설명은 그대로 둔다.
-            post["alts"] = alts + ["호텔아로하 예약 안내 카드"]
+            _fill_alts(post, alts)
         print(f"  [insta] 사진 선택 {idx} — {pick.get('reason', '')}")
         return idx
     except Exception as exc:  # noqa: BLE001
         print(f"  [insta] 사진 선택 실패, 순서대로 사용 ({type(exc).__name__}: {str(exc)[:200]}"
               f"{' / 응답: ' + text[:200] if text else ''})")
         return fallback
+
+
+def _fill_alts(post: dict, photo_alts) -> None:
+    """장 순서대로 대체 텍스트를 만든다. photo_alts 는 사진 장(표지 + full·split) 설명, 없으면 카드 문구로."""
+    pa = list(photo_alts or [])
+    alts = [pa.pop(0) if pa else " ".join(post["cover_lines"])]
+    for c in post["cards"]:
+        layout = c.get("layout", "split")
+        if layout == "big":
+            alts.append(f"{c.get('big', '')} — {c['heading']} 안내 카드")
+        elif layout == "summary":
+            alts.append(f"{c['heading']} 카드")
+        else:
+            alts.append(pa.pop(0) if pa else c["heading"])
+    post["alts"] = alts + ["호텔아로하 예약 안내 카드"]
 
 
 def _load(c: dict) -> Image.Image:
