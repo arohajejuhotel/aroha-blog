@@ -168,7 +168,7 @@
  "cta": {
   "ko": {
    "primary": {
-    "label": "네이버 예약으로 객실 확인하기",
+    "label": "📅 네이버 예약",
     "url": "https://booking.naver.com/booking/3/bizes/139897?area=plt"
    },
    "secondary": {
@@ -182,7 +182,7 @@
   },
   "en": {
    "primary": {
-    "label": "Check rates on Agoda",
+    "label": "📅 Book now",
     "url": "https://www.agoda.com/hotel-aroha-jeju/hotel/jeju-island-kr.html"
    },
    "secondary": {

@@ -26,7 +26,7 @@ TEXT = {
         "checkin": "체크인 / 체크아웃",
         "walk": "도보 거리",
         "booking": "네이버 예약",
-        "booking_cta": "객실 확인하기",
+        "booking_cta": "📅 네이버 예약",  # 블로그 고정 버튼 바와 같은 문구
         "map": "네이버 지도에서 보기",
         "other_lang": "English version of this post",
     },
@@ -38,7 +38,7 @@ TEXT = {
         "checkin": "Check-in / Check-out",
         "walk": "On foot",
         "booking": "Booking",
-        "booking_cta": "Check availability",
+        "booking_cta": "📅 Book now",
         "map": "See it on the map",
         "other_lang": "이 글의 한국어 버전 보기",
     },
