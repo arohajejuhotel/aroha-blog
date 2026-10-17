@@ -245,6 +245,53 @@ def save_naver_version(env, topic, post, url, picked, kto, points, day) -> None:
         print(f"[warn] (ko) 네이버용 원고 저장 실패 ({type(exc).__name__}: {exc})")
 
 
+def save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, state, day) -> None:
+    """한국어 글을 인스타 캐러셀로 만든다. INSTAGRAM_MODE: preview(기본, 드라이브 저장) / publish / off.
+    실패해도 블로그 발행에는 영향 없음."""
+    mode = settings.env("INSTAGRAM_MODE", "preview").lower()
+    if mode == "off":
+        return
+    try:
+        import tempfile
+        import anthropic
+        from src import instagram
+        # 후보: 글 주제 장소 사진(관광공사 제1유형만 — 글자를 얹고 자르므로) + 호텔 사진
+        used = used_photo_urls(state)
+        cands = [{"url": p["url"], "credit": p.get("credit", "")} for p in kto if p.get("editable")]
+        cands += [{"url": c["url"], "credit": tour_photos._credit("ko", c["license"])}
+                  for c in tour_photos.thumbnail_candidates(env.tour_key, topic_places(topic), used)]
+        more = images.pick(manifest, topic["img"], 6, images.usage_counter(state))
+        for p in picked + more:
+            cands.append({"url": f"{env.image_base}/{p['file']}", "credit": "",
+                          "local": str(settings.ROOT / "assets" / "img" / p["file"])})
+        seen, uniq = set(), []
+        for c in cands:
+            if c["url"] not in seen:
+                seen.add(c["url"])
+                uniq.append(c)
+        cands = uniq[:12]
+
+        client = anthropic.Anthropic(api_key=env.anthropic_key, max_retries=3, timeout=180.0)
+        ipost = instagram.write(client, env.model, post["title"], url, post["body_html"], hotel)
+        idx = instagram.pick_photos(client, env.model, ipost, post["title"], cands)
+        publishing = mode == "publish" and instagram.can_publish()
+        out = (settings.ROOT / "assets" / "insta" / day) if publishing else Path(tempfile.mkdtemp())
+        files = instagram.package(ipost, cands, idx, topic["cat"], out, f"{day}-{topic['id']}")
+        cards = [f for f in files if f.suffix == ".jpg"]
+
+        if publishing:
+            caption = ipost["caption"].strip() + "\n\n" + " ".join(ipost.get("hashtags", []))
+            media_id = instagram.publish(instagram.host(cards), caption, ipost.get("alts", []))
+            print(f"[ok] (ko) 인스타 발행: {media_id}")
+        if gdrive.enabled():
+            where = gdrive.save("아로하", day, post["title"], files, root_name="인스타그램 게시물")
+            print(f"[ok] (ko) 인스타 카드 저장: 구글 드라이브/{where}")
+        elif not publishing:
+            print(f"[info] (ko) 인스타 카드 (드라이브 미설정, 로컬): {out}")
+    except Exception as exc:  # noqa: BLE001
+        print(f"[warn] (ko) 인스타 카드 생성 실패 ({type(exc).__name__}: {exc})")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -364,6 +411,8 @@ def main() -> int:
         print(f"[ok] ({lang}) 발행: {url or '초안'}")
         if lang == "ko" and not args.draft:
             save_naver_version(env, topic, post, url, picked, kto, points, f"{today:%Y-%m-%d}")
+            save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, state,
+                                   f"{today:%Y-%m-%d}")
         if not args.draft:
             published_today += 1
         if args.draft:

@@ -164,6 +164,10 @@ jobs:
           GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+          # 인스타: preview(기본, 드라이브 저장만) / publish(자동 발행) / off
+          INSTAGRAM_MODE: ${{ vars.INSTAGRAM_MODE || 'preview' }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
         run: python -m src.publish ${{ steps.flags.outputs.flags }}
 
       - name: Commit state

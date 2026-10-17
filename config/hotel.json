@@ -125,7 +125,7 @@
   "Korean, English and Chinese spoken"
  ],
  "walking_distance_ko": [
-  "성산일출봉 (유네스코 세계자연유산): 도보 5~10분",
+  "성산일출봉 (유네스코 세계자연유산): 도보 5분",
   "광치기해변: 도보 5분",
   "우도 페리 터미널: 도보 10분",
   "짱구네 유채꽃밭: 도보 5분",
@@ -133,7 +133,7 @@
   "제주국제공항: 차 약 60분"
  ],
  "walking_distance_en": [
-  "Seongsan Ilchulbong (Sunrise Peak, UNESCO World Heritage): 5-10 min walk",
+  "Seongsan Ilchulbong (Sunrise Peak, UNESCO World Heritage): 5 min walk",
   "Gwangchigi Beach: 5 min walk",
   "Udo ferry terminal: 10 min walk",
   "Jjanggune canola flower field: 5 min walk",
@@ -214,9 +214,9 @@
   },
   {
    "id": "sunrise",
-   "ko": "일출을 보러 새벽에 운전하지 않아도 된다. 걸어서 5~10분이면 성산일출봉 매표소다.",
-   "en": "No pre-dawn drive to catch the sunrise. The Sunrise Peak ticket booth is a 5-10 minute walk.",
-   "evidence": "도보 5~10분"
+   "ko": "일출을 보러 새벽에 운전하지 않아도 된다. 걸어서 5분이면 성산일출봉 매표소다.",
+   "en": "No pre-dawn drive to catch the sunrise. The Sunrise Peak ticket booth is a 5 minute walk.",
+   "evidence": "도보 5분"
   },
   {
    "id": "comfort",
@@ -264,8 +264,8 @@
   {
    "id": "walk_peak",
    "always": true,
-   "ko": "호텔아로하는 성산일출봉까지 걸어서 5~10분 거리에 있는 제주 성산 호텔입니다.",
-   "en": "Hotel Aroha is a hotel in Seongsan, Jeju, a 5-10 minute walk from Seongsan Ilchulbong."
+   "ko": "호텔아로하는 성산일출봉까지 걸어서 5분 거리에 있는 제주 성산 호텔입니다.",
+   "en": "Hotel Aroha is a hotel in Seongsan, Jeju, a 5 minute walk from Seongsan Ilchulbong."
   },
   {
    "id": "sunrise",

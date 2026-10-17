@@ -77,13 +77,13 @@ def _upload(token, path: Path, parent: str, name: str = "") -> str:
     return _req("POST", UPLOAD, token, body, {"Content-Type": f"multipart/related; boundary={boundary}"})["id"]
 
 
-def save(blog: str, day: str, title: str, files: list) -> str:
-    """'네이버용 블로그 글/{blog}/{day} {title}' 폴더에 파일들을 올린다. 폴더 경로를 돌려준다."""
+def save(blog: str, day: str, title: str, files: list, root_name: str = ROOT_NAME) -> str:
+    """'{root_name}/{blog}/{day} {title}' 폴더에 파일들을 올린다. 폴더 경로를 돌려준다."""
     token = _access_token()
-    root = _folder(token, ROOT_NAME)
+    root = _folder(token, root_name)
     blog_dir = _folder(token, blog, root)
     safe = "".join(c for c in title if c not in '\\/:*?"<>|')[:50].strip()
     post_dir = _folder(token, f"{day} {safe}", blog_dir)
     for f in files:
         _upload(token, Path(f), post_dir)
-    return f"{ROOT_NAME}/{blog}/{day} {safe}"
+    return f"{root_name}/{blog}/{day} {safe}"
