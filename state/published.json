@@ -714,6 +714,65 @@
      "제주축제"
     ]
    }
+  },
+  {
+   "date": "2026-10-17",
+   "ko_topic": "d261017",
+   "ko_images": [
+    "surroundings-c4603ba2.jpg",
+    "exterior-05-fb5e7143.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/04/3077604_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/61/3077361_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/63/3077363_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "sunrise",
+    "ratings",
+    "gs25_breakfast"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@df98b985d51f752e4318c985e5ed8455813839ef/assets/thumbs/2026-10-17-d261017-ko.jpg",
+   "ko": {
+    "title": "한라산 탐방예약 방법, 10월 단풍철 코스별 총정리",
+    "url": "https://arohajeju.blogspot.com/2026/10/hallasan-hiking-reservation-guide.html",
+    "id": "966746926327417179",
+    "labels": [
+     "제주전역여행",
+     "한라산",
+     "제주가을여행",
+     "탐방예약정보"
+    ]
+   },
+   "en_topic": "xj01",
+   "en_images": [
+    "surroundings-img-5739-79b7a9b5.jpg",
+    "surroundings-sunrise-5038cbe7.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/38/3460338_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource_photo/41/3460441_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource_photo/95/3460395_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "parking",
+    "library",
+    "brand"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@63ada4c89be5f633e700c55d454f6c0da33850cb/assets/thumbs/2026-10-17-xj01-en.jpg",
+   "en": {
+    "title": "Hallasan Hiking Guide: Trails, Reservations, and Real Timing for Visitors",
+    "url": "https://arohajeju.blogspot.com/2026/10/hallasan-hiking-guide.html",
+    "id": "5350404551115412542",
+    "labels": [
+     "Jeju Island Guide",
+     "Hallasan Hiking",
+     "Jeju Hiking Tips",
+     "English"
+    ]
+   }
   }
  ]
 }
