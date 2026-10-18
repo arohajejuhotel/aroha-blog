@@ -833,6 +833,66 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-19",
+   "ko_topic": "d261019",
+   "ko_images": [
+    "surroundings-img-6063-cb50d320.jpg",
+    "surroundings-seongsan-73f59874.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/08/3527908_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource_photo/95/3098295_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/11/3527911_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "ocean_view",
+    "all_trips",
+    "brand"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@b2a21ef57b188816e4f88444f5769fbbcd08a0d3/assets/thumbs/2026-10-19-d261019-ko.jpg",
+   "ko": {
+    "title": "제주 오름 추천 BEST, 가을 억새 보러 성산 동쪽 코스",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-oreum-autumn-hiking-guide-d261019.html",
+    "id": "1387016849882666368",
+    "labels": [
+     "제주동부여행",
+     "제주오름",
+     "가을억새",
+     "성산여행코스"
+    ]
+   },
+   "en_topic": "xj02",
+   "en_images": [
+    "surroundings-img-5878-f7292b4f.jpg",
+    "surroundings-23-55725333.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/83/4097383_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/88/4097388_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/85/4097385_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "olle",
+    "gs25",
+    "family"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@cad94b9d56d5384c009890fd81ad9036f89aa486/assets/thumbs/2026-10-19-xj02-en.jpg",
+   "en": {
+    "title": "Jeju Olle Trail for First-Timers: Best Route and How to Reach the Trailheads",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-olle-trail-guide.html",
+    "id": "358359446526526899",
+    "labels": [
+     "Jeju Island Guide",
+     "Jeju Olle Trail",
+     "East Jeju",
+     "Jeju Hiking",
+     "English"
+    ]
+   }
   }
  ]
 }
