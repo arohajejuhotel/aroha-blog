@@ -166,6 +166,45 @@ def _big_scene(big_text: str, heading: str) -> Image.Image:
     return img
 
 
+def _naver_end(heading: str, points: list) -> Image.Image:
+    """네이버 클립용 마지막 장면: '프로필 링크' 대신 네이버 검색·예약 안내."""
+    from PIL import ImageDraw
+    from src.insta_cards import CREAM, GOLD, LOGO, MINT, OCEAN, _logo_on_dark
+    from src.thumbnail import _wrap
+    FB, FR, _font = _fonts()
+    img = Image.new("RGB", (W, H), OCEAN)
+    d = ImageDraw.Draw(img)
+    y = 330
+    if LOGO.exists():
+        lg = _logo_on_dark(Image.open(LOGO).convert("RGBA"), 520)
+        img.paste(lg, ((W - lg.width) // 2, y), lg)
+        y += lg.height + 110
+    fh = _font(FB, 68)
+    for ln in _wrap(d, heading, fh, W - PADX * 2)[:2]:
+        d.text(((W - d.textlength(ln, font=fh)) / 2, y), ln, font=fh, fill=CREAM)
+        y += 90
+    y += 50
+    fp = _font(FR, 46)
+    widest = max((d.textlength(p, font=fp) for p in points), default=0)
+    x = (W - widest - 60) / 2
+    for p in points[:3]:
+        d.ellipse((x, y + 18, x + 26, y + 44), fill=MINT)
+        d.text((x + 56, y), p, font=fp, fill=CREAM)
+        y += 82
+    # 네이버 검색창 모양 + 예약 안내
+    y = max(y + 90, 1180)
+    fs = _font(FB, 52)
+    box = (PADX + 20, y, W - PADX - 20, y + 120)
+    d.rounded_rectangle(box, radius=60, outline=(3, 199, 90), width=8, fill=(255, 255, 255))
+    q = "호텔아로하"
+    d.text((box[0] + 60, y + 30), q, font=fs, fill=OCEAN)
+    d.text((box[2] - 60 - d.textlength("검색", font=fs), y + 30), "검색", font=fs, fill=(3, 199, 90))
+    fb = _font(FB, 46)
+    t = "네이버 예약으로 바로 예약하세요"
+    d.text(((W - d.textlength(t, font=fb)) / 2, y + 170), t, font=fb, fill=GOLD)
+    return img
+
+
 def _card_scene(card_path: Path) -> Image.Image:
     card = Image.open(card_path).convert("RGB")
     f = _background(card)
@@ -175,7 +214,7 @@ def _card_scene(card_path: Path) -> Image.Image:
 
 
 def make_native(slides: dict, photos: list, cards: list, out: Path, cover_label: str = "",
-                credits: list = None) -> Path:
+                credits: list = None, naver: bool = False) -> Path:
     """릴스 전용 화면으로 만든다.
     slides/photos 는 insta_cards.build 에 넣은 것과 같은 것. cards 는 build 가 만든 카드 경로(요약·예약 카드 재사용)."""
     from src.insta_cards import PHOTO_LAYOUTS
@@ -197,7 +236,11 @@ def make_native(slides: dict, photos: list, cards: list, out: Path, cover_label:
             scenes.append(("still", _big_scene(c.get("big", ""), c["heading"]), 1.9))
         elif layout == "summary":
             scenes.append(("still", _card_scene(cards[i + 1]), 3.0))
-    scenes.append(("still", _card_scene(cards[-1]), 2.4))
+    if naver:
+        scenes.append(("still", _naver_end(slides.get("cta_heading", "제주 성산, 호텔아로하"),
+                                           slides.get("cta_points", [])), 2.6))
+    else:
+        scenes.append(("still", _card_scene(cards[-1]), 2.4))
 
     out.parent.mkdir(parents=True, exist_ok=True)
     proc = subprocess.Popen(
