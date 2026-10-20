@@ -893,6 +893,72 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-20",
+   "ko_topic": "d261020",
+   "ko_images": [
+    "exterior-2-3c63d4cb.jpg",
+    "surroundings-c4603ba2.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/81/2944281_image2_1.bmp",
+    "https://tong.visitkorea.or.kr/cms/resource/82/2944282_image2_1.bmp",
+    "https://tong.visitkorea.or.kr/cms/resource/84/2944284_image2_1.bmp"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "parking",
+    "family",
+    "basecamp"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@e5e4edcaa855d49fa793b8630363256b64640879/assets/thumbs/2026-10-20-d261020-ko.jpg",
+   "ko": {
+    "title": "제주렌터카 픽업부터 성산 호텔아로하까지 실제 동선 정리",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-rental-car-route-d261020.html",
+    "id": "8432063414748995089",
+    "labels": [
+     "제주동부여행",
+     "제주렌터카",
+     "제주공항",
+     "성산가는길"
+    ]
+   },
+   "en_topic": "x16",
+   "en_images": [
+    "surroundings-img-6044-c74b81ba.jpg",
+    "surroundings-img-6063-cb50d320.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/97/1011797.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/04/1011804.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/67/1011867.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "all_trips",
+    "multilingual",
+    "economy"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@81f11db26895cb128b225c098f051f61cd7e73c7/assets/thumbs/2026-10-20-x16-en.jpg",
+   "en": {
+    "title": "Jeju Oreum Hiking: Volcanic Cones You Can Climb in Under an Hour",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-oreum-hiking-guide.html",
+    "id": "5065064587681433781",
+    "labels": [
+     "East Jeju Guide",
+     "Oreum Hiking",
+     "Seongsan Ilchulbong",
+     "Jeju Nature",
+     "English"
+    ]
+   }
   }
+ ],
+ "insta_photos": [
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg"
  ]
 }
