@@ -65,7 +65,7 @@ def scrub(client, model: str, text: str, style: str = "") -> str:
             "HTML 태그가 있으면 그대로 둔다.\n"
             "JSON 문자열 배열 하나만 출력한다 (입력과 같은 순서·같은 개수).\n\n"
             + json.dumps(bad, ensure_ascii=False))
-        resp = client.messages.create(model=model, max_tokens=2000,
+        resp = client.messages.create(model=model, max_tokens=8000,
                                       messages=[{"role": "user", "content": prompt}])
         raw = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
         fixed = json.loads(re.search(r"\[.*\]", raw, re.S).group(0))
