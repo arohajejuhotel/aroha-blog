@@ -5,6 +5,8 @@ import re
 
 import anthropic
 
+from src import cliche
+
 # 영문 글은 한글보다 토큰을 많이 먹는다. 넉넉히 잡아야 JSON 이 잘리지 않는다.
 MAX_TOKENS = 16000
 
@@ -46,7 +48,7 @@ thumb_lines 는 모바일 썸네일 사진 위에 크게 얹을 문구다 (영�
 - 제목을 그대로 자르지 말고, 검색한 사람이 멈춰서 누르고 싶게 핵심만 쓴다.
 - 숫자·장소명이 있으면 살린다. 따옴표·이모지·마침표는 쓰지 않는다."""
 
-COMMON_RULES = """
+COMMON_RULES = cliche.RULE + """
 [본문 HTML 규칙]
 - <h2>, <h3>, <p>, <ul>, <li>, <strong>, <blockquote>, <table> 만 사용한다.
 - <html>, <head>, <body>, <style>, <script>, class/style 속성은 쓰지 않는다.
@@ -94,7 +96,7 @@ COMMON_RULES = """
   (예: 현금이 필요한 가게 이야기를 하다가 "1층 편의점에 ATM이 있어서 급할 때 쓸 수 있다")
 - 자신 있게 자랑해도 된다. 강조·최상급 표현("성산 최고의 일출 숙소")도 괜찮다.
   다만 독자의 문제를 푸는 구체적인 장면과 함께 쓰면 훨씬 설득력이 있다.
-  예: "일출을 보려면 보통 새벽 4시에 렌터카를 몰아야 하는데, 호텔아로하에서는 걸어서 가면 끝이다. 성산에서 일출 보기에 이보다 좋은 자리는 없다"
+  예: "일출을 보려면 보통 새벽 4시에 렌터카를 몰아야 하는데, 호텔아로하에서는 객실을 나와 10분 걸으면 매표소에 닿는다. 성산에서 일출 보기에 이보다 좋은 자리는 없다"
 - 근거 숫자(evidence)가 있으면 함께 쓴다. 좋은 평점(객실 안락함 9.4, 위치 8.8 등)은 자랑해도 된다.
 
 [자기 비하 금지, 사실 왜곡 금지 — honest_limits]
@@ -352,8 +354,11 @@ def generate(env, hotel, seo, topic, image_refs, lang: str,
                        "같은 구성을 유지하되 전체 분량을 25% 줄여 다시 작성하라.")
             continue
         try:
-            return _validate(_extract_json(raw), image_refs, lang,
+            post = _validate(_extract_json(raw), image_refs, lang,
                              strict=attempt < attempts - 1)
+            style = "존댓말" if lang == "ko" else "English"
+            return cliche.scrub_fields(client, env.model, post,
+                                       ("title", "body_html", "faq", "thumb_lines"), style)
         except (ValueError, json.JSONDecodeError) as exc:
             last_error = exc
             print(f"[warn] 생성 결과 검증 실패 (시도 {attempt + 1}): {exc}")

@@ -10,6 +10,8 @@
 """
 import html
 import re
+
+from src import cliche
 import shutil
 from pathlib import Path
 
@@ -47,6 +49,7 @@ def write(client, model: str, title: str, keyword: str, url: str, body_html: str
     prompt = PROMPT.format(title=title, keyword=keyword or title, url=url or "(주소 미정)",
                            body=_plain(body_html)[:9000], n=n_photos, extra=extra)
     # 본문 HTML 에 따옴표가 섞여 JSON 이 깨진 적이 있어(2026-10-17) 태그로 나눠 받는다. 한 번 더 시도한다.
+    prompt += "\n\n" + cliche.RULE
     for _ in range(2):
         resp = client.messages.create(model=model, max_tokens=6000,
                                       messages=[{"role": "user", "content": prompt}])
@@ -54,9 +57,10 @@ def write(client, model: str, title: str, keyword: str, url: str, body_html: str
         parts = {k: re.search(rf"<{k}>(.*?)</{k}>", text, re.S) for k in ("title", "body", "hashtags")}
         if parts["title"] and parts["body"]:
             tags = parts["hashtags"].group(1) if parts["hashtags"] else ""
-            return {"title": parts["title"].group(1).strip(),
+            post = {"title": parts["title"].group(1).strip(),
                     "body_html": parts["body"].group(1).strip(),
                     "hashtags": re.findall(r"#\S+", tags)}
+            return cliche.scrub_fields(client, model, post, ("title", "body_html"))
     raise ValueError(f"네이버용 원고 형식을 읽지 못함: {text[:200]!r}")
 
 

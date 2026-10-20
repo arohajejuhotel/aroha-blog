@@ -23,7 +23,7 @@ from pathlib import Path
 import requests
 from PIL import Image
 
-from src import insta_cards
+from src import cliche, insta_cards
 
 PROMPT = """아래 블로그 글을 인스타그램 캐러셀(카드 여러 장) 게시물로 다시 짠다.
 
@@ -167,6 +167,7 @@ def write(client, model: str, title: str, url: str, body_html: str, hotel: dict,
         prompt += (f"\n\n[게시일] {today}. 글이 다른 달에 쓰였으면 지금 계절에 맞게 쓴다. "
                    "지난 달에만 해당하는 내용(예: '9월엔', 지난 행사 일정)은 빼거나 바꾸고, "
                    "이번 달 시간·일정이 글과 팩트에 없으면 숫자로 단정하지 않는다.")
+    prompt += "\n\n" + cliche.RULE
     resp = client.messages.create(model=model, max_tokens=8000,
                                   messages=[{"role": "user", "content": prompt}])
     post = _json("".join(b.text for b in resp.content if getattr(b, "type", "") == "text"))
@@ -183,7 +184,8 @@ def write(client, model: str, title: str, url: str, body_html: str, hotel: dict,
         if filled and c.get("heading", "").replace(" ", "") != cta:
             cards.append(c)
     post["cards"] = cards[:6]
-    return post
+    return cliche.scrub_fields(client, model, post,
+                               ("cover_lines", "cards", "cta_heading", "cta_points", "caption"), "존댓말 구어체")
 
 
 def photo_cards(post: dict) -> list:
