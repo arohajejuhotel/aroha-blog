@@ -953,12 +953,76 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-21",
+   "ko_topic": "d261021",
+   "ko_images": [
+    "surroundings-img-5739-79b7a9b5.jpg",
+    "room-6-fa857566.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/00/1804200.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/02/1804202.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/03/1804203.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "olle",
+    "economy",
+    "direct"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@1a72fa7d62b83d43bcf393acf9c19aa931881ae6/assets/thumbs/2026-10-21-d261021-ko.jpg",
+   "ko": {
+    "title": "제주공항 맛집, 도착 시간대별로 고르는 법",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-airport-restaurants-guide-d261021.html",
+    "id": "2085173082333315271",
+    "labels": [
+     "제주전역여행",
+     "제주공항맛집",
+     "제주가을여행",
+     "성산가는길"
+    ]
+   },
+   "en_topic": "xj03",
+   "en_images": [
+    "surroundings-img-5872-f5775ce2.jpg",
+    "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/43/4094043_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/30/2918130_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/31/2918131_image2_1.JPG"
+   ],
+   "en_points": [
+    "walk_peak",
+    "luggage",
+    "sunrise",
+    "gs25_breakfast"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@a90d6f3cabd792242d11fd864ca306d675604b8a/assets/thumbs/2026-10-21-xj03-en.jpg",
+   "en": {
+    "title": "Seogwipo Day Trip from Seongsan: Waterfalls, Soesokkak and the Market, No Car Needed",
+    "url": "https://arohajeju.blogspot.com/2026/10/seogwipo-day-trip-guide.html",
+    "id": "4282896104954196249",
+    "labels": [
+     "Jeju Island Guide",
+     "Seogwipo",
+     "Waterfalls",
+     "Car-Free Travel",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
   "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5878-f7292b4f.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-01-2d8ba3cc.jpg"
  ]
 }
