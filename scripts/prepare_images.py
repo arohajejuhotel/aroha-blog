@@ -45,6 +45,7 @@ FILENAME_TAGS = [
     (r"성산일출봉|seongsan|sunrise", ["sunrise-peak"]),
     (r"우도|udo", ["udo"]),
     (r"섭지코지|seopji", ["seopjikoji"]),
+    (r"해녀|haenyeo", ["haenyeo"]),
     (r"광치기|gwangchigi", ["gwangchigi"]),
     (r"야간|night", ["night"]),
     (r"gs25|store", ["convenience-store"]),
@@ -129,6 +130,11 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     entries = []
     skipped = 0
+    # 손으로 붙인 표시(exclude: 운영하지 않는 조식, 예전 1층 외관 등)는 다시 돌려도 지우지 않는다
+    old = {}
+    if MANIFEST.exists():
+        old = {e["file"]: e for e in json.loads(MANIFEST.read_text(encoding="utf-8")).get("images", [])}
+    KEEP = ("exclude", "exclude_reason")
 
     for folder in sorted(os.listdir(src)):
         fdir = src / folder
@@ -170,6 +176,7 @@ def main() -> int:
                 "height": h,
                 "orientation": "landscape" if w >= h else "portrait",
                 "source": f"{folder}/{name}",
+                **{k: old[f"{slug}.jpg"][k] for k in KEEP if k in old.get(f"{slug}.jpg", {})},
             })
 
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)

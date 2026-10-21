@@ -24,7 +24,9 @@
    "width": 1400,
    "height": 934,
    "orientation": "landscape",
-   "source": "01_외관/DSC_0727.JPG"
+   "source": "01_외관/DSC_0727.JPG",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-dsc-0728-c034a315.jpg",
@@ -37,7 +39,9 @@
    "width": 1400,
    "height": 934,
    "orientation": "landscape",
-   "source": "01_외관/DSC_0728.JPG"
+   "source": "01_외관/DSC_0728.JPG",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-hotelout-01-a605c863.jpg",
@@ -50,7 +54,9 @@
    "width": 1400,
    "height": 788,
    "orientation": "landscape",
-   "source": "01_외관/HOTELOUT_01.jpg"
+   "source": "01_외관/HOTELOUT_01.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-hotelout-02-4754ef85.jpg",
@@ -63,7 +69,9 @@
    "width": 1400,
    "height": 1196,
    "orientation": "landscape",
-   "source": "01_외관/HOTELOUT_02.jpg"
+   "source": "01_외관/HOTELOUT_02.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-hotelout-03-e8302990.jpg",
@@ -76,7 +84,9 @@
    "width": 1400,
    "height": 788,
    "orientation": "landscape",
-   "source": "01_외관/HOTELOUT_03.jpg"
+   "source": "01_외관/HOTELOUT_03.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-hotelout-04-1c5b46f4.jpg",
@@ -89,7 +99,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "01_외관/HOTELOUT_04.jpg"
+   "source": "01_외관/HOTELOUT_04.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-hotelout-naver-a602367a.jpg",
@@ -102,7 +114,9 @@
    "width": 596,
    "height": 509,
    "orientation": "landscape",
-   "source": "01_외관/HOTELOUT_naver.jpg"
+   "source": "01_외관/HOTELOUT_naver.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-1-e37b5ccb.jpg",
@@ -116,7 +130,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "01_외관/외관 (야간1).jpg"
+   "source": "01_외관/외관 (야간1).jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-2-3c63d4cb.jpg",
@@ -143,7 +159,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "01_외관/외관 01.jpg"
+   "source": "01_외관/외관 01.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-02-752c4658.jpg",
@@ -169,7 +187,9 @@
    "width": 1400,
    "height": 933,
    "orientation": "landscape",
-   "source": "01_외관/외관 03.jpg"
+   "source": "01_외관/외관 03.jpg",
+   "exclude": true,
+   "exclude_reason": "예전 1층(해담식당) 간판이 보임 — 1층은 GS25 로 바뀜 (2026-10-21). 이미 발행된 글은 그대로 둔다"
   },
   {
    "file": "exterior-04-af53fd06.jpg",
@@ -222,6 +242,34 @@
    "height": 1050,
    "orientation": "landscape",
    "source": "01_외관/외관 06.jpg"
+  },
+  {
+   "file": "exterior-gs25-fd1e9651.jpg",
+   "tags": [
+    "exterior",
+    "hotel",
+    "convenience-store"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 1050,
+   "orientation": "landscape",
+   "source": "01_외관/외관_GS25_정면.jpg"
+  },
+  {
+   "file": "exterior-gs25-a0a6ddfe.jpg",
+   "tags": [
+    "exterior",
+    "hotel",
+    "convenience-store"
+   ],
+   "alt_ko": "호텔아로하 외관 — 제주 성산 성산일출봉 근처 숙소",
+   "alt_en": "Hotel Aroha exterior in Seongsan, Jeju",
+   "width": 1400,
+   "height": 1049,
+   "orientation": "landscape",
+   "source": "01_외관/외관_GS25_측면.jpg"
   },
   {
    "file": "room-se-31d7ce7d-a2ce-40e1-b1c2-5-e862e66a.jpg",
@@ -1471,6 +1519,82 @@
    "height": 512,
    "orientation": "landscape",
    "source": "10_주변환경/유체꽃밭.jpg"
+  },
+  {
+   "file": "surroundings-1-98479d01.jpg",
+   "tags": [
+    "haenyeo"
+   ],
+   "alt_ko": "성산해녀의집 해녀 물질 공연 — 성산일출봉 아래",
+   "alt_en": "Haenyeo diving performance below Seongsan Ilchulbong",
+   "width": 674,
+   "height": 674,
+   "orientation": "landscape",
+   "source": "10_주변환경/해녀물질공연 (1).jpg"
+  },
+  {
+   "file": "surroundings-2-9dcb8a20.jpg",
+   "tags": [
+    "haenyeo"
+   ],
+   "alt_ko": "성산해녀의집 해녀 물질 공연 — 성산일출봉 아래",
+   "alt_en": "Haenyeo diving performance below Seongsan Ilchulbong",
+   "width": 773,
+   "height": 1031,
+   "orientation": "portrait",
+   "source": "10_주변환경/해녀물질공연 (2).jpg"
+  },
+  {
+   "file": "surroundings-3-1c0b5382.jpg",
+   "tags": [
+    "haenyeo"
+   ],
+   "alt_ko": "성산해녀의집 해녀 물질 공연 — 성산일출봉 아래",
+   "alt_en": "Haenyeo diving performance below Seongsan Ilchulbong",
+   "width": 741,
+   "height": 468,
+   "orientation": "landscape",
+   "source": "10_주변환경/해녀물질공연 (3).jpg"
+  },
+  {
+   "file": "surroundings-4-db6dc351.jpg",
+   "tags": [
+    "haenyeo"
+   ],
+   "alt_ko": "성산해녀의집 해녀 물질 공연 — 성산일출봉 아래",
+   "alt_en": "Haenyeo diving performance below Seongsan Ilchulbong",
+   "width": 386,
+   "height": 285,
+   "orientation": "landscape",
+   "source": "10_주변환경/해녀물질공연 (4).jpg",
+   "exclude": true,
+   "exclude_reason": "해상도가 너무 낮음 (386px)"
+  },
+  {
+   "file": "surroundings-5-3ca642a6.jpg",
+   "tags": [
+    "haenyeo"
+   ],
+   "alt_ko": "성산해녀의집 해녀 물질 공연 — 성산일출봉 아래",
+   "alt_en": "Haenyeo diving performance below Seongsan Ilchulbong",
+   "width": 386,
+   "height": 293,
+   "orientation": "landscape",
+   "source": "10_주변환경/해녀물질공연 (5).jpg",
+   "exclude": true,
+   "exclude_reason": "해상도가 너무 낮음 (386px)"
+  },
+  {
+   "file": "surroundings-6-935655af.jpg",
+   "tags": [
+    "haenyeo"
+   ],
+   "alt_ko": "성산해녀의집 해녀 물질 공연 — 성산일출봉 아래",
+   "alt_en": "Haenyeo diving performance below Seongsan Ilchulbong",
+   "width": 773,
+   "height": 1031,
+   "orientation": "portrait",
+   "source": "10_주변환경/해녀물질공연 (6).jpg"
   }
  ]
 }
