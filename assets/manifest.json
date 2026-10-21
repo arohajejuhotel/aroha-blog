@@ -255,7 +255,9 @@
    "width": 1400,
    "height": 1050,
    "orientation": "landscape",
-   "source": "01_외관/외관_GS25_정면.jpg"
+   "source": "01_외관/외관_GS25_정면.jpg",
+   "exclude": true,
+   "exclude_reason": "외관 05/06 과 같은 사진 (중복) — 릴스 작업용 사본"
   },
   {
    "file": "exterior-gs25-a0a6ddfe.jpg",
@@ -269,7 +271,9 @@
    "width": 1400,
    "height": 1049,
    "orientation": "landscape",
-   "source": "01_외관/외관_GS25_측면.jpg"
+   "source": "01_외관/외관_GS25_측면.jpg",
+   "exclude": true,
+   "exclude_reason": "외관 05/06 과 같은 사진 (중복) — 릴스 작업용 사본"
   },
   {
    "file": "room-se-31d7ce7d-a2ce-40e1-b1c2-5-e862e66a.jpg",
