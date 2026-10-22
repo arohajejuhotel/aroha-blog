@@ -1013,6 +1013,66 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-22",
+   "ko_topic": "d261022",
+   "ko_images": [
+    "surroundings-a3badf5d.jpg",
+    "room-stanocean-02-5f3a4198.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/99/3011799_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/40/4094040_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/41/4094041_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "library",
+    "economy",
+    "parking"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@cab192139de9981424c7768b9cb14f6e1d8d691c/assets/thumbs/2026-10-22-d261022-ko.jpg",
+   "ko": {
+    "title": "서귀포 가볼만한곳, 가을 끝자락 테마별 코스 총정리",
+    "url": "https://arohajeju.blogspot.com/2026/10/seogwipo-must-visit-spots-d261022.html",
+    "id": "7517228042582643619",
+    "labels": [
+     "제주전역여행",
+     "서귀포가볼만한곳",
+     "제주가을여행",
+     "제주당일치기코스"
+    ]
+   },
+   "en_topic": "x17",
+   "en_images": [
+    "surroundings-img-6086-40d5cf04.jpg",
+    "surroundings-2ea8db05.jpg",
+    "surroundings-23-55725333.jpg",
+    "surroundings-img-6144-7362eff9.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/61/1011861.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "ratings",
+    "direct",
+    "brand"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@b52b6c96f98ba3438d9c89d41ecbc51e7535abd1/assets/thumbs/2026-10-22-x17-en.jpg",
+   "en": {
+    "title": "Manjanggul Lava Tube: What's Open, How Cold, What to Wear",
+    "url": "https://arohajeju.blogspot.com/2026/10/manjanggul-lava-tube-guide.html",
+    "id": "5625337729533015882",
+    "labels": [
+     "East Jeju Guide",
+     "Manjanggul Lava Tube",
+     "East Jeju Nature",
+     "Jeju Itinerary",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
@@ -1023,6 +1083,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5878-f7292b4f.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-01-2d8ba3cc.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-01-2d8ba3cc.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-deluxedouble-1-c17e8a72.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/99/3011799_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-a3badf5d.jpg",
+  "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg"
  ]
 }
