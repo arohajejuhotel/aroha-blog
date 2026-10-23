@@ -10,7 +10,7 @@
 장면 길이는 자막 길이로 정한다 (읽을 시간).
 끝: 호텔 영상 → 예약 안내 화면. 인스타용(전화·홈페이지)과 네이버 클립용(네이버 검색창) 두 가지.
 
-원본 스크립트: 08.AROHA/릴스참고/샘플/스크립트/reel_hook.py, sample_reel_v4.py, style_aroha.py
+원본 스크립트: 08.AROHA/인스타그램/릴스/수동제작/reel_hook.py, sample_reel_v4.py, style_aroha.py
 """
 import re
 import subprocess
