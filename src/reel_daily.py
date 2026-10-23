@@ -5,7 +5,7 @@
    네이버 월간 검색량으로 정렬한다.
 2) Claude 가 검색량·시기·호텔 거리를 보고 오늘 다룰 장소 후보를 고른다.
 3) 후보마다 관광공사 사진(공공누리 1유형만, 글자를 얹으므로)이 5장 이상이고
-   소개문이 키워드를 뒷받침하면, Claude 가 사진을 보고 장면별 자막·내레이션을 쓴다.
+   소개문이 키워드를 뒷받침하면, Claude 가 사진을 보고 장면별 자막을 쓴다 (내레이션 없음, 음원은 앱에서).
 4) src.reels 로 영상 두 편을 만들고 '인스타그램 게시물/아로하 릴스/날짜 [릴스] 제목' 에 저장.
 
 사용:
@@ -57,7 +57,7 @@ def km_from_hotel(lat: float, lng: float) -> float:
 
 
 def dist_phrase(km: float) -> str:
-    """자막·내레이션에 쓸 거리 문구. 직선거리라 가까운 곳만 숫자로 말한다."""
+    """자막에 쓸 거리 문구. 직선거리라 가까운 곳만 숫자로 말한다."""
     if km <= 2:
         return f"호텔아로하에서 {max(1, round(km))}km 남짓"
     if km <= 10:
@@ -116,7 +116,7 @@ JSON 하나만 출력한다:
 
 
 SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오늘은 {today}이다.
-위 사진 {n}장(0번부터)은 '{place}'의 한국관광공사 사진이다.
+위 사진 {n}장(번호 0 ~ {last})은 '{place}'의 한국관광공사 사진이다.
 
 이번 릴스: 키워드 '{keyword}' (네이버 월 {volume}회), 끌림 방식 '{hook}'
 장소 소개문 (한국관광공사, 이 내용 안에서만 사실을 쓴다):
@@ -129,21 +129,23 @@ SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오
 대본을 쓰지 말고 {{"skip": "이유"}} 만 출력한다. 없는 것을 있다고 하지 않는다.
 
 대본 규칙:
-- 말투는 친근한 존댓말 ("~예요", "~해요"). 내레이션은 한 장면에 한두 문장, 짧게.
+- 내레이션은 없다. 음악 위에 자막만으로 이야기가 이어져야 한다.
+- 말투는 친구에게 알려 주듯 말하는 존댓말 ("~예요", "~해요"). 글처럼 꾸민 문장은 쓰지 않는다.
+  나쁜 예: "능선 따라 걷는 길, 그림처럼 펼쳐져요" / 좋은 예: "입구부터 벌써\\n억새가 하얗게 깔려 있어요"
 - 첫 장면은 훅이다. 끌림 방식에 맞춰 시작한다. 예:
   숨은명소 "성산에 숨은 산책길, 하나 알려드릴게요" / 현지인추천 "성산 현지 호텔이 추천하는 가을 오름" /
   요즘핫플 "요즘 제주에서 제일 많이 찾는 곳, 어딘지 아세요?" / 계절한정 "이 풍경, 딱 지금만 볼 수 있어요" /
   저장각 "제주 가기 전에 이건 저장해 두세요"
 - 둘째 장면에서 장소 이름을 밝힌다.
-- 전체 길이 30초 안팎: 장소 장면 5~7개, 내레이션은 장면마다 25자 안팎.
+- 전체 길이 25~30초: 장소 장면 6~8개.
 - 사진 번호(photo)를 장면마다 고른다. 같은 사진은 두 번까지만. 첫 장면 사진은 가장 눈길을 끄는 것.
   자막이 사진 내용과 맞아야 한다 (다리 사진에 다리 이야기).
 - 소개문에 없는 시간·요금·숫자·전설·풍경(예: 소개문에 없는 '바다가 보여요')은 쓰지 않는다.
   사진 설명은 사진에 확실히 보이는 것만. 날씨·시기 표현은 '가을이면'처럼 소개문 수준으로.
-- 그다음 호텔 장면 1개(외관 사진). 거리는 이 문구를 그대로 쓴다 (자막·내레이션 같게): {dist}
+- 그다음 호텔 장면 1개(외관 사진). 거리는 이 문구를 그대로 쓴다 {dist}
   자막 예: "호텔아로하에서\\n1km 남짓" / "성산 호텔아로하에서\\n출발하는 동쪽 여행". 호텔의 단점·한계는 절대 말하지 않는다.
 - 마지막 장면 1개(객실 영상): "저장해 두고 … 꼭 가 보세요" 같은 마무리.
-- 자막(sub): 최대 2줄, 줄바꿈은 \\n, 한 줄 14자 이내. 내레이션을 줄인 말. 한자·이모지 금지.
+- 자막(sub): 최대 2줄, 줄바꿈은 \\n, 한 줄 15자 이내, 의미 단위로 끊는다. 한자·이모지 금지.
 - em: 자막 안에서 노랗게 강조할 낱말 (자막에 그대로 들어 있는 글자, 없으면 "").
 - kicker: 장소를 꾸미는 머리말 (12자 이내, 예: "성산 숨은 산책길", "가을 억새 명소"). 훅 문장을 넣지 않는다. name: 장소 이름 (9자 이내).
 - sub_line: 예약 안내 화면 한 줄 (예: "오조포구 1km 남짓 · 성산일출봉 걸어서 5분", 30자 이내).
@@ -155,9 +157,9 @@ SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오
 
 JSON 하나만 출력한다:
 {{"title": "…", "kicker": "…", "name": "…", "sub_line": "…",
-  "scenes": [{{"photo": 0, "sub": "…", "say": "…", "em": "…"}}],
-  "hotel": {{"sub": "…", "say": "…", "em": "…"}},
-  "cta": {{"sub": "…", "say": "…", "em": "…"}},
+  "scenes": [{{"photo": 0, "sub": "…", "em": "…"}}],
+  "hotel": {{"sub": "…", "em": "…"}},
+  "cta": {{"sub": "…", "em": "…"}},
   "caption_insta": "…", "caption_naver": "…"}}"""
 
 
@@ -202,8 +204,8 @@ def _check(s: dict, n: int) -> str:
     if not 5 <= len(scenes) <= 9:
         return f"장소 장면 수 {len(scenes)}"
     for sc in scenes + [s.get("hotel") or {}, s.get("cta") or {}]:
-        if not sc.get("sub") or not sc.get("say"):
-            return "자막/내레이션 빈 장면"
+        if not sc.get("sub"):
+            return "자막 빈 장면"
         if re.search(r"[一-鿿]", sc["sub"]):
             return "자막에 한자"  # Pretendard 에 한자가 없어 네모로 깨진다
         if sc["sub"].count("\n") > 1:
@@ -211,13 +213,14 @@ def _check(s: dict, n: int) -> str:
         if sc.get("em") and sc["em"] not in sc["sub"]:
             sc["em"] = ""
     for sc in scenes:
-        if not isinstance(sc.get("photo"), int) or not 0 <= sc["photo"] < n:
+        if not isinstance(sc.get("photo"), int):
             return f"사진 번호 {sc.get('photo')}"
+        sc["photo"] %= n  # 범위를 넘으면 앞 사진으로 돌린다
     return ""
 
 
 def write_script(client, model, cand: dict, info: dict, images: list, volume: int) -> dict:
-    prompt = SCRIPT.format(today=now().strftime("%Y-%m-%d"), n=len(images), place=info["title"],
+    prompt = SCRIPT.format(today=now().strftime("%Y-%m-%d"), n=len(images), last=len(images) - 1, place=info["title"],
                            keyword=cand["keyword"], volume=f"{volume:,}", hook=cand.get("hook", ""),
                            overview=info["overview"][:1500] or "(소개문 없음)", addr=info["addr"],
                            km=f"{info['km']:.1f}", dist=dist_phrase(info["km"]), cliche=cliche.RULE)
@@ -225,8 +228,8 @@ def write_script(client, model, cand: dict, info: dict, images: list, volume: in
         s = _ask(client, model, [*map(_b64, images), {"type": "text", "text": prompt}], 8000)
         if s.get("skip"):
             return s
-        texts = " ".join(x["say"] + " " + x["sub"] for x in s.get("scenes", []) + [s.get("hotel", {}), s.get("cta", {})]
-                         if isinstance(x, dict) and "say" in x)
+        texts = " ".join(x["sub"] for x in s.get("scenes", []) + [s.get("hotel", {}), s.get("cta", {})]
+                         if isinstance(x, dict) and "sub" in x)
         problem = _check(s, len(images)) or ("상투 표현: " + "; ".join(cliche.find(texts)) if cliche.find(texts) else "")
         if not problem:
             return s
@@ -235,7 +238,7 @@ def write_script(client, model, cand: dict, info: dict, images: list, volume: in
 
 
 def make_job(script: dict, images: list) -> dict:
-    scenes = [{"src": images[sc["photo"]], "sub": sc["sub"], "say": sc["say"], "em": sc.get("em", "")}
+    scenes = [{"src": images[sc["photo"]], "sub": sc["sub"], "em": sc.get("em", "")}
               for sc in script["scenes"]]
     scenes.append({"src": Image.open(reels.EXTERIOR), **script["hotel"]})
     scenes.append({"src": (reels.ROOM_A, 0.4), **script["cta"]})
@@ -301,7 +304,7 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     files = {"insta": out_dir / "reel_instagram.mp4", "naver": out_dir / "clip_naver.mp4",
              "cover": out_dir / "cover.jpg"}
-    secs = reels.build(make_job(script, images), tmp, files["insta"], files["naver"], files["cover"])
+    secs = reels.build(make_job(script, images), tmp, files["insta"], files["naver"], files["cover"], seed=day)
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},

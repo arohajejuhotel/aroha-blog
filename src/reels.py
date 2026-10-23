@@ -2,13 +2,16 @@
 """훅 릴스 영상 만들기 (2026-10-23, 오조포구·해녀공연 훅 릴스를 자동화로 옮김).
 
 화면: 사진 전체 화면 + 장면마다 다른 카메라 움직임 + 0.6초 페이드 (v4, 2026-10-19 승인)
-글자: '세련형' Pretendard — 첫 장면 큰 장소명, 나머지는 왼쪽 위 작은 라벨, 하단 자막 강조어만 노랑 (2026-10-21 승인)
-소리: edge-tts 무료 한국어 여성 음성(존댓말). 장면 길이는 내레이션 길이에 맞춘다 (최소 2.2초).
+글자: 첫 장면 큰 장소명, 나머지는 왼쪽 위 작은 라벨 (Pretendard).
+      하단 자막은 고운바탕 명조 62pt, 강조어만 크림색 (2026-10-23 사용자 선택: "B인데 조금만 작게").
+소리: 내레이션 없음 (2026-10-23 사용자: "나래이션 없이 음원으로"). 음악은 인스타·네이버 앱에서 고르는 게
+      기본이다 (앱 음원이라야 저작권 걱정이 없고 노출에도 유리). assets/reels/music/ 에 무료 음원(mp3)을
+      넣어 두면 날짜마다 돌려 가며 깐다. 비어 있으면 무음 트랙.
+장면 길이는 자막 길이로 정한다 (읽을 시간).
 끝: 호텔 영상 → 예약 안내 화면. 인스타용(전화·홈페이지)과 네이버 클립용(네이버 검색창) 두 가지.
 
 원본 스크립트: 08.AROHA/릴스참고/샘플/스크립트/reel_hook.py, sample_reel_v4.py, style_aroha.py
 """
-import asyncio
 import re
 import subprocess
 from pathlib import Path
@@ -19,13 +22,15 @@ ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets" / "reels"
 FONTS = ASSETS / "fonts"
 XB, SB, MD = (str(FONTS / f"Pretendard-{w}.otf") for w in ("ExtraBold", "SemiBold", "Medium"))
+SUB = str(FONTS / "GowunBatang-Bold.ttf")
+MUSIC = ASSETS / "music"
 EXTERIOR = ASSETS / "exterior.jpg"  # 1층 GS25 가 들어온 지금 외관 (예전 해담식당 간판 사진은 쓰지 않는다)
 ROOM_A, ROOM_B = ASSETS / "room_a.mp4", ASSETS / "room_b.mp4"  # 오션뷰 객실 영상 (세로로 잘라 둔 4초)
 
 W, H, FPS, FADE = 1080, 1920, 30, 0.6
-MIN_DUR, END_DUR = 2.2, 3.2
-VOICE, RATE = "ko-KR-SunHiNeural", "+8%"
+MIN_DUR, MAX_DUR, END_DUR = 2.4, 3.6, 3.2
 WHITE, SOFT, YELLOW, GOLD = (255, 255, 255), (238, 236, 230), (255, 214, 90), (203, 162, 88)
+CREAM = (246, 226, 180)
 NAVER_GREEN = (3, 199, 90)
 
 # 카메라 움직임: (시작 중심x, 중심y, 확대) → (끝)
@@ -59,10 +64,9 @@ def duration(path: Path) -> float:
     return int(h) * 3600 + int(m) * 60 + float(s)
 
 
-def tts(text: str, path: Path) -> float:
-    import edge_tts
-    asyncio.run(edge_tts.Communicate(text, VOICE, rate=RATE).save(str(path)))
-    return duration(path)
+def read_time(sub: str) -> float:
+    """자막을 편하게 읽을 시간 (한 글자 약 0.11초 + 여유)."""
+    return min(max(1.2 + len(sub.replace("\n", "")) * 0.11, MIN_DUR), MAX_DUR)
 
 
 # ---------- 글자 ----------
@@ -117,16 +121,16 @@ def subtitle(text: str, em: str = "") -> Image.Image:
     shade(img, 1040, 1520, 140, mid=True)
     d = ImageDraw.Draw(img)
     lines = text.split("\n")
-    size = 78
-    while max(d.textlength(x, font=F(SB, size)) for x in lines) > W - 140 and size > 54:
-        size -= 4
-    f, gap = F(SB, size), int(size * 1.38)
+    size = 62
+    while max(d.textlength(x, font=F(SUB, size)) for x in lines) > W - 160 and size > 48:
+        size -= 2
+    f, gap = F(SUB, size), int(size * 1.5)
     y0 = 1230 - (len(lines) - 1) * gap // 2
     for k, line in enumerate(lines):
         segs = [(line, WHITE)]
         if em and em in line:
             a, b = line.split(em, 1)
-            segs = [(a, WHITE), (em, YELLOW), (b, WHITE)]
+            segs = [(a, WHITE), (em, CREAM), (b, WHITE)]
         x = (W - sum(d.textlength(s, font=f) for s, _ in segs)) / 2
         for s, c in segs:
             shadow(img, (x, y0 + k * gap), s, f, c, blur=9, alpha=190)
@@ -251,8 +255,23 @@ def end_segment(card: Image.Image, out: Path):
     p.wait()
 
 
-def _compose(parts: list, durs: list, auds: list, tmp: Path, out: Path):
-    """장면 사이를 겹쳐 부드럽게 (xfade). 겹치는 만큼 음성도 앞으로 당긴다."""
+def _audio(total: float, tmp: Path, seed: str) -> Path:
+    """배경 음원 (music 폴더에서 날짜마다 돌려 가며, 끝 1.5초 페이드아웃). 없으면 무음."""
+    tracks = sorted(p for p in MUSIC.glob("*") if p.suffix.lower() in (".mp3", ".m4a", ".wav"))
+    out = tmp / f"a_{seed}.wav"
+    if tracks:
+        track = tracks[sum(map(ord, seed)) % len(tracks)]
+        run(["-i", str(track), "-t", f"{total:.3f}", "-af",
+             f"afade=t=in:d=0.5,afade=t=out:st={max(total - 1.5, 0):.3f}:d=1.5,volume=0.8",
+             "-ar", "44100", "-ac", "2", str(out)])
+        print(f"[info] 배경 음원: {track.name}")
+    else:
+        run(["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-t", f"{total:.3f}", str(out)])
+    return out
+
+
+def _compose(parts: list, durs: list, audio: Path, tmp: Path, out: Path):
+    """장면 사이를 겹쳐 부드럽게 (xfade)."""
     args = []
     for p in parts:
         args += ["-i", str(p)]
@@ -265,17 +284,16 @@ def _compose(parts: list, durs: list, auds: list, tmp: Path, out: Path):
     run([*args, "-filter_complex", ";".join(chain), "-map", prev, "-c:v", "libx264", "-preset", "medium",
          "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS), str(video)])
     out.parent.mkdir(parents=True, exist_ok=True)
-    run(["-i", str(video), "-i", str(tmp / "a.wav"), "-map", "0:v", "-map", "1:a", "-c:v", "copy",
-         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out)])
+    run(["-i", str(video), "-i", str(audio), "-map", "0:v", "-map", "1:a", "-c:v", "copy",
+         "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out)])
 
 
-def build(job: dict, tmp: Path, out_insta: Path, out_naver: Path, cover: Path) -> float:
-    """job = {kicker, name, sub_line, scenes: [{src, sub, say, em}]}.
+def build(job: dict, tmp: Path, out_insta: Path, out_naver: Path, cover: Path, seed: str = "") -> float:
+    """job = {kicker, name, sub_line, scenes: [{src, sub, em}]}.
     src 는 PIL 이미지(사진) 또는 (영상 경로, 시작초). 장면은 한 번만 그리고 끝 화면만 바꿔 두 편을 만든다."""
-    parts, durs, auds = [], [], []
+    parts, durs = [], []
     for i, sc in enumerate(job["scenes"]):
-        mp3 = tmp / f"say{i}.mp3"
-        dur = max(tts(sc["say"], mp3) + 0.5, MIN_DUR)
+        dur = read_time(sc["sub"])
         sub_img = subtitle(sc["sub"], sc.get("em", ""))
         title = intro_title(job["kicker"], job["name"]) if i == 0 else label(job["kicker"], job["name"])
         seg = tmp / f"p{i}.mp4"
@@ -288,19 +306,11 @@ def build(job: dict, tmp: Path, out_insta: Path, out_naver: Path, cover: Path) -
                       first_frame=cover if i == 0 else None)
         parts.append(seg)
         durs.append(dur)
-        auds.append((mp3, dur))
 
-    wavs = []
-    for k, (mp3, dur) in enumerate(auds):
-        w = tmp / f"a{k}.wav"
-        run(["-i", str(mp3), "-af", f"apad=whole_dur={dur - FADE:.3f}", "-t", f"{dur - FADE:.3f}",
-             "-ar", "44100", "-ac", "2", str(w)])
-        wavs.append(w)
-    (tmp / "a.txt").write_text("".join(f"file '{w.as_posix()}'\n" for w in wavs), encoding="utf-8")
-    run(["-f", "concat", "-safe", "0", "-i", str(tmp / "a.txt"), "-c:a", "pcm_s16le", str(tmp / "a.wav")])
-
+    total = sum(durs) + END_DUR - FADE * len(durs)
+    audio = _audio(total, tmp, seed or job["name"])
     for naver, out in ((False, out_insta), (True, out_naver)):
         end = tmp / f"end_{'naver' if naver else 'insta'}.mp4"
         end_segment(end_card(tmp, job["sub_line"], naver), end)
-        _compose(parts + [end], durs + [END_DUR], auds, tmp, out)
+        _compose(parts + [end], durs + [END_DUR], audio, tmp, out)
     return duration(out_insta)
