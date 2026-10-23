@@ -1,0 +1,74 @@
+name: Daily reel
+
+# 매일 훅 릴스 1편(인스타 릴스 + 네이버 클립)을 만들어 구글 드라이브
+# '인스타그램 게시물/아로하 릴스/날짜 [릴스] 제목' 에 저장한다. 올리는 건 사람이 한다.
+on:
+  schedule:
+    # 22:40 UTC = 07:40 KST (블로그 발행 07:00 다음)
+    - cron: "40 22 * * *"
+  workflow_dispatch:
+    inputs:
+      place:
+        description: "장소 강제 지정 (예: 따라비오름, 비우면 자동)"
+        type: string
+        default: ""
+      keyword:
+        description: "키워드 (장소를 지정할 때, 예: 제주 억새 명소)"
+        type: string
+        default: ""
+
+concurrency:
+  group: daily-reel
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  reel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Make reel
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5' }}
+          TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
+          NAVER_AD_CUSTOMER_ID: ${{ secrets.NAVER_AD_CUSTOMER_ID }}
+          NAVER_AD_API_KEY: ${{ secrets.NAVER_AD_API_KEY }}
+          NAVER_AD_SECRET: ${{ secrets.NAVER_AD_SECRET }}
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+          PLACE: ${{ inputs.place }}
+          KEYWORD: ${{ inputs.keyword }}
+        run: |
+          if [ -n "$PLACE" ]; then
+            python -m src.reel_daily --place "$PLACE" --keyword "${KEYWORD:-$PLACE}"
+          else
+            python -m src.reel_daily
+          fi
+
+      - name: Commit state
+        if: success()
+        run: |
+          git config user.name "aroha-bot"
+          git config user.email "actions@github.com"
+          git add state/reels.json
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: reel log $(date -u +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase origin main || exit 1
+          done
+          exit 1
