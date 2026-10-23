@@ -1104,14 +1104,69 @@
     ]
    },
    "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@c73080c6205dd4544440767b69625ec83fab40d9/assets/thumbs/2026-10-23-h01-ko.jpg"
+  },
+  {
+   "date": "2026-10-23",
+   "ko_topic": "d261023",
+   "ko_images": [
+    "surroundings-img-6063-cb50d320.jpg",
+    "exterior-04-af53fd06.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/11/3056611_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/03/3056603_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/98/3056598_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "library",
+    "all_trips",
+    "basecamp"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@591424e8ebc297ed7365dac2c36e1b24a68ac994/assets/thumbs/2026-10-23-d261023-ko.jpg",
+   "ko": {
+    "title": "애월 맛집, 가을 해안 드라이브로 완성하는 하루",
+    "url": "https://arohajeju.blogspot.com/2026/10/aewol-restaurant-guide-jeju-d261023.html",
+    "id": "7007976924292169763",
+    "labels": [
+     "제주전역여행",
+     "애월맛집",
+     "제주가을여행",
+     "애월카페"
+    ]
+   },
+   "en_topic": "xj04",
+   "en_images": [
+    "room-deluxe-05-519c240e.jpg",
+    "room-deluxedouble-4-631727fa.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/66/3096066_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/64/4107964_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource_photo/12/3515412_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "gs25_breakfast",
+    "library",
+    "luggage"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@cff85bafd91305d98c28c514a2de2fb73c939ef3/assets/thumbs/2026-10-23-xj04-en.jpg",
+   "en": {
+    "title": "Hyeopjae Beach and West Jeju: How It Compares with the East Coast",
+    "url": "https://arohajeju.blogspot.com/2026/10/hyeopjae-beach-guide.html",
+    "id": "81227166942949251",
+    "labels": [
+     "Jeju Island Guide",
+     "West Jeju",
+     "Beaches",
+     "Jeju Itinerary",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5878-f7292b4f.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-01-2d8ba3cc.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-deluxedouble-1-c17e8a72.jpg",
@@ -1121,6 +1176,11 @@
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/10/4073410_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/06/4073406_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5739-79b7a9b5.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-23-55725333.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg"
  ]
 }
