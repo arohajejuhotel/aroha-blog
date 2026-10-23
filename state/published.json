@@ -1073,10 +1073,40 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-23",
+   "ko_topic": "h01",
+   "ko_images": [
+    "surroundings-sunrise-5038cbe7.jpg",
+    "surroundings-img-5878-f7292b4f.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/56/1011856.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/09/4073409_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/06/4073406_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "luggage",
+    "ocean_view",
+    "gs25_breakfast"
+   ],
+   "ko": {
+    "title": "성산일출봉 해녀공연, 매일 오후 2시 보는 법",
+    "url": "https://arohajeju.blogspot.com/2026/10/seongsan-haenyeo-diving-show-h01.html",
+    "id": "6014468703366931911",
+    "labels": [
+     "성산여행정보",
+     "성산일출봉",
+     "해녀공연",
+     "제주동부여행"
+    ]
+   },
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@c73080c6205dd4544440767b69625ec83fab40d9/assets/thumbs/2026-10-23-h01-ko.jpg"
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
@@ -1087,6 +1117,10 @@
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-deluxedouble-1-c17e8a72.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/99/3011799_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-a3badf5d.jpg",
-  "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg"
+  "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/10/4073410_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/06/4073406_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg"
  ]
 }
