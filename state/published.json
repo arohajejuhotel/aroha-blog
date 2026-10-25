@@ -1280,13 +1280,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-26",
+   "ko_topic": "d261026",
+   "ko_images": [
+    "room-deluxedouble-1-c17e8a72.jpg",
+    "surroundings-img-6144-7362eff9.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/69/4107969_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/68/4107968_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/67/4107967_image2_1.JPG"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "multilingual",
+    "sunrise",
+    "gs25_breakfast"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@90b5870e736fe689a60257e3639ed9156320be3f/assets/thumbs/2026-10-26-d261026-ko.jpg",
+   "ko": {
+    "title": "협재 해수욕장 물빛 좋은 시간과 한림 동선",
+    "url": "https://arohajeju.blogspot.com/2026/10/hyeopjae-beach-jeju-d261026.html",
+    "id": "8778309387796926884",
+    "labels": [
+     "제주전역여행",
+     "협재해수욕장",
+     "한림공원",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "x19",
+   "en_images": [
+    "surroundings-83a96d68.jpg",
+    "exterior-02-752c4658.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/43/1012943.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/08/1011808.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/15/1012315.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "ocean_view",
+    "gs25",
+    "olle"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@eb41a8e4361b4d5cea3802531d5248c4c6aa51ed/assets/thumbs/2026-10-26-x19-en.jpg",
+   "en": {
+    "title": "Jeju Sunset Spots in Seongsan: Where to Go When You Missed the Sunrise",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-sunset-spots-seongsan-guide.html",
+    "id": "2375783695156428036",
+    "labels": [
+     "Seongsan Travel",
+     "Jeju Sunset",
+     "Seongsan Ilchulbong",
+     "Travel Tips",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/06/4073406_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5739-79b7a9b5.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-23-55725333.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
@@ -1297,6 +1353,10 @@
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/70/3554770_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/74/3554774_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG"
+  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/69/4107969_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/68/4107968_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/65/4107965_image2_1.JPG",
+  "http://tong.visitkorea.or.kr/cms/resource/82/3553982_image2_1.jpg"
  ]
 }
