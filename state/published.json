@@ -1220,13 +1220,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-25",
+   "ko_topic": "d261025",
+   "ko_images": [
+    "surroundings-2ea8db05.jpg",
+    "surroundings-img-6086-40d5cf04.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/71/3554771_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/74/3554774_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/72/3554772_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "direct",
+    "family",
+    "olle"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@697fad28357c4b8a6e1d619ba4601419c0ebfd1f/assets/thumbs/2026-10-25-d261025-ko.jpg",
+   "ko": {
+    "title": "우도 전기차 어디서 빌릴까, 가격과 렌트 예약까지 가을 당일치기 가이드",
+    "url": "https://arohajeju.blogspot.com/2026/10/udo-electric-car-rental-d261025.html",
+    "id": "3553336600924323470",
+    "labels": [
+     "제주동부여행",
+     "우도",
+     "우도전기차",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "xj05",
+   "en_images": [
+    "room-3-457eb479.jpg",
+    "surroundings-img-5739-79b7a9b5.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/32/3411132_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/47/4113347_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/48/4113348_image2_1.JPG"
+   ],
+   "en_points": [
+    "walk_peak",
+    "multilingual",
+    "family",
+    "sunrise"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@143c768c8fe273a39d91dcd005b873d58b643b1f/assets/thumbs/2026-10-25-xj05-en.jpg",
+   "en": {
+    "title": "Jeju Tangerine Picking: When to Go, What It Costs, and How to Book",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-tangerine-picking-guide.html",
+    "id": "6399487584960978733",
+    "labels": [
+     "Jeju Island Guide",
+     "Tangerine Picking",
+     "Jeju Food Experience",
+     "Seongsan",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-a3badf5d.jpg",
-  "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/10/4073410_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/06/4073406_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5739-79b7a9b5.jpg",
@@ -1237,6 +1293,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-83a96d68.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/70/3554770_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/74/3554774_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG"
  ]
 }
