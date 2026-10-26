@@ -46,8 +46,45 @@ SEEDS = [
 ]
 
 
+# 계절 소재와 제주에서 볼 수 있는 달 (2026-10-26: 10월에 동백 릴스가 '이번 가을 꼭' 으로 나가서 추가)
+SEASONS = {
+    "억새": (9, 10, 11), "핑크뮬리": (9, 10, 11), "단풍": (10, 11), "감귤": (10, 11, 12, 1),
+    "동백": (11, 12, 1, 2, 3), "수선화": (12, 1, 2), "매화": (1, 2, 3), "유채": (2, 3, 4),
+    "벚꽃": (3, 4), "청보리": (4, 5), "메밀": (5, 6, 9, 10), "수국": (6, 7), "해바라기": (7, 8),
+}
+
+# 호텔 소개에 붙는 '성산' 은 장소가 멀어도 쓸 수 있다
+HOTEL_SEONGSAN = ("성산 호텔아로하", "성산 현지 호텔", "성산일출봉", "성산숙소")
+
+
 def now() -> datetime:
     return datetime.now(KST)
+
+
+def area_of(addr: str) -> str:
+    """주소에서 자막에 쓸 동네 이름. '서귀포시 남원읍 …' → '남원', 읍면이 없으면 시 이름."""
+    m = re.search(r"(\S+?)[읍면]\s", addr + " ")
+    if m:
+        return m.group(1)
+    m = re.search(r"(제주|서귀포)시", addr)
+    return m.group(1) if m else "제주"
+
+
+def season_of(text: str) -> list:
+    """글자에 든 계절 소재와 제철 달 [(소재, 달들)]."""
+    return [(k, months) for k, months in SEASONS.items() if k in text]
+
+
+def season_note(keyword: str, month: int) -> str:
+    notes = []
+    for k, months in season_of(keyword):
+        span = f"{months[0]}~{months[-1]}월"
+        if month in months:
+            notes.append(f"'{k}' 제철: {span}. 오늘({month}월)은 제철이다.")
+        else:
+            notes.append(f"'{k}' 제철: {span}. 오늘({month}월)은 제철이 아니다. 지금 볼 수 있다고 하지 말고, "
+                         f"언제 볼 수 있는지 알려 주며 '그때 가려고 저장' 하게 만든다.")
+    return "\n".join(notes) or "계절 소재 없음. 계절 표현은 오늘 날짜에 맞게만 쓴다."
 
 
 def km_from_hotel(lat: float, lng: float) -> float:
@@ -62,7 +99,7 @@ def dist_phrase(km: float) -> str:
         return f"호텔아로하에서 {max(1, round(km))}km 남짓"
     if km <= 10:
         return f"호텔아로하에서 약 {round(km)}km"
-    return "성산 호텔아로하에서 출발하는 제주 동쪽 여행 (km 숫자는 쓰지 않는다)"
+    return "성산 호텔아로하에서 출발하는 제주 여행 (km 숫자와 방향은 쓰지 않는다)"
 
 
 def load_state() -> dict:
@@ -106,6 +143,7 @@ PICK = """너는 제주 성산 호텔아로하의 인스타 릴스·네이버 �
 
 장소 후보 8개를 고른다.
 - 검색량이 많고 지금 시기(계절·꽃·축제)에 맞는 키워드를 우선한다.
+  꽃·억새 같은 계절 소재는 이번 달에 실제로 볼 수 있는 것만 고른다. 제주 제철: {seasons}
 - 제주 동쪽(성산·구좌·표선·우도·남원)에 있으면 더 좋다. 호텔은 성산일출봉 앞이다.
 - 장소는 한국관광공사 관광정보에 등록된 관광지 이름으로 쓴다 (예: 따라비오름, 비자림, 휴애리자연생활공원, 혼인지).
   가게·식당·카페·숙소는 고르지 않는다.
@@ -122,18 +160,24 @@ SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오
 장소 소개문 (한국관광공사, 이 내용 안에서만 사실을 쓴다):
 {overview}
 장소 주소: {addr}
+장소 동네: {area} ({area_rule})
 호텔아로하에서 직선거리: 약 {km}km
 호텔 사실: 성산일출봉 걸어서 5분, 광치기해변 걸어서 5분, 오션뷰 객실, 1층 GS25 편의점.
+제철: {season}
 
 먼저 판단한다: 키워드의 핵심(예: 억새, 돌고래, 핑크뮬리, 동백)이 소개문이나 사진에 없으면
 대본을 쓰지 말고 {{"skip": "이유"}} 만 출력한다. 없는 것을 있다고 하지 않는다.
 
 대본 규칙:
+- 장소를 꾸미는 동네 이름(제목·머리말·훅·캡션)은 '{area}' 로 쓴다. 장소가 성산읍이 아니면
+  '성산에 숨은', '성산 근처' 처럼 장소에 성산을 붙이지 않는다. 성산은 호텔을 말할 때만 쓴다.
+- 계절 표현('이번 가을', '지금', '요즘')은 위 제철과 오늘 날짜에 맞아야 한다.
+  제철이 아니면 피는 시기를 알려 주고 그때 가 보라고 마무리한다 (예: "11월부터 붉게 피어요").
 - 내레이션은 없다. 음악 위에 자막만으로 이야기가 이어져야 한다.
 - 말투는 친구에게 알려 주듯 말하는 존댓말 ("~예요", "~해요"). 글처럼 꾸민 문장은 쓰지 않는다.
   나쁜 예: "능선 따라 걷는 길, 그림처럼 펼쳐져요" / 좋은 예: "입구부터 벌써\\n억새가 하얗게 깔려 있어요"
 - 첫 장면은 훅이다. 끌림 방식에 맞춰 시작한다. 예:
-  숨은명소 "성산에 숨은 산책길, 하나 알려드릴게요" / 현지인추천 "성산 현지 호텔이 추천하는 가을 오름" /
+  숨은명소 "{area}에 숨은 산책길, 하나 알려드릴게요" / 현지인추천 "성산 현지 호텔이 추천하는 {area} 오름" /
   요즘핫플 "요즘 제주에서 제일 많이 찾는 곳, 어딘지 아세요?" / 계절한정 "이 풍경, 딱 지금만 볼 수 있어요" /
   저장각 "제주 가기 전에 이건 저장해 두세요"
 - 둘째 장면에서 장소 이름을 밝힌다.
@@ -147,12 +191,12 @@ SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오
 - 마지막 장면 1개(객실 영상): "저장해 두고 … 꼭 가 보세요" 같은 마무리.
 - 자막(sub): 최대 2줄, 줄바꿈은 \\n, 한 줄 15자 이내, 의미 단위로 끊는다. 한자·이모지 금지.
 - em: 자막 안에서 노랗게 강조할 낱말 (자막에 그대로 들어 있는 글자, 없으면 "").
-- kicker: 장소를 꾸미는 머리말 (12자 이내, 예: "성산 숨은 산책길", "가을 억새 명소"). 훅 문장을 넣지 않는다. name: 장소 이름 (9자 이내).
+- kicker: 장소를 꾸미는 머리말 (12자 이내, 예: "{area} 숨은 산책길", "가을 억새 명소"). 훅 문장을 넣지 않는다. name: 장소 이름 (9자 이내).
 - sub_line: 예약 안내 화면 한 줄 (예: "오조포구 1km 남짓 · 성산일출봉 걸어서 5분", 30자 이내).
 - caption_insta: 인스타 캡션. 3~5줄 + 빈 줄 + 해시태그 10개 안팎(#호텔아로하 #성산숙소 포함).
 - caption_naver: 네이버 클립 설명. 2~4줄 + 해시태그 5~7개.
   두 캡션 모두 끝 줄에 "사진: 한국관광공사 (공공누리 제1유형)".
-- title: 드라이브 폴더용 짧은 제목 (예: "성산 숨은 산책길 오조포구").
+- title: 드라이브 폴더용 짧은 제목 (예: "{area} 숨은 산책길 {place}").
 {cliche}
 
 JSON 하나만 출력한다:
@@ -198,7 +242,7 @@ def _b64(im: Image.Image) -> dict:
                                         "data": base64.b64encode(buf.getvalue()).decode()}}
 
 
-def _check(s: dict, n: int) -> str:
+def _check(s: dict, n: int, area: str) -> str:
     """대본 형식 점검. 문제가 있으면 이유를 돌려준다."""
     scenes = s.get("scenes") or []
     if not 5 <= len(scenes) <= 9:
@@ -216,13 +260,24 @@ def _check(s: dict, n: int) -> str:
         if not isinstance(sc.get("photo"), int):
             return f"사진 번호 {sc.get('photo')}"
         sc["photo"] %= n  # 범위를 넘으면 앞 사진으로 돌린다
+    if area != "성산":
+        texts = [s.get("title", ""), s.get("kicker", ""), s.get("caption_insta", ""), s.get("caption_naver", ""),
+                 *(sc["sub"] for sc in scenes), (s.get("cta") or {}).get("sub", "")]
+        for t in texts:
+            for ok in HOTEL_SEONGSAN:
+                t = t.replace(ok, "")
+            if "성산" in t:
+                return f"{area} 장소에 '성산' 을 붙임"
     return ""
 
 
 def write_script(client, model, cand: dict, info: dict, images: list, volume: int) -> dict:
+    area = area_of(info["addr"])
+    area_rule = "호텔과 같은 성산읍" if area == "성산" else "성산읍이 아니다"
     prompt = SCRIPT.format(today=now().strftime("%Y-%m-%d"), n=len(images), last=len(images) - 1, place=info["title"],
                            keyword=cand["keyword"], volume=f"{volume:,}", hook=cand.get("hook", ""),
                            overview=info["overview"][:1500] or "(소개문 없음)", addr=info["addr"],
+                           area=area, area_rule=area_rule, season=season_note(cand["keyword"], now().month),
                            km=f"{info['km']:.1f}", dist=dist_phrase(info["km"]), cliche=cliche.RULE)
     for attempt in range(2):
         s = _ask(client, model, [*map(_b64, images), {"type": "text", "text": prompt}], 8000)
@@ -230,11 +285,17 @@ def write_script(client, model, cand: dict, info: dict, images: list, volume: in
             return s
         texts = " ".join(x["sub"] for x in s.get("scenes", []) + [s.get("hotel", {}), s.get("cta", {})]
                          if isinstance(x, dict) and "sub" in x)
-        problem = _check(s, len(images)) or ("상투 표현: " + "; ".join(cliche.find(texts)) if cliche.find(texts) else "")
+        problem = _check(s, len(images), area) or ("상투 표현: " + "; ".join(cliche.find(texts)) if cliche.find(texts) else "")
         if not problem:
             return s
         print(f"[warn] 대본 다시 씀 ({attempt + 1}/2): {problem}")
     return {"skip": f"대본 점검 실패: {problem}"}
+
+
+def fix_sub_line(script: dict, km: float) -> None:
+    """먼 장소를 예약 화면에 호텔 거리와 나란히 쓰면 일출봉 근처로 읽혀서 호텔 사실만 남긴다."""
+    if km > 10:
+        script["sub_line"] = "성산일출봉 걸어서 5분 · 광치기해변 걸어서 5분"
 
 
 def make_job(script: dict, images: list) -> dict:
@@ -271,9 +332,14 @@ def main() -> int:
     else:
         recent = [r["place"] for r in state["reels"][-40:]]
         listing = "\n".join(f"- {k['query']} (월 {k['volume']:,}회)" for k in kws[:90])
-        cands = _ask(client, model, PICK.format(today=day, keywords=listing,
+        seasons = ", ".join(f"{k} {m[0]}~{m[-1]}월" for k, m in SEASONS.items())
+        cands = _ask(client, model, PICK.format(today=day, keywords=listing, seasons=seasons,
                                                 used=", ".join(recent) or "(없음)"))["candidates"]
         cands = [c for c in cands if c.get("place") and c["place"] not in recent]
+        off = [c for c in cands if any(now().month not in m for _, m in season_of(c.get("keyword", "")))]
+        if off:
+            print(f"[skip] 제철 아님: {[c['place'] + '/' + c['keyword'] for c in off]}")
+        cands = [c for c in cands if c not in off]
     print(f"[info] 후보: {[c['place'] for c in cands]}")
 
     for cand in cands:
@@ -293,6 +359,7 @@ def main() -> int:
         if script.get("skip"):
             print(f"[skip] {info['title']}: {script['skip']}")
             continue
+        fix_sub_line(script, info["km"])
         print(f"[info] 오늘의 릴스: {script['title']} ({cand['keyword']}, {info['km']:.1f}km)")
         break
     else:
