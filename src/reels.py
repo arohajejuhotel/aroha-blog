@@ -9,6 +9,8 @@
       넣어 두면 날짜마다 돌려 가며 깐다. 비어 있으면 무음 트랙.
 장면 길이는 자막 길이로 정한다 (읽을 시간).
 끝: 호텔 영상 → 예약 안내 화면. 인스타용(전화·홈페이지)과 네이버 클립용(네이버 검색창) 두 가지.
+중국어(샤오홍슈, 2026-10-26): job["lang"]="zh" 면 Noto Sans/Serif SC 로 그리고, 끝 화면은 전화·링크 없이
+      携程 검색어「阿罗哈酒店 济州」만 (샤오홍슈는 연락처·링크를 외부 유도로 보고 노출을 줄인다).
 
 원본 스크립트: 08.AROHA/인스타그램/릴스/수동제작/reel_hook.py, sample_reel_v4.py, style_aroha.py
 """
@@ -23,6 +25,14 @@ ASSETS = ROOT / "assets" / "reels"
 FONTS = ASSETS / "fonts"
 XB, SB, MD = (str(FONTS / f"Pretendard-{w}.otf") for w in ("ExtraBold", "SemiBold", "Medium"))
 SUB = str(FONTS / "GowunBatang-Bold.ttf")
+# 언어별 글꼴 (제목 굵게, 라벨 중간, 라벨 본문, 자막 명조). Pretendard·고운바탕엔 한자가 없다.
+FONTSET = {
+    "ko": (XB, SB, MD, SUB),
+    "zh": (str(FONTS / "NotoSansSC-Bold.otf"), str(FONTS / "NotoSansSC-Bold.otf"),
+           str(FONTS / "NotoSansSC-Medium.otf"), str(FONTS / "NotoSerifSC-Bold.otf")),
+}
+ZH_SEARCH = "阿罗哈酒店 济州"  # Trip.com·携程에서 아로하(ID 3799607)가 1위로 나오는 검색어 (2026-10-26 확인)
+ZH_OTA_LINE = True  # 끝 화면에 '携程 · Trip.com 搜索即可预订' 줄 (샤오홍슈에서 노출이 줄면 False)
 MUSIC = ASSETS / "music"
 EXTERIOR = ASSETS / "exterior.jpg"  # 1층 GS25 가 들어온 지금 외관 (예전 해담식당 간판 사진은 쓰지 않는다)
 ROOM_A, ROOM_B = ASSETS / "room_a.mp4", ASSETS / "room_b.mp4"  # 오션뷰 객실 영상 (세로로 잘라 둔 4초)
@@ -32,6 +42,7 @@ MIN_DUR, MAX_DUR, END_DUR = 2.4, 3.6, 3.2
 WHITE, SOFT, YELLOW, GOLD = (255, 255, 255), (238, 236, 230), (255, 214, 90), (203, 162, 88)
 CREAM = (246, 226, 180)
 NAVER_GREEN = (3, 199, 90)
+XHS_RED = (255, 36, 66)
 
 # 카메라 움직임: (시작 중심x, 중심y, 확대) → (끝)
 MOVES = [
@@ -59,14 +70,16 @@ def run(args):
 
 
 def duration(path: Path) -> float:
-    out = subprocess.run([FF, "-hide_banner", "-i", str(path)], capture_output=True, text=True).stderr
+    out = subprocess.run([FF, "-hide_banner", "-i", str(path)], capture_output=True, text=True,
+                         encoding="utf-8", errors="replace").stderr  # 윈도우 한글 경로에서 cp949 로 읽다 깨진다
     h, m, s = re.search(r"Duration: (\d+):(\d+):([\d.]+)", out).groups()
     return int(h) * 3600 + int(m) * 60 + float(s)
 
 
-def read_time(sub: str) -> float:
-    """자막을 편하게 읽을 시간 (한 글자 약 0.11초 + 여유)."""
-    return min(max(1.2 + len(sub.replace("\n", "")) * 0.11, MIN_DUR), MAX_DUR)
+def read_time(sub: str, lang: str = "ko") -> float:
+    """자막을 편하게 읽을 시간 (한 글자 약 0.11초, 한자는 뜻이 많아 0.17초 + 여유)."""
+    per = 0.17 if lang == "zh" else 0.11
+    return min(max(1.2 + len(sub.replace("\n", "")) * per, MIN_DUR), MAX_DUR)
 
 
 # ---------- 글자 ----------
@@ -90,8 +103,9 @@ def shade(img, y0, y1, peak, mid=False):
         d.line([(0, y), (W, y)], fill=(0, 0, 0, int(a)))
 
 
-def intro_title(kicker: str, name: str) -> Image.Image:
+def intro_title(kicker: str, name: str, lang: str = "ko") -> Image.Image:
     """첫 장면 제목: 머리말(작게) + 장소명(아주 크게) + 노란 선."""
+    XB, _, MD, _ = FONTSET[lang]
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     shade(img, 0, 900, 150)
     shadow(img, (86, 250), kicker, F(MD, 46), SOFT, blur=8, alpha=160)
@@ -103,8 +117,9 @@ def intro_title(kicker: str, name: str) -> Image.Image:
     return img
 
 
-def label(kicker: str, name: str) -> Image.Image:
+def label(kicker: str, name: str, lang: str = "ko") -> Image.Image:
     """나머지 장면: 왼쪽 위 작은 한 줄 라벨."""
+    _, SB, MD, _ = FONTSET[lang]
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     shade(img, 0, 420, 120)
     d = ImageDraw.Draw(img)
@@ -116,7 +131,8 @@ def label(kicker: str, name: str) -> Image.Image:
     return img
 
 
-def subtitle(text: str, em: str = "") -> Image.Image:
+def subtitle(text: str, em: str = "", lang: str = "ko") -> Image.Image:
+    SUB = FONTSET[lang][3]
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     shade(img, 1040, 1520, 140, mid=True)
     d = ImageDraw.Draw(img)
@@ -193,13 +209,17 @@ def _center(d, y, text, font, fill):
     d.text(((W - d.textlength(text, font=font)) / 2, y), text, font=font, fill=fill)
 
 
-def end_card(tmp: Path, sub_line: str, naver: bool) -> Image.Image:
-    """예약 안내 화면: 객실 영상 마지막 장면을 흐리게 깔고 정보만 크게."""
+def end_card(tmp: Path, sub_line: str, variant: str) -> Image.Image:
+    """예약 안내 화면: 객실 영상 마지막 장면을 흐리게 깔고 정보만 크게.
+    variant: insta(전화·홈페이지) | naver(네이버 검색창) | xhs(携程 검색어, 연락처 없음)"""
     still = tmp / "room_last.png"
     if not still.exists():
         run(["-sseof", "-0.2", "-i", str(ROOM_A), "-frames:v", "1", str(still)])
     img = Image.open(still).convert("RGB").resize((W, H)).filter(ImageFilter.GaussianBlur(28))
     img = ImageEnhance.Brightness(img).enhance(0.42).convert("RGBA")
+    if variant == "xhs":
+        return _end_card_xhs(img, sub_line)
+    naver = variant == "naver"
     d = ImageDraw.Draw(img)
     y = 430
     _center(d, y, "예약 안내", F(XB, 46), GOLD)
@@ -239,6 +259,42 @@ def end_card(tmp: Path, sub_line: str, naver: bool) -> Image.Image:
     fb = F(XB, 40)
     _center(d, y + 26, "전화·홈페이지로 직접 예약하면", fb, WHITE)
     _center(d, y + 80, "얼리 체크인 12:00 · 레이트 체크아웃 13:00", fb, GOLD)
+    return img
+
+
+def _end_card_xhs(img: Image.Image, sub_line: str) -> Image.Image:
+    """샤오홍슈 끝 화면: 호텔 이름 + 携程 검색창 모양. 전화·링크·QR 은 넣지 않는다."""
+    XBz, _, MDz, _ = FONTSET["zh"]
+    d = ImageDraw.Draw(img)
+    y = 400
+    _center(d, y, "住在城山日出峰旁边", F(MDz, 46), GOLD)
+    y += 96
+    _center(d, y, "阿罗哈酒店", F(XBz, 112), WHITE)
+    y += 168
+    _center(d, y, "Hotel Aroha Jeju", F(MD, 46), SOFT)
+    y += 92
+    _center(d, y, sub_line, F(MDz, 40), (225, 225, 225))
+    y += 110
+    d.line([(W / 2 - 60, y), (W / 2 + 60, y)], fill=GOLD, width=4)
+    y += 70
+    fs = F(XBz, 54)
+    bx0, bx1 = 110, W - 110
+    d.rounded_rectangle((bx0, y, bx1, y + 124), radius=62, fill=WHITE, outline=XHS_RED, width=8)
+    d.text((bx0 + 60, y + 26), ZH_SEARCH, font=fs, fill=(30, 30, 30))
+    d.text((bx1 - 60 - d.textlength("搜索", font=fs), y + 26), "搜索", font=fs, fill=XHS_RED)
+    y += 170
+    if ZH_OTA_LINE:
+        _center(d, y, "携程 · Trip.com 搜索即可预订", F(XBz, 46), GOLD)
+        y += 110
+    box_w = 860
+    box = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(box).rounded_rectangle(((W - box_w) / 2, y, (W + box_w) / 2, y + 150), radius=24,
+                                          fill=(255, 255, 255, 34), outline=GOLD, width=3)
+    img.alpha_composite(box)
+    d = ImageDraw.Draw(img)
+    fb = F(XBz, 40)
+    _center(d, y + 24, "步行5分钟到城山日出峰 · 牛岛码头10分钟", fb, WHITE)
+    _center(d, y + 80, "前台可以用中文沟通", fb, GOLD)
     return img
 
 
@@ -288,14 +344,19 @@ def _compose(parts: list, durs: list, audio: Path, tmp: Path, out: Path):
          "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out)])
 
 
-def build(job: dict, tmp: Path, out_insta: Path, out_naver: Path, cover: Path, seed: str = "") -> float:
-    """job = {kicker, name, sub_line, scenes: [{src, sub, em}]}.
-    src 는 PIL 이미지(사진) 또는 (영상 경로, 시작초). 장면은 한 번만 그리고 끝 화면만 바꿔 두 편을 만든다."""
+def build(job: dict, tmp: Path, ends: dict, cover: Path, seed: str = "") -> float:
+    """job = {kicker, name, sub_line, scenes: [{src, sub, em}], lang(ko|zh)}.
+    src 는 PIL 이미지(사진) 또는 (영상 경로, 시작초). ends = {끝 화면 종류: 출력 경로}
+    (insta·naver·xhs). 장면은 한 번만 그리고 끝 화면만 바꿔 여러 편을 만든다."""
+    lang = job.get("lang", "ko")
+    tmp = tmp / lang  # 언어마다 장면 파일을 따로 둔다
+    tmp.mkdir(parents=True, exist_ok=True)
     parts, durs = [], []
     for i, sc in enumerate(job["scenes"]):
-        dur = read_time(sc["sub"])
-        sub_img = subtitle(sc["sub"], sc.get("em", ""))
-        title = intro_title(job["kicker"], job["name"]) if i == 0 else label(job["kicker"], job["name"])
+        dur = read_time(sc["sub"], lang)
+        sub_img = subtitle(sc["sub"], sc.get("em", ""), lang)
+        title = (intro_title(job["kicker"], job["name"], lang) if i == 0
+                 else label(job["kicker"], job["name"], lang))
         seg = tmp / f"p{i}.mp4"
         if isinstance(sc["src"], tuple):
             title.save(tmp / f"title{i}.png")
@@ -309,8 +370,8 @@ def build(job: dict, tmp: Path, out_insta: Path, out_naver: Path, cover: Path, s
 
     total = sum(durs) + END_DUR - FADE * len(durs)
     audio = _audio(total, tmp, seed or job["name"])
-    for naver, out in ((False, out_insta), (True, out_naver)):
-        end = tmp / f"end_{'naver' if naver else 'insta'}.mp4"
-        end_segment(end_card(tmp, job["sub_line"], naver), end)
+    for variant, out in ends.items():
+        end = tmp / f"end_{variant}.mp4"
+        end_segment(end_card(tmp, job["sub_line"], variant), end)
         _compose(parts + [end], durs + [END_DUR], audio, tmp, out)
-    return duration(out_insta)
+    return duration(next(iter(ends.values())))

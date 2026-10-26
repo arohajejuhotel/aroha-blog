@@ -207,6 +207,91 @@ JSON 하나만 출력한다:
   "caption_insta": "…", "caption_naver": "…"}}"""
 
 
+ZH_SCRIPT = """你是济州城山「阿罗哈酒店」(Hotel Aroha) 的小红书视频编辑。今天是 {today}。
+下面是同一条视频的韩语版脚本（已经审核过），场景顺序和照片都不变，请为小红书中国用户重新写一版简体中文。
+
+韩语版脚本:
+{script}
+
+景点介绍（韩国观光公社，事实只能来自这里或韩语脚本）:
+{overview}
+
+酒店事实: 步行5分钟到城山日出峰、步行5分钟到广峙其海边、步行10分钟到牛岛码头（城山港）、海景房、楼下GS25便利店、前台可以用中文沟通。
+
+规则:
+- 不是逐字翻译。像在小红书上给朋友推荐一样，用自然口语的简体中文重写每一句字幕。
+- 地名用中国游客常用的叫法（例: 우도→牛岛, 성산일출봉→城山日出峰, 광치기해변→广峙其海边, 섭지코지→涉地可支,
+  한라산→汉拉山, 오조포구→吾照浦口）。没有常用叫法就用音译汉字。
+- 韩语脚本和介绍里没有的时间、价格、数字、风景不能写。酒店的缺点、限制一句都不写。
+- 场景数量必须和韩语版一样: scenes {n} 个, 加 hotel 1 个, cta 1 个。
+- 字幕(sub): 最多2行, 换行用 \\n, 每行不超过13个字, 按意思断行。不能有韩文、表情符号、电话、网址。
+- em: 字幕里要高亮的词（必须原样出现在字幕里, 没有就 ""）。
+- kicker: 地名前面的小标题（10字以内）。name: 景点中文名（8字以内）。
+- sub_line: 结尾画面一行（例: "牛岛码头步行10分钟 · 城山日出峰步行5分钟", 24字以内）。
+  景点离酒店超过10公里时只写酒店事实。
+- xhs_title: 小红书标题, 20字以内, 地名关键词放前面, 可以有1个表情。
+- xhs_body: 小红书正文 5~9行, 口语, 可以用表情开头。倒数第二行写
+  "📍 住在城山日出峰旁边｜携程搜索「阿罗哈酒店 济州」", 最后一行写 "图片：韩国观光公社"。
+  不写电话、网址、二维码、微信、Naver、Instagram。
+- xhs_tags: 话题 8~10个（不带#）, 必须包含 济州岛、济州旅行、阿罗哈酒店。
+- 不用 "绝绝子"、"yyds"、"不得不说"、"总之"、"简直了" 这类套话和总结句。
+
+只输出一个 JSON:
+{{"kicker": "…", "name": "…", "sub_line": "…",
+  "scenes": [{{"sub": "…", "em": "…"}}],
+  "hotel": {{"sub": "…", "em": "…"}},
+  "cta": {{"sub": "…", "em": "…"}},
+  "xhs_title": "…", "xhs_body": "…", "xhs_tags": ["…"]}}"""
+
+ZH_BANNED = re.compile(r"[가-힣]|https?:|www\.|微信|二维码|QR|naver|instagram|\d{3}-\d{3,4}-\d{4}", re.I)
+
+
+def _check_zh(z: dict, n: int) -> str:
+    """중국어 대본 점검. 문제가 있으면 이유를 돌려준다."""
+    if len(z.get("scenes") or []) != n:
+        return f"장면 수 {len(z.get('scenes') or [])} (한국어 {n})"
+    for sc in z["scenes"] + [z.get("hotel") or {}, z.get("cta") or {}]:
+        sub = sc.get("sub", "")
+        if not re.search(r"[一-鿿]", sub):
+            return "중국어 없는 자막"
+        if ZH_BANNED.search(sub):
+            return f"금지 문자: {sub}"
+        lines = sub.split("\n")[:2]
+        if max(len(x) for x in lines) > 14:
+            return f"자막 줄이 김: {sub}"
+        sc["sub"] = "\n".join(lines)
+        if sc.get("em") and sc["em"] not in sc["sub"]:
+            sc["em"] = ""
+    if len(z.get("xhs_title", "")) > 20:
+        return "제목 20자 넘음"
+    if ZH_BANNED.search(z.get("xhs_body", "") + z.get("xhs_title", "")):
+        return "본문에 연락처·한글·링크"
+    return ""
+
+
+def write_zh(client, model, script: dict, info: dict) -> dict:
+    """샤오홍슈용 중국어 대본. 한국어 대본과 같은 장면·사진에 자막만 새로 쓴다."""
+    ko = {k: script[k] for k in ("kicker", "name", "sub_line", "scenes", "hotel", "cta")}
+    prompt = ZH_SCRIPT.format(today=now().strftime("%Y-%m-%d"), n=len(script["scenes"]),
+                              script=json.dumps(ko, ensure_ascii=False, indent=1),
+                              overview=info["overview"][:1500] or "(无)")
+    for attempt in range(2):
+        z = _ask(client, model, prompt, 4000)
+        problem = _check_zh(z, len(script["scenes"]))
+        if not problem:
+            return z
+        print(f"[warn] 중국어 대본 다시 씀 ({attempt + 1}/2): {problem}")
+    return {"skip": f"중국어 대본 점검 실패: {problem}"}
+
+
+def xhs_caption(z: dict) -> str:
+    tags = " ".join("#" + t.lstrip("#") for t in z.get("xhs_tags", []))
+    return (f"【标题】\n{z['xhs_title']}\n\n【正文】\n{z['xhs_body'].strip()}\n\n{tags}\n\n"
+            "────────\n올리는 법: 샤오홍슈 PC creator.xiaohongshu.com → 上传视频 → 영상 올리기 → "
+            "표지는 cover_xiaohongshu.jpg → 제목·본문·해시태그 붙여넣기 → 위치에 장소 이름 검색\n"
+            "음악은 앱에서 고르세요. 전화번호·링크는 넣지 마세요 (노출 제한).\n")
+
+
 def place_info(key: str, place: str):
     items = [i for i in tour_photos._call(key, "KorService2", "searchKeyword2", keyword=place,
                                           lDongRegnCd=tour_photos.JEJU_REGION, numOfRows=20)
@@ -298,12 +383,15 @@ def fix_sub_line(script: dict, km: float) -> None:
         script["sub_line"] = "성산일출봉 걸어서 5분 · 광치기해변 걸어서 5분"
 
 
-def make_job(script: dict, images: list) -> dict:
-    scenes = [{"src": images[sc["photo"]], "sub": sc["sub"], "em": sc.get("em", "")}
-              for sc in script["scenes"]]
-    scenes.append({"src": Image.open(reels.EXTERIOR), **script["hotel"]})
-    scenes.append({"src": (reels.ROOM_A, 0.4), **script["cta"]})
-    return {"kicker": script["kicker"], "name": script["name"], "sub_line": script["sub_line"], "scenes": scenes}
+def make_job(script: dict, images: list, zh: dict = None) -> dict:
+    """zh 를 주면 한국어 대본의 사진 순서에 중국어 자막을 얹는다."""
+    text = zh or script
+    scenes = [{"src": images[sc["photo"]], "sub": t["sub"], "em": t.get("em", "")}
+              for sc, t in zip(script["scenes"], text["scenes"])]
+    scenes.append({"src": Image.open(reels.EXTERIOR), **text["hotel"]})
+    scenes.append({"src": (reels.ROOM_A, 0.4), **text["cta"]})
+    return {"kicker": text["kicker"], "name": text["name"], "sub_line": text["sub_line"], "scenes": scenes,
+            "lang": "zh" if zh else "ko"}
 
 
 def main() -> int:
@@ -371,12 +459,27 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     files = {"insta": out_dir / "reel_instagram.mp4", "naver": out_dir / "clip_naver.mp4",
              "cover": out_dir / "cover.jpg"}
-    secs = reels.build(make_job(script, images), tmp, files["insta"], files["naver"], files["cover"], seed=day)
+    secs = reels.build(make_job(script, images), tmp, {"insta": files["insta"], "naver": files["naver"]},
+                       files["cover"], seed=day)
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},
                                                     ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"[ok] 영상 {secs:.1f}초")
+
+    # 샤오홍슈 중국어판: 실패해도 한국어판은 그대로 저장한다
+    try:
+        zh = write_zh(client, model, script, info)
+        if zh.get("skip"):
+            print(f"[warn] 샤오홍슈판 건너뜀: {zh['skip']}")
+        else:
+            zs = reels.build(make_job(script, images, zh), tmp, {"xhs": out_dir / "reel_xiaohongshu.mp4"},
+                             out_dir / "cover_xiaohongshu.jpg", seed=day)
+            (out_dir / "caption_xiaohongshu.txt").write_text(xhs_caption(zh), encoding="utf-8")
+            (out_dir / "script_zh.json").write_text(json.dumps(zh, ensure_ascii=False, indent=1), encoding="utf-8")
+            print(f"[ok] 샤오홍슈판 {zs:.1f}초: {zh['xhs_title']}")
+    except Exception as e:  # noqa: BLE001
+        print(f"::warning title=샤오홍슈판 실패::{e}")
 
     if args.out:
         print(f"[ok] 로컬 저장: {out_dir}")
