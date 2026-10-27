@@ -1340,13 +1340,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-27",
+   "ko_topic": "d261027",
+   "ko_images": [
+    "surroundings-2ea8db05.jpg",
+    "room-deluxedouble-3-eae23865.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/78/3554778_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/70/3554770_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/76/3554776_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "sunrise",
+    "all_trips",
+    "economy"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@628ecdc7f660cfdd7f4f7c34f8b72fa53c15711d/assets/thumbs/2026-10-27-d261027-ko.jpg",
+   "ko": {
+    "title": "우도 맛집 코스, 땅콩아이스크림부터 블랑로쉐까지 하루 동선",
+    "url": "https://arohajeju.blogspot.com/2026/10/udo-food-restaurant-guide-d261027.html",
+    "id": "7743831273288680945",
+    "labels": [
+     "제주동부여행",
+     "우도맛집",
+     "우도여행",
+     "제주맛집"
+    ]
+   },
+   "en_topic": "xj06",
+   "en_images": [
+    "surroundings-img-5872-f5775ce2.jpg",
+    "surroundings-c4603ba2.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/60/4062960_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/13/3527913_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/10/3527910_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "parking",
+    "economy",
+    "multilingual"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@53c0222a53b2d245be15bce624fb4d329104566d/assets/thumbs/2026-10-27-xj06-en.jpg",
+   "en": {
+    "title": "Jeju Oreum Guide: Small Volcanic Hills You Can Climb in 30 Minutes",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-oreum-guide.html",
+    "id": "6992899117769353912",
+    "labels": [
+     "Jeju Island Guide",
+     "Jeju Oreum",
+     "Seongsan Ilchulbong",
+     "Jeju Nature",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-83a96d68.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
@@ -1357,6 +1413,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/69/4107969_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/68/4107968_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/65/4107965_image2_1.JPG",
-  "http://tong.visitkorea.or.kr/cms/resource/82/3553982_image2_1.jpg"
+  "http://tong.visitkorea.or.kr/cms/resource/82/3553982_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/76/3554776_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/78/3554778_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg"
  ]
 }
