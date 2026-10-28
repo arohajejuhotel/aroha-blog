@@ -1400,13 +1400,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-28",
+   "ko_topic": "d261028",
+   "ko_images": [
+    "surroundings-sunrise-5038cbe7.jpg",
+    "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/98/1011798.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/56/1011856.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/65/1011865.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "ratings",
+    "multilingual",
+    "direct"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@82e085369d66fd97876c4ce3e3ac7796dcb20ad5/assets/thumbs/2026-10-28-d261028-ko.jpg",
+   "ko": {
+    "title": "성산일출봉 소요시간, 구간별로 정리해드려요",
+    "url": "https://arohajeju.blogspot.com/2026/10/seongsan-ilchulbong-duration-d261028.html",
+    "id": "6127881731301869534",
+    "labels": [
+     "성산여행정보",
+     "성산일출봉",
+     "제주여행코스",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "x20",
+   "en_images": [
+    "surroundings-img-6063-cb50d320.jpg",
+    "exterior-05-f9e485b9.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/09/1310909.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/50/1012950.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/63/1310763.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "gs25",
+    "direct",
+    "ocean_view"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@a761dcdcecde2fab581b847f50bf7f62117352e7/assets/thumbs/2026-10-28-x20-en.jpg",
+   "en": {
+    "title": "Jeju Olle Trail Route 1: Walking From Seongsan to Gwangchigi",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-olle-trail-route-1-guide.html",
+    "id": "1081794320310871558",
+    "labels": [
+     "East Jeju Guide",
+     "Jeju Olle Trail",
+     "Seongsan",
+     "Hiking",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-83a96d68.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/70/3554770_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/74/3554774_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
@@ -1417,6 +1473,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/76/3554776_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/78/3554778_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG"
  ]
 }
