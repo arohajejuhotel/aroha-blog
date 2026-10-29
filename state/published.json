@@ -1460,13 +1460,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-29",
+   "ko_topic": "d261029",
+   "ko_images": [
+    "surroundings-seongsan-73f59874.jpg",
+    "surroundings-c4603ba2.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/60/4109160_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/93/3099993_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/55/4109155_image2_1.JPG"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "gs25",
+    "library",
+    "family"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@018bba7c74840935dc7ae068eb3433bf3f56bd29/assets/thumbs/2026-10-29-d261029-ko.jpg",
+   "ko": {
+    "title": "제주 11월 여행, 날씨부터 가볼만한 곳까지 미리 정리",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-november-travel-guide-d261029.html",
+    "id": "7794025200892775037",
+    "labels": [
+     "제주전역여행",
+     "제주11월여행",
+     "제주가을여행",
+     "제주여행코스"
+    ]
+   },
+   "en_topic": "xj07",
+   "en_images": [
+    "surroundings-2ea8db05.jpg",
+    "surroundings-img-6044-c74b81ba.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/68/3543168_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/67/3543167_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/69/3543169_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "gs25_breakfast",
+    "ratings",
+    "parking"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@949b0e3a7ddaded60ad20da329974084326bd3e2/assets/thumbs/2026-10-29-xj07-en.jpg",
+   "en": {
+    "title": "Jeju Island Hopping: Gapado, Marado and Biyangdo Compared",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-island-hopping-guide.html",
+    "id": "5979790406892910183",
+    "labels": [
+     "Jeju Island Guide",
+     "Gapado",
+     "Marado",
+     "Biyangdo",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/70/3554770_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/74/3554774_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/69/4107969_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/68/4107968_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/65/4107965_image2_1.JPG",
   "http://tong.visitkorea.or.kr/cms/resource/82/3553982_image2_1.jpg",
@@ -1477,6 +1533,10 @@
   "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG"
+  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/56/4109156_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/58/4109158_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/55/4109155_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg"
  ]
 }
