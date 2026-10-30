@@ -1520,13 +1520,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-30",
+   "ko_topic": "d261030",
+   "ko_images": [
+    "surroundings-sunrise-5038cbe7.jpg",
+    "surroundings-seongsan-73f59874.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/02/4098402_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms2/website/85/1011885.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "parking",
+    "basecamp",
+    "olle"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@8397b17c3c7af15c92a3e5cc7d774f5de9a21748/assets/thumbs/2026-10-30-d261030-ko.jpg",
+   "ko": {
+    "title": "제주 올레길 1코스, 지도로 보는 시흥-광치기와 우도 1-1코스",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-olle-trail-course-1-d261030.html",
+    "id": "4019991340114190149",
+    "labels": [
+     "성산여행정보",
+     "올레길",
+     "제주올레",
+     "우도여행"
+    ]
+   },
+   "en_topic": "x21",
+   "en_images": [
+    "lobby-recep-011-f0e53387.jpg",
+    "amenity-img-5448-6ddc051f.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/35/1012935.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/53/1012953.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/53/1310753.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "all_trips",
+    "luggage",
+    "olle"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@1363c5ddc743f5db65f9d31da942a7330c655e19/assets/thumbs/2026-10-30-x21-en.jpg",
+   "en": {
+    "title": "Jeju Rainy Day Activities: What To Do When East Jeju Weather Turns",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-rainy-day-activities-guide.html",
+    "id": "7370623569389648830",
+    "labels": [
+     "East Jeju Guide",
+     "Rainy Day Activities",
+     "Seongsan Ilchulbong",
+     "Jeju Travel Tips",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/68/4107968_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/65/4107965_image2_1.JPG",
-  "http://tong.visitkorea.or.kr/cms/resource/82/3553982_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/76/3554776_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/78/3554778_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
@@ -1537,6 +1593,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/56/4109156_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/58/4109158_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/55/4109155_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/79/3554779_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/59/4109159_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/02/4098402_image2_1.JPG"
  ]
 }
