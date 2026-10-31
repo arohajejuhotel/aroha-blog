@@ -1580,13 +1580,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-10-31",
+   "ko_topic": "d261031",
+   "ko_images": [
+    "room-stanocean-05-4aa33b12.jpg",
+    "surroundings-img-6086-40d5cf04.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/40/4073540_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/42/4073542_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/45/4073545_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "ocean_view",
+    "luggage",
+    "brand"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@22d7bad1f4c794606f12996933c30bd47ba4651d/assets/thumbs/2026-10-31-d261031-ko.jpg",
+   "ko": {
+    "title": "애월 카페 가을 투어, 성산에서 서쪽까지 하루 동선",
+    "url": "https://arohajeju.blogspot.com/2026/10/aewol-coastal-cafe-guide-d261031.html",
+    "id": "212642022029402925",
+    "labels": [
+     "제주전역여행",
+     "애월카페",
+     "제주가을여행",
+     "카페투어"
+    ]
+   },
+   "en_topic": "xj08",
+   "en_images": [
+    "exterior-2-3c63d4cb.jpg",
+    "room-economy-01-3c215d70.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/62/1808062.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/63/1808063.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/67/1808067.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "library",
+    "sunrise",
+    "economy"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@b023ad4abd74641c2bcca4088fdb6c99ae6aad53/assets/thumbs/2026-10-31-xj08-en.jpg",
+   "en": {
+    "title": "Jeju Markets: Dongmun, Seogwipo Olle Market and the Five-Day Markets",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-markets-guide.html",
+    "id": "3926778818520508970",
+    "labels": [
+     "Jeju Island Guide",
+     "Jeju Markets",
+     "Dongmun Market",
+     "Seogwipo",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/78/3554778_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
@@ -1597,6 +1653,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/79/3554779_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/59/4109159_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/02/4098402_image2_1.JPG"
+  "https://tong.visitkorea.or.kr/cms/resource/02/4098402_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5872-f5775ce2.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/42/4073542_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/41/4073541_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/40/4073540_image2_1.jpg"
  ]
 }
