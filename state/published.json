@@ -1640,13 +1640,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-01",
+   "ko_topic": "d261101",
+   "ko_images": [
+    "exterior-05-fb5e7143.jpg",
+    "room-deluxe-06-4b84c40e.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/56/4109156_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/58/4109158_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/59/4109159_image2_1.JPG"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "economy",
+    "gs25",
+    "all_trips"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@41aea53b41556d7ab993afcad614ec77e35e500a/assets/thumbs/2026-11-01-d261101-ko.jpg",
+   "ko": {
+    "title": "제주숙소 고르는법, 위치부터 동선까지",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-accommodation-seongsan-guide.html",
+    "id": "8744808152771277295",
+    "labels": [
+     "아로하이야기",
+     "제주숙소고르는법",
+     "성산숙소",
+     "제주여행정보"
+    ]
+   },
+   "en_topic": "x28",
+   "en_images": [
+    "exterior-06-c773457b.jpg",
+    "surroundings-23-55725333.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/04/1414204.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/69/1414469.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "brand",
+    "family",
+    "basecamp"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@b91ca07d2cba4f1bd947642cc4c89c816ef9857f/assets/thumbs/2026-11-01-x28-en.jpg",
+   "en": {
+    "title": "Jeju in Winter: Snow on a Subtropical Island",
+    "url": "https://arohajeju.blogspot.com/2026/10/jeju-in-winter-guide.html",
+    "id": "6886712020764520600",
+    "labels": [
+     "East Jeju Guide",
+     "Jeju Winter Travel",
+     "Seongsan Ilchulbong",
+     "Travel Tips",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/56/4109156_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/58/4109158_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/55/4109155_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
@@ -1657,6 +1713,10 @@
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5872-f5775ce2.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/42/4073542_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/41/4073541_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/40/4073540_image2_1.jpg"
+  "https://tong.visitkorea.or.kr/cms/resource/40/4073540_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/61/4109161_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-06-c773457b.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-23-55725333.jpg"
  ]
 }
