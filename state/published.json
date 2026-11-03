@@ -1760,13 +1760,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-03",
+   "ko_topic": "d261103",
+   "ko_images": [
+    "surroundings-img-5872-f5775ce2.jpg",
+    "room-9-81741fc1.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/30/3053130_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/34/3053134_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/28/4088628_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "library",
+    "brand",
+    "basecamp"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@d2bd9a7de78553a1027aed001dd44a94d80dae06/assets/thumbs/2026-11-03-d261103-ko.jpg",
+   "ko": {
+    "title": "애월 놀거리 총정리, 한담해안부터 승마·요트까지",
+    "url": "https://arohajeju.blogspot.com/2026/11/aewol-activities-jeju-d261103.html",
+    "id": "968776255750390399",
+    "labels": [
+     "제주전역여행",
+     "애월여행",
+     "애월놀거리",
+     "제주액티비티"
+    ]
+   },
+   "en_topic": "xj09",
+   "en_images": [
+    "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg",
+    "surroundings-img-6144-7362eff9.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/10/4072710_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/14/4072714_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/07/4075307_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "gs25",
+    "ocean_view",
+    "economy"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@cf8f04c0477d3163959d1e9efa41d1365bc04abd/assets/thumbs/2026-11-03-xj09-en.jpg",
+   "en": {
+    "title": "Saryeoni Forest, Bijarim: Jeju's Two Classic Forest Walks",
+    "url": "https://arohajeju.blogspot.com/2026/11/saryeoni-forest-bijarim-guide.html",
+    "id": "7407981232481372197",
+    "labels": [
+     "Jeju Island Guide",
+     "Jeju Forests",
+     "Jeju Nature",
+     "Jeju Itinerary",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/79/3554779_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/59/4109159_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource/02/4098402_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5872-f5775ce2.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/42/4073542_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/41/4073541_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/40/4073540_image2_1.jpg",
@@ -1777,6 +1833,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5739-79b7a9b5.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5739-79b7a9b5.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/41/4062941_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/62/4062962_image2_1.jpg"
  ]
 }
