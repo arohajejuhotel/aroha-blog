@@ -27,7 +27,7 @@ from pathlib import Path
 import requests
 from PIL import Image
 
-from src import cliche, demand, gdrive, reels, settings, tour_photos
+from src import cliche, demand, gdrive, insta_cta, reels, settings, tour_photos
 
 KST = timezone(timedelta(hours=9))
 STATE = settings.ROOT / "state" / "reels.json"
@@ -461,6 +461,7 @@ def main() -> int:
              "cover": out_dir / "cover.jpg"}
     secs = reels.build(make_job(script, images), tmp, {"insta": files["insta"], "naver": files["naver"]},
                        files["cover"], seed=day)
+    script["caption_insta"] = insta_cta.add(script["caption_insta"], day, "reel")
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},

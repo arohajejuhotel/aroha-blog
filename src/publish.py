@@ -262,6 +262,9 @@ def save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, 
         client = anthropic.Anthropic(api_key=env.anthropic_key, max_retries=3, timeout=180.0)
         ipost = instagram.write(client, env.model, post["title"], url, post["body_html"], hotel,
                                 today=day)
+        # 팔로우·저장·태그·언급 같은 행동 유도 한 줄을 날마다 바꿔 붙인다
+        from src import insta_cta
+        ipost["caption"] = insta_cta.add(ipost["caption"], day, "carousel")
         idx = instagram.pick_photos(client, env.model, ipost, post["title"], cands,
                                     set(state.get("insta_photos", [])))
         publishing = mode == "publish" and instagram.can_publish()

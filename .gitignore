@@ -11,3 +11,6 @@ venv/
 
 # 구글 드라이브 토큰
 token*.json
+
+# 구글 드라이브가 폴더마다 만드는 파일
+desktop.ini
