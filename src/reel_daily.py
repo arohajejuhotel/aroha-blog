@@ -193,8 +193,8 @@ SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오
 - em: 자막 안에서 노랗게 강조할 낱말 (자막에 그대로 들어 있는 글자, 없으면 "").
 - kicker: 장소를 꾸미는 머리말 (12자 이내, 예: "{area} 숨은 산책길", "가을 억새 명소"). 훅 문장을 넣지 않는다. name: 장소 이름 (9자 이내).
 - sub_line: 예약 안내 화면 한 줄 (예: "오조포구 1km 남짓 · 성산일출봉 걸어서 5분", 30자 이내).
-- caption_insta: 인스타 캡션. 3~5줄 + 빈 줄 + 해시태그 10개 안팎(#호텔아로하 #성산숙소 포함).
-- caption_naver: 네이버 클립 설명. 2~4줄 + 해시태그 5~7개.
+- caption_insta: 인스타 캡션. 3~5줄 + 빈 줄 + 해시태그 정확히 5개(#호텔아로하 #성산숙소 포함).
+- caption_naver: 네이버 클립 설명. 2~4줄 + 해시태그 정확히 5개(#호텔아로하 포함).
   두 캡션 모두 끝 줄에 "사진: 한국관광공사 (공공누리 제1유형)".
 - title: 드라이브 폴더용 짧은 제목 (예: "{area} 숨은 산책길 {place}").
 {cliche}
@@ -383,6 +383,27 @@ def fix_sub_line(script: dict, km: float) -> None:
         script["sub_line"] = "성산일출봉 걸어서 5분 · 광치기해변 걸어서 5분"
 
 
+def limit_tags(caption: str, must: tuple, n: int = 5) -> str:
+    """캡션 해시태그를 n개로 맞춘다 (2026-11-05 사용자 요청). must 는 꼭 남기고 나머지는 앞에서부터."""
+    tags = list(dict.fromkeys(re.findall(r"#[^\s#]+", caption)))
+    others = [t for t in tags if t not in must]
+    keep = others[:n - len(must)] + list(must)
+    out, placed = [], False
+    for line in caption.split("\n"):
+        if "#" not in line:
+            out.append(line)
+            continue
+        rest = re.sub(r"#[^\s#]+", "", line).strip()
+        if rest:
+            out.append(rest)
+        if not placed:
+            out.append(" ".join(keep))
+            placed = True
+    if not placed:
+        out += ["", " ".join(keep)]
+    return "\n".join(out)
+
+
 def make_job(script: dict, images: list, zh: dict = None) -> dict:
     """zh 를 주면 한국어 대본의 사진 순서에 중국어 자막을 얹는다."""
     text = zh or script
@@ -461,7 +482,8 @@ def main() -> int:
              "cover": out_dir / "cover.jpg"}
     secs = reels.build(make_job(script, images), tmp, {"insta": files["insta"], "naver": files["naver"]},
                        files["cover"], seed=day)
-    script["caption_insta"] = insta_cta.add(script["caption_insta"], day, "reel")
+    script["caption_insta"] = insta_cta.add(limit_tags(script["caption_insta"], ("#호텔아로하", "#성산숙소")), day, "reel")
+    script["caption_naver"] = limit_tags(script["caption_naver"], ("#호텔아로하",))
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},
