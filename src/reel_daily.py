@@ -190,7 +190,9 @@ SCRIPT = """너는 제주 성산 호텔아로하의 릴스 대본 작가다. 오
   자막 예: "호텔아로하에서\\n1km 남짓" / "성산 호텔아로하에서\\n출발하는 동쪽 여행". 호텔의 단점·한계는 절대 말하지 않는다.
 - 마지막 장면 1개(객실 영상): "저장해 두고 … 꼭 가 보세요" 같은 마무리.
 - 자막(sub): 최대 2줄, 줄바꿈은 \\n, 한 줄 15자 이내, 의미 단위로 끊는다. 한자·이모지 금지.
-- em: 자막 안에서 노랗게 강조할 낱말 (자막에 그대로 들어 있는 글자, 없으면 "").
+- em: 화면 가운데 크게 띄울 키워드 (자막에 그대로 들어 있는 글자). 그 장면의 주제가 되는 명사
+  (장소·상품·객실·시설 이름 등, 4~8자 정도). '아직도·진짜·정말·바로·여기' 같은 부사·감탄어·지시어는
+  고르지 않는다. 마땅한 명사가 없으면 "".
 - kicker: 장소를 꾸미는 머리말 (12자 이내, 예: "{area} 숨은 산책길", "가을 억새 명소"). 훅 문장을 넣지 않는다. name: 장소 이름 (9자 이내).
 - sub_line: 예약 안내 화면 한 줄 (예: "오조포구 1km 남짓 · 성산일출봉 걸어서 5분", 30자 이내).
 - caption_insta: 인스타 캡션. 3~5줄 + 빈 줄 + 해시태그 정확히 5개(#호텔아로하 #성산숙소 포함).
@@ -327,6 +329,10 @@ def _b64(im: Image.Image) -> dict:
                                         "data": base64.b64encode(buf.getvalue()).decode()}}
 
 
+# 키워드로 크게 띄우면 어색한 말 (부사·감탄어·지시어). 빈 문자열도 맞는다.
+WEAK_EM = re.compile(r"(아직도|아직|진짜|정말|너무|바로|여기|이곳|저기|꼭|완전|딱|이렇게|그냥|드디어|벌써|지금|오늘|다시|또|모두|함께)?")
+
+
 def _check(s: dict, n: int, area: str) -> str:
     """대본 형식 점검. 문제가 있으면 이유를 돌려준다."""
     scenes = s.get("scenes") or []
@@ -341,6 +347,8 @@ def _check(s: dict, n: int, area: str) -> str:
             sc["sub"] = "\n".join(sc["sub"].split("\n")[:2])
         if sc.get("em") and sc["em"] not in sc["sub"]:
             sc["em"] = ""
+        if WEAK_EM.fullmatch(sc.get("em", "").strip(" ,.!?")):
+            sc["em"] = ""  # 부사·감탄어는 키워드로 크게 띄우지 않는다 (문장만 보인다)
     for sc in scenes:
         if not isinstance(sc.get("photo"), int):
             return f"사진 번호 {sc.get('photo')}"
@@ -482,8 +490,8 @@ def main() -> int:
              "cover": out_dir / "cover.jpg"}
     secs = reels.build(make_job(script, images), tmp, {"insta": files["insta"], "naver": files["naver"]},
                        files["cover"], seed=day)
-    script["caption_insta"] = insta_cta.add(limit_tags(script["caption_insta"], ("#호텔아로하", "#성산숙소")), day, "reel")
-    script["caption_naver"] = limit_tags(script["caption_naver"], ("#호텔아로하",))
+    script["caption_insta"] = insta_cta.add_reel(limit_tags(script["caption_insta"], ("#호텔아로하", "#성산숙소")), day, "reel")
+    script["caption_naver"] = insta_cta.add_reel(limit_tags(script["caption_naver"], ("#호텔아로하",)), day, "clip")
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},

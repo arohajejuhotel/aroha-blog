@@ -38,6 +38,7 @@ EXTERIOR = ASSETS / "exterior.jpg"  # 1층 GS25 가 들어온 지금 외관 (예
 ROOM_A, ROOM_B = ASSETS / "room_a.mp4", ASSETS / "room_b.mp4"  # 오션뷰 객실 영상 (세로로 잘라 둔 4초)
 
 W, H, FPS, FADE = 1080, 1920, 30, 0.6
+COVER_AT = 27  # 표지로 쓸 첫 장면 프레임 (0.9초, 키워드·문장이 다 나온 뒤)
 MIN_DUR, MAX_DUR, END_DUR = 2.4, 3.6, 3.2
 WHITE, SOFT, YELLOW, GOLD = (255, 255, 255), (238, 236, 230), (255, 214, 90), (203, 162, 88)
 CREAM = (246, 226, 180)
@@ -131,27 +132,77 @@ def label(kicker: str, name: str, lang: str = "ko") -> Image.Image:
     return img
 
 
-def subtitle(text: str, em: str = "", lang: str = "ko") -> Image.Image:
-    SUB = FONTSET[lang][3]
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    shade(img, 1040, 1520, 140, mid=True)
-    d = ImageDraw.Draw(img)
-    lines = text.split("\n")
-    size = 62
-    while max(d.textlength(x, font=F(SUB, size)) for x in lines) > W - 160 and size > 48:
-        size -= 2
-    f, gap = F(SUB, size), int(size * 1.5)
-    y0 = 1230 - (len(lines) - 1) * gap // 2
-    for k, line in enumerate(lines):
-        segs = [(line, WHITE)]
-        if em and em in line:
-            a, b = line.split(em, 1)
-            segs = [(a, WHITE), (em, CREAM), (b, WHITE)]
-        x = (W - sum(d.textlength(s, font=f) for s, _ in segs)) / 2
-        for s, c in segs:
-            shadow(img, (x, y0 + k * gap), s, f, c, blur=9, alpha=190)
-            x += d.textlength(s, font=f)
+def _text_layer(segs, font, blur=9, alpha=190, pad=40) -> Image.Image:
+    """[(글자, 색)] 한 줄을 그림자와 함께 글자 크기만 한 RGBA 로."""
+    d = ImageDraw.Draw(Image.new("L", (1, 1)))
+    w = int(sum(d.textlength(s, font=font) for s, _ in segs))
+    asc, desc = font.getmetrics()
+    img = Image.new("RGBA", (w + pad * 2, asc + desc + pad * 2), (0, 0, 0, 0))
+    sh = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    x = pad
+    for s, _ in segs:
+        ImageDraw.Draw(sh).text((x + 2, pad + 4), s, font=font, fill=(0, 0, 0, alpha))
+        x += d.textlength(s, font=font)
+    img.alpha_composite(sh.filter(ImageFilter.GaussianBlur(blur)))
+    x = pad
+    for s, c in segs:
+        ImageDraw.Draw(img).text((x, pad), s, font=font, fill=c)
+        x += d.textlength(s, font=font)
     return img
+
+
+def _fit(lines, path, size, maxw, low):
+    d = ImageDraw.Draw(Image.new("L", (1, 1)))
+    while max(d.textlength(x, font=F(path, size)) for x in lines) > maxw and size > low:
+        size -= 2
+    return size
+
+
+def _paste(canvas, layer, x, y, a=1.0):
+    if a <= 0:
+        return
+    if a < 1:
+        layer = layer.copy()
+        layer.putalpha(layer.getchannel("A").point(lambda v: int(v * a)))
+    canvas.alpha_composite(layer, (int(x), int(y)))
+
+
+def _pop(x: float) -> float:
+    x = min(max(x, 0.0), 1.0)
+    return 1 - (1 - x) ** 3  # 빨리 시작해 부드럽게 멈춤
+
+
+def subtitle(text: str, em: str = "", lang: str = "ko"):
+    """키워드 자막 (2026-11-09 'D' 스타일). 장면의 키워드(em)를 가운데 크림색으로 크게 띄우고
+    문장은 그 아래 작게. 키워드만 있는 줄(예: "제주 기념품,")은 아래 문장에서 빼 같은 말이 두 번 나오지 않게 한다.
+    시간(초) → 그 순간의 RGBA 를 내는 함수를 돌려준다. 키워드는 0.22초에 살짝 튀었다 제자리, 문장은 이어서 한 줄씩."""
+    XB, _, MD, _ = FONTSET[lang]
+    lines = text.split("\n")
+    key = em if em and em in text else ""
+    if key:
+        lines = [ln for ln in lines if ln.strip(" ,.!?·…，。！？") != key] or lines
+    ks = _fit([key or " "], XB, 100, W - 200, 64)
+    k = _text_layer([(key, CREAM)], F(XB, ks), blur=14, alpha=210) if key else None
+    ss = _fit(lines, MD, 48 if key else 56, W - 140, 40)
+    sl = [_text_layer([(ln, (240, 240, 236))], F(MD, ss), blur=7, alpha=180) for ln in lines]
+    bg = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    shade(bg, 980, 1640, 175, mid=True)
+    y_sub = 1325 if key else 1290 - (len(sl) - 1) * int(ss * 1.5) // 2
+
+    def at(t: float) -> Image.Image:
+        img = bg.copy()
+        if k is not None:
+            a = _pop(t / 0.3)
+            z = (0.8 + 0.2 * a) * (1 + 0.08 * max(0.0, 1 - abs(t - 0.22) / 0.22))
+            kk = k.resize((max(1, int(k.width * z)), max(1, int(k.height * z))), Image.BICUBIC)
+            _paste(img, kk, (W - kk.width) / 2, 1235 - kk.height / 2, a)
+        y = y_sub
+        for n, lay in enumerate(sl):
+            b = _pop((t - (0.35 if k is not None else 0.05) - n * 0.12) / 0.3)
+            _paste(img, lay, (W - lay.width) / 2, y + (1 - b) * 14, b)
+            y += int(ss * 1.5)
+        return img
+    return at
 
 
 # ---------- 장면 ----------
@@ -166,7 +217,7 @@ def _encoder(out: Path):
                              "-pix_fmt", "yuv420p", "-r", str(FPS), str(out)], stdin=subprocess.PIPE)
 
 
-def photo_seg(src: Image.Image, dur: float, move, title: Image.Image, sub: Image.Image, out: Path,
+def photo_seg(src: Image.Image, dur: float, move, title: Image.Image, sub, out: Path,
               first_frame: Path = None):
     src = src.convert("RGB")
     up = max((H * 1.15) / src.height, (W * 1.15) / src.width)
@@ -186,8 +237,8 @@ def photo_seg(src: Image.Image, dur: float, move, title: Image.Image, sub: Image
         top = min(max(cy * big.height - bh / 2, 0), big.height - bh)
         f = big.resize((W, H), Image.BICUBIC, box=(left, top, left + bw, top + bh)).convert("RGBA")
         f.alpha_composite(title)
-        f.alpha_composite(sub)
-        if i == 0 and first_frame:
+        f.alpha_composite(sub(i / FPS))
+        if i == COVER_AT and first_frame:  # 자막이 다 나온 뒤 프레임을 표지로
             f.convert("RGB").save(first_frame, quality=92)
         p.stdin.write(f.convert("RGB").tobytes())
     p.stdin.close()
@@ -360,7 +411,7 @@ def build(job: dict, tmp: Path, ends: dict, cover: Path, seed: str = "") -> floa
         seg = tmp / f"p{i}.mp4"
         if isinstance(sc["src"], tuple):
             title.save(tmp / f"title{i}.png")
-            sub_img.save(tmp / f"sub{i}.png")
+            sub_img(9.0).save(tmp / f"sub{i}.png")  # 영상 장면은 다 나온 자막을 얹는다
             video_seg(sc["src"][0], sc["src"][1], dur, tmp / f"title{i}.png", tmp / f"sub{i}.png", seg)
         else:
             photo_seg(sc["src"], dur, MOVES[i % len(MOVES)], title, sub_img, seg,
