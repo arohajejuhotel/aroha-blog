@@ -2119,13 +2119,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-09",
+   "ko_topic": "d261109",
+   "ko_images": [
+    "surroundings-img-5739-79b7a9b5.jpg",
+    "exterior-2-3c63d4cb.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/65/4145465_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/69/1808069.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/86/1848486.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "economy",
+    "olle",
+    "ocean_view"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@b19ba8aaeff8d5394f12089dfb94ef5c433fa0a5/assets/thumbs/2026-11-09-d261109-ko.jpg",
+   "ko": {
+    "title": "제주시 맛집 총정리, 원도심 칠성로·탑동·동문시장부터 성산 동선까지",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-city-restaurants-guide-d261109.html",
+    "id": "3645882680332258089",
+    "labels": [
+     "제주전역여행",
+     "제주시맛집",
+     "원도심여행",
+     "동문시장"
+    ]
+   },
+   "en_topic": "x31",
+   "en_images": [
+    "exterior-1-72b94dbe.jpg",
+    "lobby-se-a8a6cbc4-af4f-49a7-91ec-1-ede814e3.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "direct",
+    "all_trips",
+    "multilingual"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@d49033023d912f5f55e538af16e6e4b62c5b46e1/assets/thumbs/2026-11-09-x31-en.jpg",
+   "en": {
+    "title": "Naver Map English Jeju: Get Around East Jeju Easily",
+    "url": "https://arohajeju.blogspot.com/2026/11/naver-map-english-jeju-guide.html",
+    "id": "1629640579823961319",
+    "labels": [
+     "East Jeju Guide",
+     "Jeju Travel Tips",
+     "Naver Map",
+     "Jeju Apps",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/57/4109157_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/75/3554775_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5872-f5775ce2.jpg",
@@ -2136,6 +2192,10 @@
   "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/65/4145465_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/66/4145466_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/77/4145477_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg"
  ]
 }
