@@ -2179,13 +2179,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-10",
+   "ko_topic": "d261110",
+   "ko_images": [
+    "surroundings-23-55725333.jpg",
+    "exterior-05-fb5e7143.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/16/3396216_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/17/3396217_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/18/3396218_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "all_trips",
+    "basecamp",
+    "gs25_breakfast"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@682a4729f4cc9d7999ef1cb3d66a2106221c18c0/assets/thumbs/2026-11-10-d261110-ko.jpg",
+   "ko": {
+    "title": "제주흑돼지 맛집, 지역별·부위별로 다 정리해봤습니다",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-black-pork-restaurants-d261110.html",
+    "id": "4332881798287301106",
+    "labels": [
+     "제주전역여행",
+     "흑돼지맛집",
+     "제주맛집",
+     "제주여행코스"
+    ]
+   },
+   "en_topic": "x32",
+   "en_images": [
+    "amenity-gs25-b60a76fd.jpg",
+    "amenity-img-5451-9cf1581a.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "brand",
+    "economy",
+    "basecamp"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@ccd64ec764a7ab5e631ef5270a9d460214da7908/assets/thumbs/2026-11-10-x32-en.jpg",
+   "en": {
+    "title": "Seongsan Breakfast Early: Eating Before a Sunrise Hike",
+    "url": "https://arohajeju.blogspot.com/2026/11/seongsan-breakfast-early-guide.html",
+    "id": "8310573983954349783",
+    "labels": [
+     "Seongsan Travel",
+     "Jeju Food",
+     "Sunrise Hike",
+     "Travel Tips",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/75/3554775_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5872-f5775ce2.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/45/4094045_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/42/4094042_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/01/3011801_image2_1.jpg",
@@ -2196,6 +2252,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/65/4145465_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/66/4145466_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/77/4145477_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5878-f7292b4f.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg"
  ]
 }
