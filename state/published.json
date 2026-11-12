@@ -2298,13 +2298,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-12",
+   "ko_topic": "d261112",
+   "ko_images": [
+    "surroundings-83a96d68.jpg",
+    "surroundings-a3badf5d.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/61/4109161_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/85/2513485_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms2/website/06/1806006.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "olle",
+    "economy",
+    "direct"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@ede645c8a40f58451eefc7476ecb2199942d4bef/assets/thumbs/2026-11-12-d261112-ko.jpg",
+   "ko": {
+    "title": "섭지코지 깡통열차 요금·시간 완전정리",
+    "url": "https://arohajeju.blogspot.com/2026/11/seopjikoji-mini-train-d261112.html",
+    "id": "7795017455903442455",
+    "labels": [
+     "성산여행정보",
+     "섭지코지",
+     "제주여행코스",
+     "성산가볼만한곳"
+    ]
+   },
+   "en_topic": "x34",
+   "en_images": [
+    "surroundings-sunrise-5038cbe7.jpg",
+    "room-se-31d7ce7d-a2ce-40e1-b1c2-5-e862e66a.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "olle",
+    "library",
+    "brand"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@0757ffd76842c5feebc35f474f9fc267d015824a/assets/thumbs/2026-11-12-x34-en.jpg",
+   "en": {
+    "title": "What to Pack for Jeju: A November Packing List by Season",
+    "url": "https://arohajeju.blogspot.com/2026/11/what-to-pack-for-jeju-guide.html",
+    "id": "3090251867133449784",
+    "labels": [
+     "East Jeju Guide",
+     "Jeju Packing List",
+     "Jeju Weather",
+     "Seongsan Ilchulbong",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/65/4145465_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/66/4145466_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/77/4145477_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
@@ -2315,6 +2371,10 @@
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-a3badf5d.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-02-752c4658.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-05-fb5e7143.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/61/4109161_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/57/4109157_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/49/3100249_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg"
  ]
 }
