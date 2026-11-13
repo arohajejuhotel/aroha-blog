@@ -2358,14 +2358,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-13",
+   "ko_topic": "d261113",
+   "ko_images": [
+    "surroundings-img-5878-f7292b4f.jpg",
+    "room-dsc09406-4c9e46c3.jpg"
+   ],
+   "ko_photos": [
+    "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg",
+    "http://tong.visitkorea.or.kr/cms/resource/74/3552174_image2_1.jpg",
+    "http://tong.visitkorea.or.kr/cms/resource/76/3552176_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "ocean_view",
+    "multilingual",
+    "family"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@a1c44997bcfa9982f01c1201493a0cf753a994da/assets/thumbs/2026-11-13-d261113-ko.jpg",
+   "ko": {
+    "title": "올레길 7코스 완주 코스, 외돌개 주차와 소요시간 정리",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-olle-trail-route-7-d261113.html",
+    "id": "5002972184532502082",
+    "labels": [
+     "제주전역여행",
+     "올레길",
+     "서귀포여행",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "x35",
+   "en_images": [
+    "surroundings-sunrise-5038cbe7.jpg",
+    "surroundings-img-6044-c74b81ba.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "ocean_view",
+    "multilingual",
+    "gs25_breakfast"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@ddd0d3b13009c44c6743e8b0a2d503e11b299be5/assets/thumbs/2026-11-13-x35-en.jpg",
+   "en": {
+    "title": "Seongsan Ilchulbong Photo Spots: Where, When and the Drone Question",
+    "url": "https://arohajeju.blogspot.com/2026/11/seongsan-ilchulbong-photo-spots-guide.html",
+    "id": "4970426098125407370",
+    "labels": [
+     "Seongsan Travel",
+     "Photography",
+     "Jeju Tips",
+     "Sunrise Peak",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/66/4145466_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/77/4145477_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-5878-f7292b4f.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-2-3c63d4cb.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
@@ -2375,6 +2430,11 @@
   "https://tong.visitkorea.or.kr/cms/resource/61/4109161_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/57/4109157_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/49/3100249_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg"
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+  "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg",
+  "http://tong.visitkorea.or.kr/cms/resource/74/3552174_image2_1.jpg",
+  "http://tong.visitkorea.or.kr/cms/resource/79/3552179_image2_1.jpg",
+  "http://tong.visitkorea.or.kr/cms/resource/76/3552176_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-6044-c74b81ba.jpg"
  ]
 }
