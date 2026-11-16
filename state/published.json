@@ -2538,13 +2538,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-16",
+   "ko_topic": "j04",
+   "ko_images": [
+    "room-13-fb5006e2.jpg",
+    "surroundings-img-5872-f5775ce2.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/46/4113346_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/73/3477473_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/43/4113343_image2_1.JPG"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "library",
+    "sunrise",
+    "ratings"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@95179ea15d4ff99c8f20b10ff257699265ae9c4a/assets/thumbs/2026-11-16-j04-ko.jpg",
+   "ko": {
+    "title": "제주 감귤따기 체험, 11월이 딱 좋은 이유",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-tangerine-picking-j04.html",
+    "id": "812401435933542352",
+    "labels": [
+     "제주전역여행",
+     "감귤체험",
+     "서귀포여행",
+     "제주가을여행"
+    ]
+   },
+   "en_topic": "x38",
+   "en_images": [
+    "surroundings-seongsan-73f59874.jpg",
+    "surroundings-c4603ba2.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "library",
+    "family",
+    "luggage"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@fa2cc796f1fcb8fec365dff2c2b38ab01c0fa067/assets/thumbs/2026-11-16-x38-en.jpg",
+   "en": {
+    "title": "Jeju UNESCO Sites: Which Ones Are Worth Your Time in November",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-unesco-sites-guide.html",
+    "id": "401161301327715542",
+    "labels": [
+     "East Jeju Guide",
+     "UNESCO Sites",
+     "Seongsan Ilchulbong",
+     "Hallasan",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/49/3100249_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
-  "http://tong.visitkorea.or.kr/cms/resource/75/3552175_image2_1.jpg",
-  "http://tong.visitkorea.or.kr/cms/resource/74/3552174_image2_1.jpg",
   "http://tong.visitkorea.or.kr/cms/resource/79/3552179_image2_1.jpg",
   "http://tong.visitkorea.or.kr/cms/resource/76/3552176_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-6044-c74b81ba.jpg",
@@ -2555,6 +2611,10 @@
   "https://tong.visitkorea.or.kr/cms/resource_photo/41/4062941_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/47/4062947_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/44/4062944_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/55/4062955_image2_1.jpg"
+  "https://tong.visitkorea.or.kr/cms/resource_photo/55/4062955_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/46/4113346_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/45/4113345_image2_1.JPG"
  ]
 }
