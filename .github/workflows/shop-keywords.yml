@@ -1,0 +1,63 @@
+name: shop-keywords
+# DRESSCODE M·골라줌 쇼핑 키워드 조사. 아로하 자동발행과 무관하며 요청 파일을 올릴 때만 돈다.
+on:
+  push:
+    paths:
+      - "keywords/requests/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shop-keywords
+  cancel-in-progress: false
+
+jobs:
+  keywords:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run requests
+        env:
+          NAVER_AD_CUSTOMER_ID: ${{ secrets.NAVER_AD_CUSTOMER_ID }}
+          NAVER_AD_API_KEY: ${{ secrets.NAVER_AD_API_KEY }}
+          NAVER_AD_SECRET: ${{ secrets.NAVER_AD_SECRET }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          shopt -s nullglob
+          for f in keywords/requests/*.txt; do
+            name="$(basename "$f" .txt)"
+            out="keywords/results/$name"
+            # 결과가 있고 요청이 바뀌지 않았으면 건너뜀
+            if ls "$out"/00_*.txt >/dev/null 2>&1 && ! git diff --name-only HEAD~1 HEAD -- "$f" | grep -q .; then
+              continue
+            fi
+            mapfile -t seeds < <(grep -v '^\s*$' "$f" | tr -d '\r')
+            echo "== $name: ${seeds[*]}"
+            if [ "${seeds[0]}" = "#추천" ]; then
+              # 주제 추천 모드: 계절 쇼핑 씨앗 전체 + 요청 파일의 나머지 줄
+              python tools/shop_keywords.py "$out" --discover "${seeds[@]:1}"
+            else
+              python tools/shop_keywords.py "$out" "${seeds[@]}"
+            fi
+          done
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add keywords/results
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore: shop keywords"
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 5
+          done
+          exit 1
