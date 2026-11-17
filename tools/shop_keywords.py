@@ -327,7 +327,7 @@ def blog_stats(kw):
     return {"total": d.get("total", 0), "span": span, "n": len(items)}
 
 
-def niche(folder, seeds, vmin=700, vmax=30000, topn=70):
+def niche(folder, seeds, vmin=700, vmax=30000, topn=110):
     load_env()
     seeds = seeds or ["1인용", "원룸", "자취", "미니", "소형", "접이식", "다용도", "침대", "책상", "욕실", "주방", "빨래"]
     vols = ad_volumes(seeds)
