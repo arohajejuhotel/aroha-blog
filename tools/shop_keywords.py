@@ -282,8 +282,82 @@ def discover(folder, extra):
     print(text)
 
 
+# ---------------------------------------------------------------- 틈새 모드
+# 검색량은 최고치가 아니어도 글이 적어서 상위를 잡기 쉬운 키워드를 찾는다.
+# 요청 파일 첫 줄이 "#틈새" 이면 이 모드. 둘째 줄부터 넓은 씨앗(예: 원룸, 1인용, 접이식).
+# 지표: 월 검색량(검색광고) / 블로그 문서 수(검색 API total) / 최근 글 100개가 쌓인 기간(활발도).
+def blog_stats(kw):
+    cid, sec = env("NAVER_CLIENT_ID"), env("NAVER_CLIENT_SECRET")
+    if not (cid and sec):
+        return None
+    url = "https://openapi.naver.com/v1/search/blog.json?" + urllib.parse.urlencode(
+        {"query": kw, "display": 100, "sort": "date"})
+    try:
+        d = get_json(url, {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec})
+    except Exception as e:
+        return {"err": f"{type(e).__name__} {getattr(e, 'code', '')}"}
+    items = d.get("items", [])
+    span = None
+    if items:
+        try:
+            last = datetime.datetime.strptime(items[-1]["postdate"], "%Y%m%d").date()
+            span = max(1, (datetime.date.today() - last).days)
+        except Exception:
+            span = None
+    return {"total": d.get("total", 0), "span": span, "n": len(items)}
+
+
+def niche(folder, seeds, vmin=700, vmax=30000, topn=70):
+    load_env()
+    seeds = seeds or ["1인용", "원룸", "자취", "미니", "소형", "접이식", "다용도", "침대", "책상", "욕실", "주방", "빨래"]
+    vols = ad_volumes(seeds)
+    today = datetime.date.today().isoformat()
+    lines = [f"[틈새 키워드] {' / '.join(seeds)}", f"{today} 기준 · 검색량 {vmin:,}~{vmax:,} 구간", ""]
+    if not vols:
+        lines.append("검색광고 키가 없어 검색량을 가져오지 못했습니다.")
+        text = "\n".join(lines)
+    else:
+        pool = [(k, v["vol"], v["comp"]) for k, v in vols.items()
+                if vmin <= v["vol"] <= vmax and bucket(k) != "제외"]
+        pool.sort(key=lambda x: -x[1])
+        pool = pool[:topn]
+        rows, err = [], None
+        for k, vol, comp in pool:
+            st = blog_stats(k)
+            time.sleep(0.12)
+            if st is None:
+                err = "검색 API 키 없음"; break
+            if "err" in st:
+                err = f"검색 API 실패 ({st['err']}) — developers.naver.com 앱에 '검색' API 권한 추가 필요"; break
+            rows.append({"kw": k, "vol": vol, "comp": comp, "total": st["total"], "span": st["span"]})
+        if err:
+            lines.append("※ " + err)
+            lines += ["", "■ 검색량 순 (문서 수 없음)"] + [f"  - {k}  월 {vol:,}회" for k, vol, c in pool[:40]]
+        else:
+            for r in rows:
+                r["ratio"] = r["total"] / max(1, r["vol"])
+            # 포화도(문서 수 / 월 검색량)가 낮고, 최근 글 100개가 오래 걸려 쌓인(=새 글이 적은) 키워드가 위
+            rows.sort(key=lambda r: (r["ratio"], -(r["span"] or 0)))
+            lines.append("■ 틈새 후보 (포화도 낮은 순) — 포화도 = 블로그 문서 수 ÷ 월 검색량")
+            for r in rows[:30]:
+                sp = f" · 최근 100글 {r['span']}일에 걸쳐 작성" if r["span"] else ""
+                lines.append(f"  - {r['kw']}  월 {r['vol']:,}회 · 문서 {r['total']:,}건 · 포화도 {r['ratio']:.1f}{sp}")
+            lines += ["", "■ 검색량 큰 순 (참고)"]
+            for r in sorted(rows, key=lambda r: -r["vol"])[:15]:
+                lines.append(f"  - {r['kw']}  월 {r['vol']:,}회 · 문서 {r['total']:,}건 · 포화도 {r['ratio']:.1f}")
+        lines += ["", "※ 포화도가 낮을수록 글이 적어 상위를 잡기 쉽고, '최근 100글 N일'이 클수록 새 글이 드물다는 뜻입니다.",
+                  "※ 검색량은 검색광고 최근 30일 PC+모바일, 문서 수는 네이버 블로그 검색 API 기준입니다. 쇼핑 의도가 없는 키워드가 섞이면 걸러서 고릅니다."]
+        text = "\n".join(lines)
+    os.makedirs(folder, exist_ok=True)
+    with open(os.path.join(folder, "00_틈새추천.txt"), "w", encoding="utf-8") as f:
+        f.write(text + "\n")
+    print(text)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) >= 3 and sys.argv[2] == "--discover":
+    if len(sys.argv) >= 3 and sys.argv[2] == "--niche":
+        niche(sys.argv[1], sys.argv[3:])
+    elif len(sys.argv) >= 3 and sys.argv[2] == "--discover":
         load_env()
         discover(sys.argv[1], sys.argv[3:])
     else:

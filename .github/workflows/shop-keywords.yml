@@ -45,6 +45,9 @@ jobs:
             if [ "${seeds[0]}" = "#추천" ]; then
               # 주제 추천 모드: 계절 쇼핑 씨앗 전체 + 요청 파일의 나머지 줄
               python tools/shop_keywords.py "$out" --discover "${seeds[@]:1}"
+            elif [ "${seeds[0]}" = "#틈새" ]; then
+              # 틈새 모드: 검색량은 중간이지만 글이 적은 키워드
+              python tools/shop_keywords.py "$out" --niche "${seeds[@]:1}"
             else
               python tools/shop_keywords.py "$out" "${seeds[@]}"
             fi
