@@ -295,7 +295,13 @@ def blog_stats(kw):
     try:
         d = get_json(url, {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec})
     except Exception as e:
-        return {"err": f"{type(e).__name__} {getattr(e, 'code', '')}"}
+        msg = ""
+        try:
+            body = json.loads(e.read().decode("utf-8"))
+            msg = f" · {body.get('errorCode', '')} {body.get('errorMessage', '')}"
+        except Exception:
+            pass
+        return {"err": f"{type(e).__name__} {getattr(e, 'code', '')}{msg}"}
     items = d.get("items", [])
     span = None
     if items:
