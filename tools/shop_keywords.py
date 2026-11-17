@@ -12,7 +12,7 @@
 
 키는 이 폴더의 keys.env 에서 읽는다(비어 있으면 08.AROHA\\blog-automation\\.env, 값은 출력하지 않는다):
   NAVER_AD_CUSTOMER_ID, NAVER_AD_API_KEY, NAVER_AD_SECRET   (searchad.naver.com → 도구 → API 사용 관리)
-  NAVER_CLIENT_ID, NAVER_CLIENT_SECRET                      (developers.naver.com 앱, 데이터랩 검색어트렌드)
+  NAVER_CLIENT_ID, NAVER_CLIENT_SECRET                      (NCP 콘솔 NAVER API HUB Application 의 인증 정보 — 2026-07-31 이후 개발자센터 신규 발급 중단)
 """
 import base64, datetime, hashlib, hmac, json, os, re, sys, time, urllib.parse, urllib.request
 
@@ -49,6 +49,28 @@ def env(name):
 def get_json(url, headers=None, data=None):
     req = urllib.request.Request(url, headers={**UA, **(headers or {})}, data=data)
     return json.loads(urllib.request.urlopen(req, timeout=20).read().decode("utf-8"))
+
+
+HUB = "https://naverapihub.apigw.ntruss.com"
+
+
+def hub_headers(json_body=False):
+    # NAVER API HUB(네이버 클라우드 플랫폼). 2026-07-31 부터 개발자센터 대신 여기서 키를 받는다.
+    h = {"X-NCP-APIGW-API-KEY-ID": env("NAVER_CLIENT_ID"), "X-NCP-APIGW-API-KEY": env("NAVER_CLIENT_SECRET")}
+    if json_body:
+        h["Content-Type"] = "application/json"
+    return h
+
+
+def hub_error(e):
+    msg = ""
+    try:
+        body = json.loads(e.read().decode("utf-8"))
+        err = body.get("error") if isinstance(body.get("error"), dict) else body
+        msg = " · " + " ".join(str(err.get(k, "")) for k in ("errorCode", "errId", "message", "errorMessage", "errMsg")).strip()
+    except Exception:
+        pass
+    return f"{type(e).__name__} {getattr(e, 'code', '')}{msg}"
 
 
 def suggest(q):
@@ -115,9 +137,7 @@ def trend(keywords):
         body = json.dumps({"startDate": str(start), "endDate": str(end), "timeUnit": "month",
                            "keywordGroups": groups}).encode()
         try:
-            data = get_json("https://openapi.naver.com/v1/datalab/search",
-                            {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec,
-                             "Content-Type": "application/json"}, body)
+            data = get_json(HUB + "/search-trend/v1/search", hub_headers(True), body)
         except Exception as e:
             print(f"[warn] 데이터랩 실패 ({type(e).__name__} {getattr(e, 'code', '')})")
             break
@@ -290,18 +310,12 @@ def blog_stats(kw):
     cid, sec = env("NAVER_CLIENT_ID"), env("NAVER_CLIENT_SECRET")
     if not (cid and sec):
         return None
-    url = "https://openapi.naver.com/v1/search/blog.json?" + urllib.parse.urlencode(
-        {"query": kw, "display": 100, "sort": "date"})
+    url = HUB + "/search/v1/blog?" + urllib.parse.urlencode(
+        {"query": kw, "display": 100, "sort": "date", "format": "json"})
     try:
-        d = get_json(url, {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec})
+        d = get_json(url, hub_headers())
     except Exception as e:
-        msg = ""
-        try:
-            body = json.loads(e.read().decode("utf-8"))
-            msg = f" · {body.get('errorCode', '')} {body.get('errorMessage', '')}"
-        except Exception:
-            pass
-        return {"err": f"{type(e).__name__} {getattr(e, 'code', '')}{msg}"}
+        return {"err": hub_error(e)}
     items = d.get("items", [])
     span = None
     if items:
@@ -334,7 +348,7 @@ def niche(folder, seeds, vmin=700, vmax=30000, topn=70):
             if st is None:
                 err = "검색 API 키 없음"; break
             if "err" in st:
-                err = f"검색 API 실패 ({st['err']}) — developers.naver.com 앱에 '검색' API 권한 추가 필요"; break
+                err = f"검색 API 실패 ({st['err']}) — NCP 콘솔 NAVER API HUB 의 Application 에 '검색' API 가 들어 있는지 확인"; break
             rows.append({"kw": k, "vol": vol, "comp": comp, "total": st["total"], "span": st["span"]})
         if err:
             lines.append("※ " + err)
