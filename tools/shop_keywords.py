@@ -131,7 +131,9 @@ def trend(keywords):
 
 def bucket(k):
     lk = k.lower().replace(" ", "")
-    if any(x in lk for x in EXCLUDE):
+    # '40대여성'처럼 나이+대+여성 이 '대여'로 걸리지 않게 나이 표기를 먼저 지운다
+    lk_ex = re.sub(r"\d+대", "", lk)
+    if any(x in lk_ex for x in EXCLUDE):
         return "제외"
     if any(x in lk for x in GOLLA):
         return "골라줌"
