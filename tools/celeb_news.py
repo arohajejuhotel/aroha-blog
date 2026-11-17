@@ -55,6 +55,24 @@ def news(q, display=100):
         return None
 
 
+def probe(path, params):
+    url = HUB + path + "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"X-NCP-APIGW-API-KEY-ID": env("NAVER_CLIENT_ID"),
+                                               "X-NCP-APIGW-API-KEY": env("NAVER_CLIENT_SECRET"),
+                                               "User-Agent": "Mozilla/5.0"})
+    try:
+        r = urllib.request.urlopen(req, timeout=20)
+        d = json.loads(r.read().decode("utf-8"))
+        return f"{r.status} OK total={d.get('total')} items={len(d.get('items', []))}"
+    except Exception as e:
+        b = ""
+        try:
+            b = e.read().decode("utf-8")[:160]
+        except Exception:
+            pass
+        return f"{getattr(e, 'code', type(e).__name__)} {b}"
+
+
 def clean(s):
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", s or ""))).strip()
 
@@ -119,6 +137,13 @@ def main(hours=30):
         lead = c[0]
         lines += [f"{n}. {lead['title']}", f"   매체 {len(hosts)}곳({', '.join(hosts[:5])}) · {lead['dt'].strftime('%m-%d %H:%M')}",
                   f"   요약 단서: {lead['desc'][:140]}", f"   링크: {lead['link']}", ""]
+    diag = ["[API 진단] 같은 키로 호출한 결과",
+            "  블로그 /search/v1/blog : " + probe("/search/v1/blog", {"query": "패딩", "display": 3}),
+            "  뉴스 /search/v1/news (기본) : " + probe("/search/v1/news", {"query": "패딩", "display": 3}),
+            "  뉴스 sort=date : " + probe("/search/v1/news", {"query": "패딩", "display": 3, "sort": "date", "format": "json"}),
+            "  지역 /search/v1/local : " + probe("/search/v1/local", {"query": "카페", "display": 3}),
+            "  검색어트렌드 key 점검은 shop_keywords 쪽", ""]
+    lines += diag
     lines += ["[수집 점검]"] + ["  " + s for s in stats] + [""]
     lines += ["※ 사생활·의혹·사건사고성 기사는 제외했습니다. 기사 문장은 옮기지 않고 사실만 확인해 새로 씁니다.",
               "※ 본문에는 출처 매체와 기사 링크를 밝히고, 연예인 사진은 쓰지 않습니다."]
