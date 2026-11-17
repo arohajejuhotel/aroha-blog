@@ -64,29 +64,39 @@ def main(hours=30):
     if not (env("NAVER_CLIENT_ID") and env("NAVER_CLIENT_SECRET")):
         print("키 없음"); sys.exit(1)
     now = datetime.datetime.now(KST)
-    seen, items = set(), []
+    seen, items, stats = set(), [], []
     for q in QUERIES:
         res = news(q)
         time.sleep(0.15)
         if res is None:
+            stats.append(f"{q}: API 실패")
             continue
+        st = {"n": len(res), "old": 0, "dup": 0, "filtered": 0, "bad_date": 0}
+        newest = ""
         for it in res:
             try:
                 dt = email.utils.parsedate_to_datetime(it["pubDate"]).astimezone(KST)
             except Exception:
+                st["bad_date"] += 1
                 continue
+            newest = newest or dt.strftime("%m-%d %H:%M")
             if (now - dt).total_seconds() > hours * 3600:
+                st["old"] += 1
                 continue
             title, desc = clean(it.get("title")), clean(it.get("description"))
             link = it.get("originallink") or it.get("link")
             if link in seen:
+                st["dup"] += 1
                 continue
             seen.add(link)
             text = title + " " + desc
             if any(w in text for w in DROP) or not any(w in text for w in KEEP):
+                st["filtered"] += 1
                 continue
             host = urllib.parse.urlparse(link).netloc.replace("www.", "")
+            st["ok"] = st.get("ok", 0) + 1
             items.append({"title": title, "desc": desc, "link": link, "naver": it.get("link"), "host": host, "dt": dt, "tok": tokens(title)})
+        stats.append(f"{q}: 받음 {st['n']} · 최신 {newest or '-'} · 오래됨 {st['old']} · 중복 {st['dup']} · 걸러짐 {st['filtered']} · 통과 {st.get('ok', 0)}")
     # 같은 소식을 다룬 기사 묶기(제목 단어 겹침)
     clusters = []
     for it in sorted(items, key=lambda x: x["dt"], reverse=True):
@@ -105,6 +115,7 @@ def main(hours=30):
         lead = c[0]
         lines += [f"{n}. {lead['title']}", f"   매체 {len(hosts)}곳({', '.join(hosts[:5])}) · {lead['dt'].strftime('%m-%d %H:%M')}",
                   f"   요약 단서: {lead['desc'][:140]}", f"   링크: {lead['link']}", ""]
+    lines += ["[수집 점검]"] + ["  " + s for s in stats] + [""]
     lines += ["※ 사생활·의혹·사건사고성 기사는 제외했습니다. 기사 문장은 옮기지 않고 사실만 확인해 새로 씁니다.",
               "※ 본문에는 출처 매체와 기사 링크를 밝히고, 연예인 사진은 쓰지 않습니다."]
     os.makedirs("news", exist_ok=True)
