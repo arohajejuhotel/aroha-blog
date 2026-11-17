@@ -12,7 +12,9 @@ import datetime, email.utils, html, json, os, re, sys, time, urllib.parse, urlli
 HUB = "https://naverapihub.apigw.ntruss.com"
 KST = datetime.timezone(datetime.timedelta(hours=9))
 QUERIES = ["연예인 공항패션", "공항패션 착용", "시상식 드레스", "화보 착용 제품", "착용 화제 아이템", "연예인 패딩",
-           "배우 뷰티 화보", "광고 모델 발탁 패션", "스타일링 화제", "완판 착용", "데일리룩 배우", "아이돌 공항 패션"]
+           "배우 뷰티 화보", "광고 모델 발탁 패션", "스타일링 화제", "완판 착용", "데일리룩 배우", "아이돌 공항 패션", "김지원 듀베티카", "김지원 패딩", "듀베티카 착용"]
+# 계속 따라갈 인물·브랜드. 두 단어가 함께 나온 기사는 [착용 추적]에 따로 모은다.
+WATCH = [("김지원", "듀베티카")]
 KEEP = ["패션", "착용", "룩", "화보", "공항", "시상식", "드레스", "패딩", "코트", "가방", "신발", "스니커", "뷰티", "립",
         "메이크업", "광고", "모델", "브랜드", "품절", "완판", "스타일", "헤어", "니트", "재킷", "목도리", "머플러"]
 DROP = ["열애", "결별", "이혼", "불륜", "논란", "사망", "사고", "폭로", "의혹", "고소", "소송", "재판", "구속", "마약", "음주",
@@ -132,6 +134,12 @@ def main(hours=30):
     today = now.strftime("%Y-%m-%d")
     lines = [f"[연예인 패션·뷰티 뉴스 후보] {today} {now.strftime('%H:%M')} 기준, 최근 {hours}시간 · 네이버 뉴스 검색",
              f"수집 기사 {len(items)}건 → 소식 {len(clusters)}묶음 (여러 매체가 다룬 순)", ""]
+    for who, brand in WATCH:
+        hits = [i for i in items if who in (i["title"] + i["desc"]) and brand in (i["title"] + i["desc"])]
+        lines += [f"[착용 추적] {who} × {brand}: 최근 {hours}시간 기사 {len(hits)}건"]
+        for i in sorted(hits, key=lambda x: x["dt"], reverse=True)[:6]:
+            lines += [f"  - {i['dt'].strftime('%m-%d %H:%M')} {i['host']} · {i['title']}", f"    {i['link']}"]
+        lines += [""]
     for n, c in enumerate(clusters[:15], 1):
         hosts = sorted({i["host"] for i in c})
         lead = c[0]
