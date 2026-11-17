@@ -34,6 +34,9 @@ def load_env():
                     os.environ[m.group(1)] = v
 
 
+LAST_ERR = [""]
+
+
 def news(q, display=100):
     url = HUB + "/search/v1/news?" + urllib.parse.urlencode({"query": q, "display": display, "sort": "date", "format": "json"})
     req = urllib.request.Request(url, headers={"X-NCP-APIGW-API-KEY-ID": env("NAVER_CLIENT_ID"),
@@ -47,7 +50,8 @@ def news(q, display=100):
             body = e.read().decode("utf-8")[:200]
         except Exception:
             pass
-        print(f"[warn] 뉴스 검색 실패 '{q}': {type(e).__name__} {getattr(e, 'code', '')} {body}")
+        LAST_ERR[0] = f"{type(e).__name__} {getattr(e, 'code', '')} {body}"
+        print(f"[warn] 뉴스 검색 실패 '{q}': {LAST_ERR[0]}")
         return None
 
 
@@ -69,7 +73,7 @@ def main(hours=30):
         res = news(q)
         time.sleep(0.15)
         if res is None:
-            stats.append(f"{q}: API 실패")
+            stats.append(f"{q}: API 실패 · {LAST_ERR[0]}")
             continue
         st = {"n": len(res), "old": 0, "dup": 0, "filtered": 0, "bad_date": 0}
         newest = ""
