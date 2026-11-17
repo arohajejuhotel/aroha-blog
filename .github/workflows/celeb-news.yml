@@ -1,0 +1,43 @@
+name: celeb-news
+# DRESSCODE M 연예인 패션·뷰티 뉴스 후보. 아로하 자동발행과 무관. 매일 08:30 KST + 수동 실행.
+on:
+  schedule:
+    - cron: "30 23 * * *"
+  push:
+    paths:
+      - "news/trigger.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: celeb-news
+  cancel-in-progress: false
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect candidates
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          PYTHONIOENCODING: utf-8
+        run: python tools/celeb_news.py 30
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore: celeb news candidates"
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 5
+          done
+          exit 1
