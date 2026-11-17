@@ -99,6 +99,13 @@ def _n(v):
     return int(v) if str(v).isdigit() else 5  # "< 10" 은 5 로
 
 
+def _f(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def ad_volumes(keywords):
     """{키워드(공백제거): {vol, comp, rel}} + 연관 키워드. 키 없으면 {}."""
     cid, key, sec = env("NAVER_AD_CUSTOMER_ID"), env("NAVER_AD_API_KEY"), env("NAVER_AD_SECRET")
@@ -119,7 +126,11 @@ def ad_volumes(keywords):
         for row in data.get("keywordList", []):
             k = row["relKeyword"]
             out[k] = {"vol": _n(row.get("monthlyPcQcCnt")) + _n(row.get("monthlyMobileQcCnt")),
-                      "comp": row.get("compIdx", ""), "hint": k in batch}
+                      "comp": row.get("compIdx", ""), "hint": k in batch,
+                      # 월평균 광고 클릭 수(PC+모바일) = 사려는 사람이 광고를 누른 횟수 → 구매 의도 신호
+                      "clk": _f(row.get("monthlyAvePcClkCnt")) + _f(row.get("monthlyAveMobileClkCnt")),
+                      # 월평균 노출 광고 수(검색 결과에 붙은 광고 개수) → 파는 쪽이 돈을 쓰는 키워드인지
+                      "ads": _f(row.get("plAvgDepth"))}
         time.sleep(0.25)
     return out
 
@@ -339,7 +350,8 @@ def niche(folder, seeds, vmin=300, vmax=200000, topn=110):
     else:
         pool = [(k, v["vol"], v["comp"]) for k, v in vols.items()
                 if vmin <= v["vol"] <= vmax and bucket(k) != "제외"]
-        pool.sort(key=lambda x: -x[1])
+        # 광고 클릭이 있는(=사는 사람이 있는) 키워드를 먼저 문서 수 조회 대상으로 올린다
+        pool.sort(key=lambda x: (-(vols[x[0]].get("clk", 0) > 0), -x[1]))
         pool = pool[:topn]
         rows, err = [], None
         for k, vol, comp in pool:
@@ -349,23 +361,36 @@ def niche(folder, seeds, vmin=300, vmax=200000, topn=110):
                 err = "검색 API 키 없음"; break
             if "err" in st:
                 err = f"검색 API 실패 ({st['err']}) — NCP 콘솔 NAVER API HUB 의 Application 에 '검색' API 가 들어 있는지 확인"; break
-            rows.append({"kw": k, "vol": vol, "comp": comp, "total": st["total"], "span": st["span"]})
+            rows.append({"kw": k, "vol": vol, "comp": comp, "total": st["total"], "span": st["span"],
+                         "clk": vols[k].get("clk", 0.0), "ads": vols[k].get("ads", 0.0)})
         if err:
             lines.append("※ " + err)
             lines += ["", "■ 검색량 순 (문서 수 없음)"] + [f"  - {k}  월 {vol:,}회" for k, vol, c in pool[:40]]
         else:
             for r in rows:
                 r["ratio"] = r["total"] / max(1, r["vol"])
-            # 포화도(문서 수 / 월 검색량)가 낮고, 최근 글 100개가 오래 걸려 쌓인(=새 글이 적은) 키워드가 위
+                # 클릭률 = 광고 클릭 ÷ 검색량. 검색한 사람 중 광고(=상품)를 누른 비율 → 구매 의도
+                r["ctr"] = r["clk"] / max(1, r["vol"]) * 100
+
+            def line(r):
+                sp = f" · 최근 100글 {r['span']}일" if r["span"] else ""
+                return (f"  - {r['kw']}  월 {r['vol']:,}회 · 문서 {r['total']:,}건 · 포화도 {r['ratio']:.1f}"
+                        f" · 광고클릭 {r['clk']:,.0f}회({r['ctr']:.1f}%){sp}")
+
+            # 추천: 찾는 사람(검색 5천+) + 사는 사람(광고 클릭 상위) + 글이 적음(포화도 3 이하)
+            clk_cut = sorted((r["clk"] for r in rows), reverse=True)[max(0, len(rows) // 2 - 1)] if rows else 0
+            pick = [r for r in rows if r["vol"] >= 5000 and r["ratio"] <= 3 and r["clk"] >= max(clk_cut, 30)]
+            pick.sort(key=lambda r: (-r["clk"], r["ratio"]))
+            lines.append("■ 추천 (검색 5천+ · 포화도 3 이하 · 광고 클릭 상위 절반) — 광고 클릭 많은 순")
+            lines += [line(r) for r in pick[:15]] or ["  (조건에 맞는 키워드 없음 — 아래 목록에서 고르세요)"]
             rows.sort(key=lambda r: (r["ratio"], -(r["span"] or 0)))
-            lines.append("■ 틈새 후보 (포화도 낮은 순) — 포화도 = 블로그 문서 수 ÷ 월 검색량")
-            for r in rows[:30]:
-                sp = f" · 최근 100글 {r['span']}일에 걸쳐 작성" if r["span"] else ""
-                lines.append(f"  - {r['kw']}  월 {r['vol']:,}회 · 문서 {r['total']:,}건 · 포화도 {r['ratio']:.1f}{sp}")
-            lines += ["", "■ 검색량 큰 순 (참고)"]
-            for r in sorted(rows, key=lambda r: -r["vol"])[:15]:
-                lines.append(f"  - {r['kw']}  월 {r['vol']:,}회 · 문서 {r['total']:,}건 · 포화도 {r['ratio']:.1f}")
+            lines += ["", "■ 틈새 후보 전체 (포화도 낮은 순) — 포화도 = 블로그 문서 수 ÷ 월 검색량"]
+            lines += [line(r) for r in rows[:30]]
+            lines += ["", "■ 사는 사람이 많은 순 (광고 클릭 많은 순, 참고)"]
+            lines += [line(r) for r in sorted(rows, key=lambda r: -r["clk"])[:15]]
         lines += ["", "※ 포화도가 낮을수록 글이 적어 상위를 잡기 쉽고, '최근 100글 N일'이 클수록 새 글이 드물다는 뜻입니다.",
+                  "※ 광고클릭 = 검색광고 월평균 클릭 수(PC+모바일). 많을수록 그 검색어로 상품을 사려는 사람이 많다는 신호입니다. 괄호 안은 검색 대비 클릭 비율.",
+                  "※ 가격대는 자동으로 알 수 없습니다. 몇천 원짜리는 수수료가 작으니 고를 때 따로 봅니다.",
                   "※ 검색량은 검색광고 최근 30일 PC+모바일, 문서 수는 네이버 블로그 검색 API 기준입니다. 쇼핑 의도가 없는 키워드가 섞이면 걸러서 고릅니다."]
         text = "\n".join(lines)
     os.makedirs(folder, exist_ok=True)
