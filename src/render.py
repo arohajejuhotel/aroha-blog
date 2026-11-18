@@ -243,6 +243,21 @@ def _jsonld(post: dict, hotel: dict, topic: dict, lang: str,
             + json.dumps(data, ensure_ascii=False) + "</script>")
 
 
+def _summary(text: str) -> str:
+    """글 맨 위 요약 한 단락.
+
+    Blogger API 로는 글마다 '검색 설명'(meta description)을 넣을 수 없어서
+    (2026-11-18 확인: posts 리소스에 해당 필드 없음), writer 가 만든
+    meta_description 을 본문 첫 단락으로 둔다. 구글 검색 결과 요약과
+    Blogger 목록 미리보기가 이 문장을 쓰게 된다.
+    """
+    text = (text or "").strip()
+    if not text:
+        return ""
+    return ('<p style="font-size:17px;font-weight:600;color:#2f2a25;'
+            'margin:18px 0 22px;">' + html.escape(text) + "</p>")
+
+
 def build(post: dict, hotel: dict, topic: dict, refs: list, lang: str,
           cross_url: str = "", figs: list = (), thumb: dict = None) -> str:
     """최종 Blogger 본문 HTML."""
@@ -252,6 +267,7 @@ def build(post: dict, hotel: dict, topic: dict, refs: list, lang: str,
     parts = [
         '<div style="font-size:16px;line-height:1.85;color:#3a3530;">',
         _thumbnail(thumb) if thumb else "",
+        _summary(post.get("meta_description", "")),
         _cross_link(cross_url, lang),
         body,
         _faq_block(post["faq"], lang),
