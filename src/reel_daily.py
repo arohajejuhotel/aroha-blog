@@ -21,6 +21,7 @@ import math
 import re
 import sys
 import tempfile
+import datetime as dt
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -422,15 +423,35 @@ def limit_tags(caption: str, must: tuple, n: int = 5) -> str:
     return "\n".join(out)
 
 
-def make_job(script: dict, images: list, zh: dict = None) -> dict:
-    """zh 를 주면 한국어 대본의 사진 순서에 중국어 자막을 얹는다."""
+# 마무리(호텔 소개 → 예약 안내) 구성을 ABC 로 돌려 가며 쓴다 (2026-11-18 사용자: 매번 똑같은 마지막 장면 말고 돌아가면서, ABC 테스트식으로).
+# hotel/cta 는 자막이 붙는 마지막 두 장면, bg 는 예약 안내 카드 배경. 어느 안이 반응이 좋은지 state 에 기록해 비교한다.
+ENDINGS = {
+    "A": {"hotel": "exterior", "cta": "room_a", "bg": "room_a"},   # 외관 사진 → 객실 영상 A → 카드 (예전 고정안)
+    "B": {"hotel": "room_b", "cta": "exterior", "bg": "exterior"},  # 객실 영상 B → 외관 사진 → 카드
+    "C": {"hotel": "exterior", "cta": "room_b", "bg": "room_b"},   # 외관 사진 → 객실 영상 B → 카드
+}
+
+
+def pick_ending(day: str, override: str = "") -> str:
+    if override in ENDINGS:
+        return override
+    return "ABC"[dt.date.fromisoformat(day).toordinal() % 3]
+
+
+def _end_src(kind: str):
+    return Image.open(reels.EXTERIOR) if kind == "exterior" else ((reels.ROOM_B if kind == "room_b" else reels.ROOM_A), 0.4)
+
+
+def make_job(script: dict, images: list, zh: dict = None, ending: str = "A") -> dict:
+    """zh 를 주면 한국어 대본의 사진 순서에 중국어 자막을 얹는다. ending 은 마무리 구성(ENDINGS)."""
     text = zh or script
     scenes = [{"src": images[sc["photo"]], "sub": t["sub"], "em": t.get("em", "")}
               for sc, t in zip(script["scenes"], text["scenes"])]
-    scenes.append({"src": Image.open(reels.EXTERIOR), **text["hotel"]})
-    scenes.append({"src": (reels.ROOM_A, 0.4), **text["cta"]})
+    e = ENDINGS[ending]
+    scenes.append({"src": _end_src(e["hotel"]), **text["hotel"]})
+    scenes.append({"src": _end_src(e["cta"]), **text["cta"]})
     return {"kicker": text["kicker"], "name": text["name"], "sub_line": text["sub_line"], "scenes": scenes,
-            "lang": "zh" if zh else "ko"}
+            "lang": "zh" if zh else "ko", "end_bg": e["bg"]}
 
 
 def main() -> int:
@@ -438,6 +459,7 @@ def main() -> int:
     ap.add_argument("--place", default="")
     ap.add_argument("--keyword", default="")
     ap.add_argument("--hook", default="")
+    ap.add_argument("--ending", default="", help="마무리 구성 A|B|C (비우면 날짜로 돌아가며)")
     ap.add_argument("--out", default="", help="드라이브 대신 저장할 로컬 폴더 (기록하지 않음)")
     args = ap.parse_args()
 
@@ -448,6 +470,8 @@ def main() -> int:
                                  max_retries=3, timeout=300.0)
     state = load_state()
     day = now().strftime("%Y-%m-%d")
+    ending = pick_ending(day, args.ending.upper())
+    print(f"[info] 마무리 구성 {ending}")
     if not args.out and any(r["date"] == day for r in state["reels"]):
         print(f"[info] {day} 릴스는 이미 만들었습니다")
         return 0
@@ -509,7 +533,7 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     files = {"insta": out_dir / "reel_instagram.mp4", "naver": out_dir / "clip_naver.mp4",
              "cover": out_dir / "cover.jpg"}
-    secs = reels.build(make_job(script, images), tmp, {"insta": files["insta"], "naver": files["naver"]},
+    secs = reels.build(make_job(script, images, ending=ending), tmp, {"insta": files["insta"], "naver": files["naver"]},
                        files["cover"], seed=day)
     script["caption_insta"] = insta_cta.add_reel(limit_tags(script["caption_insta"], ("#호텔아로하", "#성산숙소")), day, "reel")
     script["caption_naver"] = insta_cta.add_reel(limit_tags(script["caption_naver"], ("#호텔아로하",)), day, "clip")
@@ -525,7 +549,7 @@ def main() -> int:
         if zh.get("skip"):
             print(f"[warn] 샤오홍슈판 건너뜀: {zh['skip']}")
         else:
-            zs = reels.build(make_job(script, images, zh), tmp, {"xhs": out_dir / "reel_xiaohongshu.mp4"},
+            zs = reels.build(make_job(script, images, zh, ending=ending), tmp, {"xhs": out_dir / "reel_xiaohongshu.mp4"},
                              out_dir / "cover_xiaohongshu.jpg", seed=day)
             (out_dir / "caption_xiaohongshu.txt").write_text(xhs_caption(zh), encoding="utf-8")
             (out_dir / "script_zh.json").write_text(json.dumps(zh, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -539,7 +563,7 @@ def main() -> int:
     where = gdrive.save("아로하 릴스", day, f"[릴스] {script['title']}", sorted(out_dir.iterdir()),
                         root_name="인스타그램 게시물")
     print(f"[ok] 드라이브 저장: {where}")
-    state["reels"].append({"date": day, "place": info["title"], "keyword": cand["keyword"],
+    state["reels"].append({"date": day, "ending": ending, "place": info["title"], "keyword": cand["keyword"],
                            "title": script["title"], "folder": where})
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
     return 0

@@ -260,13 +260,18 @@ def _center(d, y, text, font, fill):
     d.text(((W - d.textlength(text, font=font)) / 2, y), text, font=font, fill=fill)
 
 
-def end_card(tmp: Path, sub_line: str, variant: str) -> Image.Image:
-    """예약 안내 화면: 객실 영상 마지막 장면을 흐리게 깔고 정보만 크게.
-    variant: insta(전화·홈페이지) | naver(네이버 검색창) | xhs(携程 검색어, 연락처 없음)"""
-    still = tmp / "room_last.png"
-    if not still.exists():
-        run(["-sseof", "-0.2", "-i", str(ROOM_A), "-frames:v", "1", str(still)])
-    img = Image.open(still).convert("RGB").resize((W, H)).filter(ImageFilter.GaussianBlur(28))
+def end_card(tmp: Path, sub_line: str, variant: str, bg: str = "room_a") -> Image.Image:
+    """예약 안내 화면: 배경(객실 영상 마지막 장면·외관)을 흐리게 깔고 정보만 크게.
+    variant: insta(전화·홈페이지) | naver(네이버 검색창) | xhs(携程 검색어, 연락처 없음)
+    bg: room_a | room_b | exterior (마무리 ABC 테스트, 2026-11-18)"""
+    if bg == "exterior":
+        base = Image.open(EXTERIOR).convert("RGB")
+    else:
+        still = tmp / f"{bg}_last.png"
+        if not still.exists():
+            run(["-sseof", "-0.2", "-i", str(ROOM_B if bg == "room_b" else ROOM_A), "-frames:v", "1", str(still)])
+        base = Image.open(still).convert("RGB")
+    img = base.resize((W, H)).filter(ImageFilter.GaussianBlur(28))
     img = ImageEnhance.Brightness(img).enhance(0.42).convert("RGBA")
     if variant == "xhs":
         return _end_card_xhs(img, sub_line)
@@ -423,6 +428,6 @@ def build(job: dict, tmp: Path, ends: dict, cover: Path, seed: str = "") -> floa
     audio = _audio(total, tmp, seed or job["name"])
     for variant, out in ends.items():
         end = tmp / f"end_{variant}.mp4"
-        end_segment(end_card(tmp, job["sub_line"], variant), end)
+        end_segment(end_card(tmp, job["sub_line"], variant, job.get("end_bg", "room_a")), end)
         _compose(parts + [end], durs + [END_DUR], audio, tmp, out)
     return duration(next(iter(ends.values())))
