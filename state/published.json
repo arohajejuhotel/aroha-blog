@@ -2658,13 +2658,69 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-18",
+   "ko_topic": "d261118",
+   "ko_images": [
+    "room-11-4286a75a.jpg",
+    "room-3-457eb479.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
+    "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "gs25",
+    "library",
+    "multilingual"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@e7299f30b272acad986d3635707c6910abf76d50/assets/thumbs/2026-11-18-d261118-ko.jpg",
+   "ko": {
+    "title": "제주 아이랑 가볼만한곳, 11월 성산·동부 코스로 짜봤어요",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-with-kids-spots-d261118.html",
+    "id": "4581581716435949913",
+    "labels": [
+     "제주동부여행",
+     "제주아이랑가볼만한곳",
+     "성산가족여행",
+     "제주가족여행"
+    ]
+   },
+   "en_topic": "x40",
+   "en_images": [
+    "room-10-0102b946.jpg",
+    "room-8-646a83cc.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "basecamp",
+    "family",
+    "economy"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@7ae91bfdee02cf6d318ddb74ca5ad541d4b82e71/assets/thumbs/2026-11-18-x40-en.jpg",
+   "en": {
+    "title": "Slow Travel Jeju Week: Why One Base in East Jeju Beats Racing Around",
+    "url": "https://arohajeju.blogspot.com/2026/11/slow-travel-jeju-week-guide.html",
+    "id": "1298798055365543211",
+    "labels": [
+     "East Jeju Guide",
+     "Slow Travel",
+     "Seongsan Ilchulbong",
+     "Jeju Itinerary",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource/68/3011868_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/54/4105454_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/41/4062941_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/47/4062947_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/44/4062944_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/55/4062955_image2_1.jpg",
@@ -2675,6 +2731,10 @@
   "https://tong.visitkorea.or.kr/cms/resource_photo/34/3460434_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/14/3460314_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/42/3460442_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG"
+  "https://tong.visitkorea.or.kr/cms/resource/03/4098403_image2_1.JPG",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/01/4098401_image2_1.JPG",
+  "https://tong.visitkorea.or.kr/cms/resource/80/3554780_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-5-bfb12794.jpg"
  ]
 }
