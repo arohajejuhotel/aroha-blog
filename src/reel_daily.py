@@ -426,20 +426,27 @@ def limit_tags(caption: str, must: tuple, n: int = 5) -> str:
 # 마무리(호텔 소개 → 예약 안내) 구성을 ABC 로 돌려 가며 쓴다 (2026-11-18 사용자: 매번 똑같은 마지막 장면 말고 돌아가면서, ABC 테스트식으로).
 # hotel/cta 는 자막이 붙는 마지막 두 장면, bg 는 예약 안내 카드 배경. 어느 안이 반응이 좋은지 state 에 기록해 비교한다.
 ENDINGS = {
-    "A": {"hotel": "exterior", "cta": "room_a", "bg": "room_a"},   # 외관 사진 → 객실 영상 A → 카드 (예전 고정안)
-    "B": {"hotel": "room_b", "cta": "exterior", "bg": "exterior"},  # 객실 영상 B → 외관 사진 → 카드
-    "C": {"hotel": "exterior", "cta": "room_b", "bg": "room_b"},   # 외관 사진 → 객실 영상 B → 카드
+    "A": {"hotel": "exterior",       "cta": "room_a",         "bg": "room_a"},          # 낮 외관 → 객실A → 카드(객실A)
+    "B": {"hotel": "room_b",         "cta": "exterior",       "bg": "exterior"},         # 객실B → 낮 외관 → 카드(낮 외관)
+    "C": {"hotel": "exterior_night", "cta": "room_b",         "bg": "room_b"},           # 야간 외관 → 객실B → 카드(객실B)
+    "D": {"hotel": "exterior_night", "cta": "room_a",         "bg": "exterior_night"},   # 야간 외관 → 객실A → 카드(야간 외관)
+    "E": {"hotel": "room_a",         "cta": "exterior_night", "bg": "exterior_night"},   # 객실A → 야간 외관 → 카드(야간 외관)
 }
+_END_KEYS = list(ENDINGS)  # ["A","B","C","D","E"]
 
 
 def pick_ending(day: str, override: str = "") -> str:
     if override in ENDINGS:
         return override
-    return "ABC"[dt.date.fromisoformat(day).toordinal() % 3]
+    return _END_KEYS[dt.date.fromisoformat(day).toordinal() % len(_END_KEYS)]
 
 
 def _end_src(kind: str):
-    return Image.open(reels.EXTERIOR) if kind == "exterior" else ((reels.ROOM_B if kind == "room_b" else reels.ROOM_A), 0.4)
+    if kind == "exterior_night":
+        return Image.open(reels.EXTERIOR_NIGHT)
+    if kind == "exterior":
+        return Image.open(reels.EXTERIOR)
+    return (reels.ROOM_B if kind == "room_b" else reels.ROOM_A), 0.4
 
 
 def make_job(script: dict, images: list, zh: dict = None, ending: str = "A") -> dict:

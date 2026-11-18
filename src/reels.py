@@ -35,6 +35,7 @@ ZH_SEARCH = "阿罗哈酒店 济州"  # Trip.com·携程에서 아로하(ID 3799
 ZH_OTA_LINE = True  # 끝 화면에 '携程 · Trip.com 搜索即可预订' 줄 (샤오홍슈에서 노출이 줄면 False)
 MUSIC = ASSETS / "music"
 EXTERIOR = ASSETS / "exterior.jpg"  # 1층 GS25 가 들어온 지금 외관 (예전 해담식당 간판 사진은 쓰지 않는다)
+EXTERIOR_NIGHT = ASSETS / "exterior_night.jpg"  # 야간 외관 (드론, 해담 블러 처리 2026-11-18)
 ROOM_A, ROOM_B = ASSETS / "room_a.mp4", ASSETS / "room_b.mp4"  # 오션뷰 객실 영상 (세로로 잘라 둔 4초)
 
 W, H, FPS, FADE = 1080, 1920, 30, 0.6
@@ -264,7 +265,9 @@ def end_card(tmp: Path, sub_line: str, variant: str, bg: str = "room_a") -> Imag
     """예약 안내 화면: 배경(객실 영상 마지막 장면·외관)을 흐리게 깔고 정보만 크게.
     variant: insta(전화·홈페이지) | naver(네이버 검색창) | xhs(携程 검색어, 연락처 없음)
     bg: room_a | room_b | exterior (마무리 ABC 테스트, 2026-11-18)"""
-    if bg == "exterior":
+    if bg == "exterior_night":
+        base = Image.open(EXTERIOR_NIGHT).convert("RGB")
+    elif bg == "exterior":
         base = Image.open(EXTERIOR).convert("RGB")
     else:
         still = tmp / f"{bg}_last.png"
