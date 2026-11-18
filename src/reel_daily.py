@@ -53,6 +53,16 @@ SEASONS = {
     "벚꽃": (3, 4), "청보리": (4, 5), "메밀": (5, 6, 9, 10), "수국": (6, 7), "해바라기": (7, 8),
 }
 
+# 후보가 전부 탈락하면 조건을 바꿔 다시 고른다 (2026-11-18 사용자: 장소를 못 찾으면 날씨나 상황으로 조건을 바꿔도 좋다.
+# 비 오는 날 / 아이와 함께 하기 좋은 곳 / 무료로 가기 좋은 곳 / 가족끼리 가기 좋은 곳 / 반려동물과 함께 갈 수 있는 곳 / 외국인 환영 / 노키즈존)
+SITUATIONS = [
+    "",
+    "[조건 변경] 지난 후보가 모두 탈락했다. 계절 꽃·억새 소재 대신 상황형으로 고른다: "
+    "비 오는 날 가기 좋은 곳(실내·전시·박물관·동굴), 아이와 함께 하기 좋은 곳, 무료로 가기 좋은 곳, 가족끼리 가기 좋은 곳, 반려동물과 함께 갈 수 있는 곳, 외국인 여행자도 환영하는 곳(다국어 안내·외국인 방문이 많은 곳), 노키즈존·어른끼리 조용히 즐기는 곳(커플·성인 여행)." + "\n",
+    "[조건 변경] 계속 탈락했다. 제철 제한은 풀고, 사진이 많이 등록된 제주 대표 관광지(성산일출봉·섭지코지·만장굴·비자림·우도·광치기해변 등) 중 "
+    "비 오는 날 / 아이 동반 / 무료 입장 / 가족 나들이 / 반려동물 동반 가능 / 외국인 환영 / 노키즈존(어른끼리)에 맞는 곳을 고른다." + "\n",
+]
+
 # 호텔 소개에 붙는 '성산' 은 장소가 멀어도 쓸 수 있다
 HOTEL_SEONGSAN = ("성산 호텔아로하", "성산 현지 호텔", "성산일출봉", "성산숙소")
 
@@ -141,7 +151,7 @@ PICK = """너는 제주 성산 호텔아로하의 인스타 릴스·네이버 �
 
 최근 다룬 장소 (다시 고르지 않는다): {used}
 
-장소 후보 8개를 고른다.
+{situation}장소 후보 8개를 고른다.
 - 검색량이 많고 지금 시기(계절·꽃·축제)에 맞는 키워드를 우선한다.
   꽃·억새 같은 계절 소재는 이번 달에 실제로 볼 수 있는 것만 고른다. 제주 제철: {seasons}
 - 제주 동쪽(성산·구좌·표선·우도·남원)에 있으면 더 좋다. 호텔은 성산일출봉 앞이다.
@@ -444,42 +454,53 @@ def main() -> int:
 
     kws = collect_keywords()
     vol = {k["query"]: k["volume"] for k in kws}
-    if args.place:
-        cands = [{"keyword": args.keyword or args.place, "place": args.place, "hook": args.hook or "현지인추천"}]
-    else:
-        recent = [r["place"] for r in state["reels"][-40:]]
-        listing = "\n".join(f"- {k['query']} (월 {k['volume']:,}회)" for k in kws[:90])
-        seasons = ", ".join(f"{k} {m[0]}~{m[-1]}월" for k, m in SEASONS.items())
-        cands = _ask(client, model, PICK.format(today=day, keywords=listing, seasons=seasons,
-                                                used=", ".join(recent) or "(없음)"))["candidates"]
-        cands = [c for c in cands if c.get("place") and c["place"] not in recent]
-        off = [c for c in cands if any(now().month not in m for _, m in season_of(c.get("keyword", "")))]
-        if off:
-            print(f"[skip] 제철 아님: {[c['place'] + '/' + c['keyword'] for c in off]}")
-        cands = [c for c in cands if c not in off]
-    print(f"[info] 후보: {[c['place'] for c in cands]}")
+    tried, chosen = [], False
+    # 후보가 전부 탈락하는 날(사진 부족·최근에 다룸·제철 아님)이 있어 최대 4번까지 다시 고른다
+    # (2026-11-18: 11-11·13·14·17 에 '조건에 맞는 장소를 찾지 못했습니다' 로 릴스가 빠졌다)
+    for rnd in range(1 if args.place else 4):
+        if args.place:
+            cands = [{"keyword": args.keyword or args.place, "place": args.place, "hook": args.hook or "현지인추천"}]
+        else:
+            recent = [r["place"] for r in state["reels"][-40:]]
+            used = recent + tried
+            listing = "\n".join(f"- {k['query']} (월 {k['volume']:,}회)" for k in kws[:90])
+            seasons = ", ".join(f"{k} {m[0]}~{m[-1]}월" for k, m in SEASONS.items())
+            cands = _ask(client, model, PICK.format(today=day, keywords=listing, seasons=seasons,
+                                                    used=", ".join(used) or "(없음)",
+                                                    situation=SITUATIONS[min(rnd, len(SITUATIONS) - 1)]))["candidates"]
+            cands = [c for c in cands if c.get("place") and c["place"] not in used]
+            off = [c for c in cands if any(now().month not in m for _, m in season_of(c.get("keyword", "")))] if rnd < 2 else []
+            if off:
+                print(f"[skip] 제철 아님: {[c['place'] + '/' + c['keyword'] for c in off]}")
+            cands = [c for c in cands if c not in off]
+            tried += [c["place"] for c in off]
+        print(f"[info] 후보({rnd + 1}차): {[c['place'] for c in cands]}")
 
-    for cand in cands:
-        info = place_info(key, cand["place"])
-        if not info:
-            print(f"[skip] {cand['place']}: 관광정보 없음")
-            continue
-        if any(r["place"] == info["title"] for r in state["reels"][-40:]) and not args.place:
-            print(f"[skip] {info['title']}: 최근에 다룸")
-            continue
-        images = [im for im in (download(p["url"]) for p in info["photos"][:12]) if im]
-        if len(images) < MIN_PHOTOS:
-            print(f"[skip] {info['title']}: 1유형 사진 {len(images)}장 (최소 {MIN_PHOTOS})")
-            continue
-        script = write_script(client, model, cand, info, images,
-                              vol.get(cand["keyword"], vol.get(cand["keyword"].replace(" ", ""), 0)))
-        if script.get("skip"):
-            print(f"[skip] {info['title']}: {script['skip']}")
-            continue
-        fix_sub_line(script, info["km"])
-        print(f"[info] 오늘의 릴스: {script['title']} ({cand['keyword']}, {info['km']:.1f}km)")
-        break
-    else:
+        for cand in cands:
+            tried.append(cand["place"])
+            info = place_info(key, cand["place"])
+            if not info:
+                print(f"[skip] {cand['place']}: 관광정보 없음")
+                continue
+            if any(r["place"] == info["title"] for r in state["reels"][-40:]) and not args.place:
+                print(f"[skip] {info['title']}: 최근에 다룸")
+                continue
+            images = [im for im in (download(p["url"]) for p in info["photos"][:12]) if im]
+            if len(images) < MIN_PHOTOS:
+                print(f"[skip] {info['title']}: 1유형 사진 {len(images)}장 (최소 {MIN_PHOTOS})")
+                continue
+            script = write_script(client, model, cand, info, images,
+                                  vol.get(cand["keyword"], vol.get(cand["keyword"].replace(" ", ""), 0)))
+            if script.get("skip"):
+                print(f"[skip] {info['title']}: {script['skip']}")
+                continue
+            fix_sub_line(script, info["km"])
+            print(f"[info] 오늘의 릴스: {script['title']} ({cand['keyword']}, {info['km']:.1f}km)")
+            chosen = True
+            break
+        if chosen:
+            break
+    if not chosen:
         print("::error title=릴스 주제 없음::조건에 맞는 장소를 찾지 못했습니다")
         return 1
 
