@@ -68,6 +68,20 @@ SITUATIONS = [
 HOTEL_SEONGSAN = ("성산 호텔아로하", "성산 현지 호텔", "성산일출봉", "성산숙소")
 
 
+# 네이버 클립 장소 태그 A/B 테스트 (2026-11-19 사용자 요청).
+# 장소 태그는 한 곳만 되므로 날짜마다 번갈아 A=관광지, B=호텔아로하 로 달고 조회수를 비교한다.
+# 기간이 끝나면 결과를 보고 한쪽으로 정한다(그 전까지 기본은 관광지).
+AB_START, AB_END = "2026-11-20", "2026-12-09"
+
+
+def place_tag(day: str, place: str) -> tuple:
+    """(그룹, 태그할 장소). 기간 밖이면 관광지."""
+    if not (AB_START <= day <= AB_END):
+        return "기간 밖", place
+    n = (dt.date.fromisoformat(day) - dt.date.fromisoformat(AB_START)).days
+    return ("A", place) if n % 2 == 0 else ("B", "호텔아로하")
+
+
 def now() -> datetime:
     return datetime.now(KST)
 
@@ -546,12 +560,11 @@ def main() -> int:
     script["caption_naver"] = insta_cta.add_reel(limit_tags(script["caption_naver"], ("#호텔아로하",)), day, "clip")
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
-    # 네이버 클립 장소 태그는 한 곳만 된다. 관광지 소개 클립은 관광지로 단다
-    # (2026-11-19 사용자 결정: 처음 보는 사람에게 노출, 아로하는 자막·설명·해시태그로).
+    tag_group, tag_place = place_tag(day, info["title"])
     (out_dir / "naver_place_tag.txt").write_text(
-        f"네이버 클립 장소 태그: {info['title']}\n"
-        "(관광지 소개 클립은 관광지로 태그. 호텔아로하는 마지막 자막·설명·#호텔아로하 로 알린다.\n"
-        " 아로하가 주인공인 클립만 장소 태그를 호텔아로하로.)\n", encoding="utf-8")
+        f"네이버 클립 장소 태그: {tag_place}\n"
+        f"(A/B 테스트 {tag_group} 그룹 — {AB_START}~{AB_END} 하루씩 번갈아 관광지/호텔아로하.\n"
+        " 올린 뒤 7일째 조회수를 '네이버클립_장소태그_AB테스트.csv' 에 적어 주세요.)\n", encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},
                                                     ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"[ok] 영상 {secs:.1f}초")
@@ -577,6 +590,7 @@ def main() -> int:
                         root_name="인스타그램 게시물")
     print(f"[ok] 드라이브 저장: {where}")
     state["reels"].append({"date": day, "ending": ending, "place": info["title"], "keyword": cand["keyword"],
+                           "place_tag": tag_place, "ab_group": tag_group,
                            "title": script["title"], "folder": where})
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
     return 0
