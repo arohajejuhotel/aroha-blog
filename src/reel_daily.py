@@ -546,6 +546,12 @@ def main() -> int:
     script["caption_naver"] = insta_cta.add_reel(limit_tags(script["caption_naver"], ("#호텔아로하",)), day, "clip")
     (out_dir / "caption_instagram.txt").write_text(script["caption_insta"], encoding="utf-8")
     (out_dir / "caption_naver.txt").write_text(script["caption_naver"], encoding="utf-8")
+    # 네이버 클립 장소 태그는 한 곳만 된다. 관광지 소개 클립은 관광지로 단다
+    # (2026-11-19 사용자 결정: 처음 보는 사람에게 노출, 아로하는 자막·설명·해시태그로).
+    (out_dir / "naver_place_tag.txt").write_text(
+        f"네이버 클립 장소 태그: {info['title']}\n"
+        "(관광지 소개 클립은 관광지로 태그. 호텔아로하는 마지막 자막·설명·#호텔아로하 로 알린다.\n"
+        " 아로하가 주인공인 클립만 장소 태그를 호텔아로하로.)\n", encoding="utf-8")
     (out_dir / "script.json").write_text(json.dumps({**script, "keyword": cand["keyword"], "place": info["title"]},
                                                     ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"[ok] 영상 {secs:.1f}초")
