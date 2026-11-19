@@ -46,8 +46,13 @@ def _plain(body_html: str) -> str:
 
 def write(client, model: str, title: str, keyword: str, url: str, body_html: str,
           n_photos: int, extra: str = "") -> dict:
-    prompt = PROMPT.format(title=title, keyword=keyword or title, url=url or "(주소 미정)",
+    prompt = PROMPT.format(title=title, keyword=keyword or title, url=url or "(없음)",
                            body=_plain(body_html)[:9000], n=n_photos, extra=extra)
+    if not url:
+        # 2026-11-19부터 한국어 글은 Blogger 에 올리지 않는다(네이버·인스타 전용) → 원문 링크 안내 없음
+        prompt = prompt.replace(
+            '- 마지막 문단에 "더 자세한 내용은 원문에서" 처럼 원문 주소로 안내한다.',
+            "- 원문은 웹에 공개되지 않는다. 원문 주소·'원문에서 보기' 같은 안내는 쓰지 않는다.")
     # 본문 HTML 에 따옴표가 섞여 JSON 이 깨진 적이 있어(2026-10-17) 태그로 나눠 받는다. 한 번 더 시도한다.
     prompt += "\n\n" + cliche.RULE
     for _ in range(2):

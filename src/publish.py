@@ -117,6 +117,11 @@ def scope_note(seo: dict, lang: str) -> str:
 # 같은 블로그에 하루 이 편수를 넘겨 발행하지 않는다 (정기 2편 + 특집 1편)
 MAX_POSTS_PER_DAY = 3
 
+# Blogger 에 올리는 언어. 2026-11-19 사용자 결정: 구글에서 노출된 글이 영어뿐이고
+# 한국 사람은 네이버로 찾으므로 당분간 Blogger 는 영어만. 한국어 글은 계속 써서
+# 네이버 원고·인스타 게시물로만 쓴다. 되돌리려면 Secret/환경변수 BLOGGER_LANGS=ko,en.
+BLOGGER_LANGS = {s.strip() for s in settings.env("BLOGGER_LANGS", "en").split(",") if s.strip()}
+
 
 def posts_on(state: dict, day: str) -> int:
     """그날 이미 공개 발행한 글 수 (언어 합산)."""
@@ -400,18 +405,24 @@ def main() -> int:
             print(f"[dry-run] {path}")
             continue
 
-        created = client.create_post(post["title"], html, post["labels"],
-                                     draft=args.draft,
-                                     permalink_title=permalink_title(topic, lang))
-        url = created.get("url", "")
-        print(f"[ok] ({lang}) 발행: {url or '초안'}")
+        if lang not in BLOGGER_LANGS:
+            # 한국어 글은 네이버·인스타 원고만 만들고 Blogger 에는 올리지 않는다
+            created, url = {"id": ""}, ""
+            print(f"[info] ({lang}) Blogger 발행 안 함 (BLOGGER_LANGS={','.join(sorted(BLOGGER_LANGS))})"
+                  " — 네이버·인스타 원고만 만든다")
+        else:
+            created = client.create_post(post["title"], html, post["labels"],
+                                         draft=args.draft,
+                                         permalink_title=permalink_title(topic, lang))
+            url = created.get("url", "")
+            print(f"[ok] ({lang}) 발행: {url or '초안'}")
         if lang == "ko" and not args.draft:
             save_naver_version(env, topic, post, url, picked, kto, points, f"{today:%Y-%m-%d}")
             save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, state,
                                    f"{today:%Y-%m-%d}")
-        if not args.draft:
+        if not args.draft and url:
             published_today += 1
-        if args.draft:
+        if args.draft and created["id"]:
             settings.add_pending_title(created["id"], post["title"])
 
         results[lang] = {"title": post["title"], "url": url, "id": created["id"],
