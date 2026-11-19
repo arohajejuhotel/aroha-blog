@@ -2718,13 +2718,70 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-19",
+   "ko_topic": "d261119",
+   "ko_images": [
+    "surroundings-a3badf5d.jpg",
+    "exterior-05-f9e485b9.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/74/4072774_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/82/3553982_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource_photo/61/2820561_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "ocean_view",
+    "olle",
+    "basecamp"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@6cce81394dbcc6c64faf259b74ff520e3d368abb/assets/thumbs/2026-11-19-d261119-ko.jpg",
+   "ko": {
+    "title": "제주 서쪽 가볼만한곳, 산방산·한림공원·수월봉 하루 코스",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-west-attractions-d261119.html",
+    "id": "5771876445249022248",
+    "labels": [
+     "제주전역여행",
+     "제주서쪽여행",
+     "산방산",
+     "한림공원",
+     "수월봉"
+    ]
+   },
+   "en_topic": "x25",
+   "en_images": [
+    "surroundings-se-5c3aeb7c-bab4-4505-9796-8-1eb82d86.jpg",
+    "exterior-02-752c4658.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "luggage",
+    "olle",
+    "multilingual"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@903e025865aab56b299dee8c673acc772f12d21f/assets/thumbs/2026-11-19-x25-en.jpg",
+   "en": {
+    "title": "Jeju Spring Canola Flowers: Bloom Times and Best Fields",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-spring-canola-flowers-guide.html",
+    "id": "6350539546259171114",
+    "labels": [
+     "East Jeju Guide",
+     "Jeju Spring",
+     "Canola Flowers",
+     "Cherry Blossoms",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource_photo/47/4062947_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/44/4062944_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/55/4062955_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/46/4113346_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/99/4098399_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/98/4098398_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/45/4113345_image2_1.JPG",
@@ -2735,6 +2792,10 @@
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/01/4098401_image2_1.JPG",
   "https://tong.visitkorea.or.kr/cms/resource/80/3554780_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-5-bfb12794.jpg"
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-5-bfb12794.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-6044-c74b81ba.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/74/4072774_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/83/3553983_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg"
  ]
 }
