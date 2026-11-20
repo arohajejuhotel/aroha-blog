@@ -122,6 +122,10 @@ MAX_POSTS_PER_DAY = 3
 # 네이버 원고·인스타 게시물로만 쓴다. 되돌리려면 Secret/환경변수 BLOGGER_LANGS=ko,en.
 BLOGGER_LANGS = {s.strip() for s in settings.env("BLOGGER_LANGS", "en").split(",") if s.strip()}
 
+# 영어 글 발행 요일(한국시간, 0=월). 2026-11-20 사용자 결정: 당분간 영어 글은 주 3편(월·수·금).
+# 한국어(네이버 원고·인스타)는 매일 그대로. 수동 실행(--lang en, --topic, --force)은 요일과 상관없이 발행.
+EN_DAYS = {int(d) for d in settings.env("EN_DAYS", "0,2,4").split(",") if d.strip()}
+
 
 def posts_on(state: dict, day: str) -> int:
     """그날 이미 공개 발행한 글 수 (언어 합산)."""
@@ -329,6 +333,10 @@ def main() -> int:
         if limited and published_today >= MAX_POSTS_PER_DAY:
             print(f"[warn] ({lang}) 오늘 이미 {published_today}편 발행 — 하루 한도 "
                   f"{MAX_POSTS_PER_DAY}편이라 건너뜁니다 (--force 로 무시 가능)")
+            continue
+        if (lang == "en" and args.lang == "both" and not (args.topic or args.force)
+                and today.weekday() not in EN_DAYS):
+            print(f"[info] (en) 오늘은 영어 글 쉬는 날 (발행 요일 {sorted(EN_DAYS)}, 0=월)")
             continue
         pool = settings.topics(lang)
         topic = choose_topic(pool, done_ids(state, lang), args.topic, month)
