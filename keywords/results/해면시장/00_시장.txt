@@ -1,41 +1,22 @@
-[네이버 쇼핑 시장 스냅샷] 천연해면 / 아기 천연해면 / 해면스펀지 / 곤약스펀지
+[네이버 쇼핑 시장 스냅샷] 천연해면 / 아기 천연해면 / 곤약스펀지
 2026-11-20 기준 · 판매량은 API 미제공
-
-■ 쇼핑 검색 (상품 수·가격·판매처·브랜드)
-[천연해면]
-  [실패] 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-
-[아기 천연해면]
-  [실패] 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-
-[해면스펀지]
-  [실패] 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-
-[곤약스펀지]
-  [실패] 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
 
 ■ 데이터랩 쇼핑인사이트 (클릭 비중, 최근 12개월)
 [천연해면 · 생활/건강]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
+    age: 30 33%, 40 44%, 50 11%, 60 11%
+    gender: f 44%, m 56%
 [천연해면 · 출산/육아]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
+    age: 10 0%, 20 3%, 30 53%, 40 28%, 50 9%, 60 6%
+    gender: f 83%, m 17%
 [아기 천연해면 · 생활/건강]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
+    age: 데이터 없음
+    gender: 데이터 없음
 [아기 천연해면 · 출산/육아]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-[해면스펀지 · 생활/건강]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-[해면스펀지 · 출산/육아]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
+    age: 20 3%, 30 66%, 40 24%, 50 1%, 60 6%
+    gender: f 83%, m 17%
 [곤약스펀지 · 생활/건강]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
+    age: 50 100%
+    gender: f 100%
 [곤약스펀지 · 출산/육아]
-    age: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
-    gender: [실패] /datalab/v1/shopping/category/keyword: 404 {"error":{"errorCode":"300","message":"Not Found Exception","details":"URL not found."}}
+    age: 10 0%, 20 4%, 30 36%, 40 33%, 50 19%, 60 7%
+    gender: f 82%, m 18%
