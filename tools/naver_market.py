@@ -13,7 +13,8 @@ from collections import Counter
 HUB = "https://naverapihub.apigw.ntruss.com"
 UA = {"User-Agent": "Mozilla/5.0"}
 CATS = {"50000008": "생활/건강", "50000005": "출산/육아"}
-INSIGHT_PATHS = ["/shopping-insight/v1/category/keyword", "/datalab/v1/shopping/category/keyword"]
+# API HUB 공식 경로 (api.ncloud-docs.com naver-api-hub-shopping-insight-keyword-age/gender)
+INSIGHT_PATHS = ["/shopping/v1/category/keyword"]
 
 
 def env(n):
@@ -95,9 +96,7 @@ def main():
     folder, kws = sys.argv[1], sys.argv[2:]
     os.makedirs(folder, exist_ok=True)
     lines = [f"[네이버 쇼핑 시장 스냅샷] {' / '.join(kws)}", f"{datetime.date.today()} 기준 · 판매량은 API 미제공", ""]
-    lines.append("■ 쇼핑 검색 (상품 수·가격·판매처·브랜드)")
-    for k in kws:
-        lines += [f"[{k}]", shop(k), ""]
+    # 쇼핑 검색 API 는 2026-07-31 종료(API HUB 대체 없음) → 상품 수·가격 조회는 하지 않는다
     lines.append("■ 데이터랩 쇼핑인사이트 (클릭 비중, 최근 12개월)")
     for k in kws:
         for cat, name in CATS.items():
