@@ -822,5 +822,295 @@
    "room",
    "lobby"
   ]
+ },
+ {
+  "id": "xgen01",
+  "cat": "제주전역여행",
+  "en": "Do you need a visa to visit Jeju? Entry rules for different nationalities",
+  "kw_en": "Korea visa for Jeju",
+  "q": [
+   "Is Jeju visa-free for my country?",
+   "Do US, UK, Australian or Canadian citizens need a Korea visa for Jeju only?",
+   "What documents are checked on arrival?"
+  ],
+  "img": [
+   "surroundings",
+   "lobby"
+  ]
+ },
+ {
+  "id": "xgen02",
+  "cat": "제주전역여행",
+  "en": "Flying directly into Jeju from outside Korea: which international routes actually exist",
+  "kw_en": "direct flights to Jeju international",
+  "q": [
+   "Can I fly to Jeju without going through Seoul?",
+   "Which countries have direct flights to Jeju?",
+   "Is it cheaper to fly via Incheon or Gimpo instead?"
+  ],
+  "img": [
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen03",
+  "cat": "성산여행정보",
+  "en": "Jeju International Airport to Seongsan: every transfer option and how long each takes",
+  "kw_en": "Jeju airport to Seongsan transfer",
+  "q": [
+   "How do I get from the airport to Seongsan without a car?",
+   "Is there an airport limousine bus to Seongsan?",
+   "How much does a taxi from the airport to Seongsan cost?"
+  ],
+  "img": [
+   "exterior",
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen04",
+  "cat": "제주전역여행",
+  "en": "Renting a car in Jeju as a foreigner: international driving permit rules explained",
+  "kw_en": "international driving permit Jeju",
+  "q": [
+   "Can I rent a car in Jeju with a foreign licence?",
+   "What is an IDP and do I need one before arriving?",
+   "Which nationalities cannot rent a car in Korea?"
+  ],
+  "img": [
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen05",
+  "cat": "제주전역여행",
+  "en": "T-money card in Jeju: how to buy it, top it up, and use it on buses",
+  "kw_en": "T-money card Jeju",
+  "q": [
+   "Where do I buy a T-money card in Jeju?",
+   "Can I use T-money on Jeju buses only, or elsewhere too?",
+   "Can I get a refund on unused balance before leaving Korea?"
+  ],
+  "img": [
+   "convenience-store"
+  ]
+ },
+ {
+  "id": "xgen06",
+  "cat": "제주전역여행",
+  "en": "Currency and cash in Jeju: how much to bring, and where to withdraw more",
+  "kw_en": "currency exchange Jeju cash",
+  "q": [
+   "Should I bring cash to Jeju or rely on cards?",
+   "Where can I withdraw Korean won with a foreign card?",
+   "Do small restaurants in Jeju accept foreign credit cards?"
+  ],
+  "img": [
+   "convenience-store",
+   "lobby"
+  ]
+ },
+ {
+  "id": "xgen07",
+  "cat": "제주전역여행",
+  "en": "eSIM and Wi-Fi in Jeju: staying connected without a Korean phone number",
+  "kw_en": "eSIM Jeju Korea",
+  "q": [
+   "Does eSIM work in Jeju for foreign travellers?",
+   "Is it better to rent a pocket Wi-Fi or buy an eSIM?",
+   "Is there reliable Wi-Fi at hotels and cafes in Jeju?"
+  ],
+  "img": [
+   "amenity",
+   "lobby"
+  ]
+ },
+ {
+  "id": "xgen08",
+  "cat": "제주전역여행",
+  "en": "Power plugs and voltage in Korea: what adapter you actually need for Jeju",
+  "kw_en": "Korea power plug voltage",
+  "q": [
+   "What type of plug does Korea use?",
+   "Do I need a voltage converter for my devices in Jeju?",
+   "Can I buy an adapter after I arrive if I forget one?"
+  ],
+  "img": [
+   "room",
+   "amenity"
+  ]
+ },
+ {
+  "id": "xgen09",
+  "cat": "성산여행정보",
+  "en": "Luggage storage and delivery in Seongsan: what to do with bags before check-in",
+  "kw_en": "luggage storage Seongsan",
+  "q": [
+   "Where can I store luggage in Seongsan before check-in time?",
+   "Is there a luggage delivery service between Jeju airport and hotels?",
+   "Can hotels hold bags after checkout for a late flight?"
+  ],
+  "img": [
+   "lobby",
+   "exterior"
+  ]
+ },
+ {
+  "id": "xgen10",
+  "cat": "제주전역여행",
+  "en": "Travel insurance for Korea: what is recommended and what it actually covers",
+  "kw_en": "travel insurance Korea Jeju",
+  "q": [
+   "Do I need travel insurance to visit Jeju?",
+   "What should Korea travel insurance cover for hiking Hallasan?",
+   "Will insurance cover flight delays from typhoons?"
+  ],
+  "img": [
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen11",
+  "cat": "제주전역여행",
+  "en": "Tipping in Korea: when it is expected (almost never) and when it is not",
+  "kw_en": "tipping in Korea",
+  "q": [
+   "Do I need to tip taxi drivers or restaurants in Jeju?",
+   "Is tipping considered rude in Korea?",
+   "Are service charges already included in the bill?"
+  ],
+  "img": [
+   "convenience-store"
+  ]
+ },
+ {
+  "id": "xgen12",
+  "cat": "제주동부여행",
+  "en": "Pharmacies and medical care in east Jeju: what to do if you get sick on the trip",
+  "kw_en": "pharmacy east Jeju",
+  "q": [
+   "Where is the nearest pharmacy to Seongsan?",
+   "What do I do if I need a doctor in east Jeju as a foreigner?",
+   "Are English-speaking clinics available near Seongsan?"
+  ],
+  "img": [
+   "surroundings",
+   "night"
+  ]
+ },
+ {
+  "id": "xgen13",
+  "cat": "제주전역여행",
+  "en": "Korea's Q-CODE and arrival procedures for international visitors flying into Jeju",
+  "kw_en": "Korea arrival card Jeju",
+  "q": [
+   "Do I need to fill out an entry form before arriving in Jeju?",
+   "What is Q-CODE and is it required for Jeju flights?",
+   "How long does immigration take at Jeju airport?"
+  ],
+  "img": [
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen14",
+  "cat": "제주전역여행",
+  "en": "Emergency numbers and basic safety information for foreign travellers in Jeju",
+  "kw_en": "emergency numbers Korea Jeju",
+  "q": [
+   "What is the emergency number in Korea for police or ambulance?",
+   "Is Jeju safe for solo foreign travellers at night?",
+   "Is there an English-language tourist help line?"
+  ],
+  "img": [
+   "night",
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen15",
+  "cat": "제주전역여행",
+  "en": "Typhoon season and flight delays: how Jeju travel plans can be affected",
+  "kw_en": "Jeju typhoon flight delay",
+  "q": [
+   "Does typhoon season cancel flights to Jeju often?",
+   "Which months carry the highest typhoon risk?",
+   "What should I do if my flight out of Jeju is cancelled?"
+  ],
+  "img": [
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen16",
+  "cat": "제주전역여행",
+  "en": "Why Google Maps does not work well in Korea, and what to use instead",
+  "kw_en": "Google Maps Korea alternative",
+  "q": [
+   "Why does Google Maps fail to give directions in Jeju?",
+   "Which map app should foreign travellers download before arriving?",
+   "Can I use Naver Map or Kakao Map in English?"
+  ],
+  "img": [
+   "amenity"
+  ]
+ },
+ {
+  "id": "xgen17",
+  "cat": "제주동부여행",
+  "en": "Credit cards vs cash in rural east Jeju: what small restaurants actually accept",
+  "kw_en": "credit card acceptance east Jeju",
+  "q": [
+   "Do small restaurants near Seongsan accept foreign credit cards?",
+   "Should I carry cash for local markets and food stalls?",
+   "Are contactless payments common in rural Jeju?"
+  ],
+  "img": [
+   "convenience-store"
+  ]
+ },
+ {
+  "id": "xgen18",
+  "cat": "제주전역여행",
+  "en": "Getting to Jeju by ferry: routes, booking, and how long the crossing takes",
+  "kw_en": "ferry to Jeju Island",
+  "q": [
+   "Can I take a ferry to Jeju instead of flying?",
+   "Where do ferries to Jeju depart from on the mainland?",
+   "How much does a ferry ticket to Jeju cost?"
+  ],
+  "img": [
+   "surroundings"
+  ]
+ },
+ {
+  "id": "xgen19",
+  "cat": "제주전역여행",
+  "en": "Arriving at Jeju Airport: customs, immigration, and what to expect on landing",
+  "kw_en": "Jeju airport arrival guide",
+  "q": [
+   "What happens after my flight lands at Jeju airport?",
+   "Do I need to go through customs again if I am already in Korea?",
+   "How do I find ground transport once I land at Jeju?"
+  ],
+  "img": [
+   "surroundings",
+   "lobby"
+  ]
+ },
+ {
+  "id": "xgen20",
+  "cat": "제주전역여행",
+  "en": "Language barrier in Jeju: basic phrases and translation apps that actually work",
+  "kw_en": "language barrier Korea travel",
+  "q": [
+   "Will I be able to get by in Jeju without speaking Korean?",
+   "Which translation app works best offline in Jeju?",
+   "What basic Korean phrases are useful for travellers?"
+  ],
+  "img": [
+   "convenience-store",
+   "amenity"
+  ]
  }
 ]
