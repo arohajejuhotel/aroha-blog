@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import demand, figures, gdrive, images, naver, render, settings, thumbnail, tour_photos, vision, writer  # noqa: E402
+from src import demand, figures, gdrive, images, naver, related, render, settings, thumbnail, tour_photos, vision, writer  # noqa: E402
 from src.blogger import Blogger  # noqa: E402
 
 KST = ZoneInfo("Asia/Seoul")
@@ -297,6 +297,24 @@ def save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, 
         print(f"[warn] (ko) 인스타 카드 생성 실패 ({type(exc).__name__}: {exc})")
 
 
+def link_related(client, post_id: str, lang: str) -> None:
+    """새 글에 관련 글 4편 링크를 넣고, 그 4편에도 새 글로 오는 링크를 다시 만든다.
+
+    실패해도 발행 자체는 성공으로 둔다 (다음 실행이나 scripts/add_related_links.py 로 복구).
+    """
+    try:
+        posts = related.live_posts(client)
+        meta = next((p for p in posts if p["id"] == post_id), None)
+        if not meta:
+            print(f"[warn] ({lang}) 관련 글: 방금 올린 글을 목록에서 못 찾아 건너뜀")
+            return
+        targets = [post_id] + [p["id"] for p in related.pick(meta, posts)]
+        n = related.refresh(client, targets, posts)
+        print(f"[ok] ({lang}) 관련 글 링크 {n}편 갱신")
+    except Exception as exc:  # noqa: BLE001
+        print(f"[warn] ({lang}) 관련 글 링크 실패 ({type(exc).__name__}: {exc})")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -424,6 +442,8 @@ def main() -> int:
                                          permalink_title=permalink_title(topic, lang))
             url = created.get("url", "")
             print(f"[ok] ({lang}) 발행: {url or '초안'}")
+            if url and not args.draft:
+                link_related(client, created["id"], lang)
         if lang == "ko" and not args.draft:
             save_naver_version(env, topic, post, url, picked, kto, points, f"{today:%Y-%m-%d}")
             save_instagram_version(env, topic, post, url, picked, kto, hotel, manifest, state,
