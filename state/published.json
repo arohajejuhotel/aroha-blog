@@ -3052,13 +3052,40 @@
      "English"
     ]
    }
+  },
+  {
+   "date": "2026-11-26",
+   "ko_topic": "d261126",
+   "ko_images": [
+    "exterior-04-af53fd06.jpg",
+    "surroundings-img-6044-c74b81ba.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/83/4074283_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/80/4074280_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/36/3403536_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "gs25",
+    "gs25_breakfast",
+    "economy"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@e3cd3e75da509bb4e7858d8a2b24833edd2a7319/assets/thumbs/2026-11-26-d261126-ko.jpg",
+   "ko": {
+    "title": "제주 12월 축제 테마별 총정리와 성산 겨울 동선",
+    "url": "",
+    "id": "",
+    "labels": [
+     "제주전역여행",
+     "제주12월축제",
+     "겨울여행",
+     "성산일출봉"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://tong.visitkorea.or.kr/cms/resource_photo/43/3460343_image2_1.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-2-a3cfc409.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/49/3100249_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/55/4109155_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/01/4098401_image2_1.JPG",
@@ -3069,6 +3096,10 @@
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-6086-40d5cf04.jpg",
   "https://tong.visitkorea.or.kr/cms/resource/00/4098400_image2_1.JPG",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/exterior-04-af53fd06.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg"
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/80/4074280_image2_1.jpg"
  ]
 }
