@@ -3083,14 +3083,69 @@
      "성산일출봉"
     ]
    }
+  },
+  {
+   "date": "2026-11-27",
+   "ko_topic": "d261127",
+   "ko_images": [
+    "surroundings-img-5878-f7292b4f.jpg",
+    "exterior-02-752c4658.jpg"
+   ],
+   "ko_photos": [
+    "https://tong.visitkorea.or.kr/cms2/website/93/1011893.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/95/3035595_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/82/3321082_image2_1.jpg"
+   ],
+   "ko_points": [
+    "walk_peak",
+    "all_trips",
+    "brand",
+    "direct"
+   ],
+   "ko_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@90162a36c1fc5a2ba4b4e5b02e10f83966e6d350/assets/thumbs/2026-11-27-d261127-ko.jpg",
+   "ko": {
+    "title": "한라산 백록담, 11월 말~12월에 볼 수 있을까요",
+    "url": "",
+    "id": "",
+    "labels": [
+     "제주전역여행",
+     "한라산",
+     "백록담",
+     "제주겨울여행"
+    ]
+   },
+   "en_topic": "xgen03",
+   "en_images": [
+    "exterior-05-fb5e7143.jpg",
+    "surroundings-c4603ba2.jpg"
+   ],
+   "en_photos": [
+    "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/87/2653587_image2_1.jpg",
+    "https://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg"
+   ],
+   "en_points": [
+    "walk_peak",
+    "gs25_breakfast",
+    "family",
+    "parking"
+   ],
+   "en_thumb": "https://cdn.jsdelivr.net/gh/arohajejuhotel/aroha-blog@84a3de87c34365ea9b691f291d6b1a770d1062fc/assets/thumbs/2026-11-27-xgen03-en.jpg",
+   "en": {
+    "title": "Jeju Airport to Seongsan: Every Transfer Option and How Long Each Takes",
+    "url": "https://arohajeju.blogspot.com/2026/11/jeju-airport-to-seongsan-transfer-guide.html",
+    "id": "40282957973648571",
+    "labels": [
+     "Seongsan Travel",
+     "Jeju Transportation",
+     "Airport Transfer",
+     "Travel Tips",
+     "English"
+    ]
+   }
   }
  ],
  "insta_photos": [
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/room-dsc09406-4c9e46c3.jpg",
-  "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-sunrise-5038cbe7.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/01/4098401_image2_1.JPG",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/42/3460442_image2_1.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource_photo/49/3459949_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/43/3460343_image2_1.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/35/3460435_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-img-6086-40d5cf04.jpg",
@@ -3100,6 +3155,11 @@
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-2ea8db05.jpg",
   "https://tong.visitkorea.or.kr/cms/resource_photo/26/3052926_image2_1.jpg",
   "https://arohajejuhotel.github.io/aroha-blog/assets/img/surroundings-c4603ba2.jpg",
-  "https://tong.visitkorea.or.kr/cms/resource/80/4074280_image2_1.jpg"
+  "https://tong.visitkorea.or.kr/cms/resource/80/4074280_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/79/3321079_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/90/3321090_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource_photo/14/3460314_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/92/3035592_image2_1.jpg",
+  "https://tong.visitkorea.or.kr/cms/resource/82/3321082_image2_1.jpg"
  ]
 }
